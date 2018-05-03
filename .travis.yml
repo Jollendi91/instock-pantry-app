@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: XJUV7+P17Lh9bxCEMkJcHfAtD40YJLrnL7+y0Qrx1SrtMFt/JozPmGtnrkC/n6gMUJtRVsykm7QlgpyyiGVxSkXm52OYZDmokIStXjCOpqfAYtgyKU+GOb/nQcbf6tvVn7X4ABxKabZJm1D1cbNMk8RbSvDeWc5ys+cXbmfYT/Ity/HspjpvBd3XJK+USpzFoYvimPPQ8E0kPvXYnFzdWxlR6hYGVc88wjzgGwphyuukWcHhTi/AN1HRHmo0kTWTgE0LorFDhLLSosQ69r7/feb+gmgqMf/QEOzQ+PX8HopF29zQL6bPD6lvb7w3R7VDSo18EtwNeDmt0NgV+nOL+q6k74QmObRhOqfpj5+0iXNvllp/rM3VcLVuLVXPyMaxLkbslW7D4htnYdL5RvGr3AcjRQuKdA2ac3GJQSVJ9VooMiYXAx4vjDGYEudt1N4ZICa6KZk8RTphPLhMfR23/2QWYJfhrB4TkubPknb13noNZ4mwre6Nl9c3Zrp/vLMsLm/CYKH6B6rRUBC+eOyddYAOHUhVxuAXx/J86WfYW8AZFfQJfOrXZbO4iKO4F2USpeawEjQu6+n4HjtXhk8xryb0AEtftOAfA2N2Vg8fk0b5186mTcHKWNKSamGcROZGBAZ3HCzrMR3k/EvxBdmtvg5MTg3okzasKW5LKw+tQZ8=
+  app: instock-pantry-app
+  on:
+    repo: Jollendi91/instock-pantry-app
