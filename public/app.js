@@ -61,6 +61,36 @@ const MOCK_PANTRY_DATA = {
             "quantity": 2,
             "category": "Breakfast"
         },
+    ],
+    "recipes": [
+        {
+            "id": "101010",
+            "title": "Easy & Delish! ~ Apple Crumble",
+            "image": "https://spoonacular.com/recipeImages/Easy---Delish--Apple-Crumble-641803.jpg",
+            "usedIngredientCount": 3,
+            "missedIngredientCount": 4
+        },
+        {
+            "id": "121212",
+            "title": "Grandma's Apple Crisp",
+            "image": "https://spoonacular.com/recipeImages/Grandmas-Apple-Crisp-645152.jpg",
+            "usedIngredientCount": 3,
+            "missedIngredientCount": 6
+          },
+          {
+            "id": "131313",
+            "title": "Quick Apple Ginger Pie",
+            "image": "https://spoonacular.com/recipeImages/Quick-Apple-Ginger-Pie-657563.jpg",
+            "usedIngredientCount": 3,
+            "missedIngredientCount": 6
+          },
+          {
+            "id": "141414",
+            "title": "Cinnamon Sugar Fried Apples",
+            "image": "https://spoonacular.com/recipeImages/Cinnamon-Sugar-Fried-Apples-639487.jpg",
+            "usedIngredientCount": 3,
+            "missedIngredientCount": 8
+          }
     ]
 };
 
@@ -75,6 +105,15 @@ function displayPantryItems(data) {
 
     for(item in data.shoppingListItems) {
         $('#js-shopping-list').append(`<p>${data.shoppingListItems[item].quantity} ${data.shoppingListItems[item].name}`);
+    }
+
+    for(recipe in data.recipes) {
+        $('#js-recipes').append(`
+        <h2>${data.recipes[recipe].title}</h2>
+        <img src="${data.recipes[recipe].image}">
+        <p>Number of ingredients used from Pantry: ${data.recipes[recipe].usedIngredientCount}</p>
+        <p>Number of ingredients missing for this recipe: ${data.recipes[recipe].missedIngredientCount}</p>
+        `);
     }
 }
 
