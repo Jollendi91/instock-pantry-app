@@ -35,6 +35,32 @@ const MOCK_PANTRY_DATA = {
             "category": "Dairy",
             "dateAdded": Date.now()
         }
+    ],
+    "shoppingListItems": [
+        {
+            "id": "666666",
+            "name": "French Bread",
+            "quantity": 2,
+            "category": "Bread"
+        },
+        {
+            "id": "777777",
+            "name": "Broccoli",
+            "quantity": 1,
+            "category": "Vegetables"
+        },
+        {
+            "id": "888888",
+            "name": "Chips",
+            "quantity": 3,
+            "category": "Snacks"
+        },
+        {
+            "id": "999999",
+            "name": "Cereal",
+            "quantity": 2,
+            "category": "Breakfast"
+        },
     ]
 };
 
@@ -44,7 +70,11 @@ function getPantryItems(callbackFn) {
 
 function displayPantryItems(data) {
     for (item in data.pantryItems) {
-        $('body').append(`<p>${data.pantryItems[item].quantity} ${data.pantryItems[item].name}</p>`);
+        $('#js-pantry-items').append(`<p>${data.pantryItems[item].quantity} ${data.pantryItems[item].name}</p>`);
+    }
+
+    for(item in data.shoppingListItems) {
+        $('#js-shopping-list').append(`<p>${data.shoppingListItems[item].quantity} ${data.shoppingListItems[item].name}`);
     }
 }
 
