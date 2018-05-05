@@ -14,10 +14,10 @@
     </header>
     <main role="main">
         <h2>Pantry Items</h2>
-        <form>
-            Quantity:<input type="number" name="quantity">
-            Item Name: <input type="text" name="item name">
-            Category: <select name="category">
+        <form id="js-add-item">
+            Quantity:<input id="js-quantity" type="number" name="quantity" value="1">
+            Item Name: <input id="js-item-name" type="text" name="item name" required>
+            Category: <select id="js-category" name="category" required>
                 <option value="" disabled selected>Select a category</option>
                 <option value="bread">Bread</option>
                 <option value="condiment">Condiments</option>

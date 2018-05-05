@@ -94,6 +94,45 @@ const MOCK_PANTRY_DATA = {
     ]
 };
 
+function addNewItem(itemName, quantity, category) {
+    const newItem = {
+        "name": itemName,
+        "quantity": quantity,
+        "category": category,
+        "addedDate": Date.now()
+    }
+
+    MOCK_PANTRY_DATA.pantryItems.push(newItem);   
+}
+
+function searchDatabaseForExistingItem(newItem, quantity, category) {
+    const existingItem = MOCK_PANTRY_DATA.pantryItems.find(item => {
+        return item.name.toLowerCase() === newItem.toLowerCase()
+    });
+    const similarItem = MOCK_PANTRY_DATA.pantryItems.find(item => {
+        return item.name.toLowerCase().includes(newItem.toLowerCase());
+    });
+    if(existingItem || similarItem){
+        console.log('This item exists');
+        existingItem.quantity++;
+    }
+    else{
+        addNewItem(newItem, quantity, category);
+    } 
+} 
+
+function listenforAddNewItem() {
+    $('#js-add-item').submit(event => {
+        event.preventDefault();
+        let newItem = $('#js-item-name').val();
+        let quantity = $('#js-quantity').val();
+        let category = $('#js-category').val();
+        searchDatabaseForExistingItem(newItem, quantity, category);
+        $('#js-pantry-items').empty();
+        getAndDisplayPantryItems();
+    });
+}
+
 function getPantryItems(callbackFn) {
     setTimeout(function() { callbackFn(MOCK_PANTRY_DATA)}, 100);
 }
@@ -105,8 +144,19 @@ function displayPantryItems(data) {
         <button>-</button><button>+</button>
         `);
     }
+}
 
-    for(item in data.shoppingListItems) {
+function getAndDisplayPantryItems() {
+    getPantryItems(displayPantryItems);
+}
+
+$(function() {
+    getAndDisplayPantryItems();
+    listenforAddNewItem();
+});
+
+
+/*for(item in data.shoppingListItems) {
         $('#js-shopping-list').append(`<p>${data.shoppingListItems[item].quantity} ${data.shoppingListItems[item].name}`);
     }
 
@@ -117,11 +167,4 @@ function displayPantryItems(data) {
         <p>Number of ingredients used from Pantry: ${data.recipes[recipe].usedIngredientCount}</p>
         <p>Number of ingredients missing for this recipe: ${data.recipes[recipe].missedIngredientCount}</p>
         `);
-    }
-}
-
-function getAndDisplayPantryItems() {
-    getPantryItems(displayPantryItems);
-}
-
-$(getAndDisplayPantryItems())
+    }*/
