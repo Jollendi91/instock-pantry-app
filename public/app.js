@@ -68,7 +68,7 @@ const MOCK_PANTRY_DATA = {
             "title": "Easy & Delish! ~ Apple Crumble",
             "image": "https://spoonacular.com/recipeImages/Easy---Delish--Apple-Crumble-641803.jpg",
             "usedIngredientCount": 3,
-            "missedIngredientCount": 4
+            "missedIngredientCount": 4,
         },
         {
             "id": "121212",
@@ -100,7 +100,10 @@ function getPantryItems(callbackFn) {
 
 function displayPantryItems(data) {
     for (item in data.pantryItems) {
-        $('#js-pantry-items').append(`<p>${data.pantryItems[item].quantity} ${data.pantryItems[item].name}</p>`);
+        $('#js-pantry-items').append(`
+        <li>${data.pantryItems[item].quantity} ${data.pantryItems[item].name}</li>
+        <button>-</button><button>+</button>
+        `);
     }
 
     for(item in data.shoppingListItems) {

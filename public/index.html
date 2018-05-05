@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,9 +9,34 @@
     <script src="main.js"></script>
 </head>
 <body>
-    <section id="js-pantry-items">
-        <h1>Pantry Items</h1>
-    </section>
+    <header role="banner">
+        <h1>InStock</h1>
+    </header>
+    <main role="main">
+        <h2>Pantry Items</h2>
+        <form>
+            Quantity:<input type="number" name="quantity">
+            Item Name: <input type="text" name="item name">
+            Category: <select name="category">
+                <option value="" disabled selected>Select a category</option>
+                <option value="bread">Bread</option>
+                <option value="condiment">Condiments</option>
+                <option value="canned">Canned Goods</option>
+                <option value="dairy">Dairy</option>
+                <option value="dry">Dry/Baking Goods</option>
+                <option value="frozen">Frozen Foods</option>
+                <option value="fruit">Fruits</option>
+                <option value="meat">Meats</option>
+                <option value="snack">Snacks</option>
+                <option value="spices">Spices/Seasongings</option>
+                <option value="vegetable">Vegetables</option>
+                <option value="misc">Miscellaneous</option>
+            </select>
+            <button type="submit" role="button">Add Item</button>
+        </form>
+        <ul id="js-pantry-items">
+        </ul>
+    </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
 </body>
