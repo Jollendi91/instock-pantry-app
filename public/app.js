@@ -94,8 +94,11 @@ const MOCK_PANTRY_DATA = {
     ]
 };
 
+let ITEM_ID = 111112;
+
 function addNewItem(itemName, quantity, category) {
     const newItem = {
+        "id": `${ITEM_ID++}`,
         "name": itemName,
         "quantity": quantity,
         "category": category,
@@ -125,13 +128,12 @@ function listenforAddNewItem() {
     $('#js-add-item').submit(event => {
         event.preventDefault();
         let newItem = $('#js-item-name').val();
-        let quantity = $('#js-quantity').val();
+        let quantity = parseInt($('#js-quantity').val());
         let category = $('#js-category').val();
         $('#js-item-name').val("");
-        $('#js-quantity').val("1");
+        $('#js-quantity').val(1);
         $('#js-category').val("");
         searchDatabaseForExistingItem(newItem, quantity, category);
-        $('#js-pantry-items').empty();
         getAndDisplayCategoriesAndItems();
     });
 }
@@ -171,20 +173,40 @@ function displayPantryItems(data) {
     for (item in data.pantryItems) {
         const selector = `#${data.pantryItems[item].category}`;
         $(selector).append(`
-        <li>${data.pantryItems[item].quantity} - ${data.pantryItems[item].name}</li>
-        <button>-</button><button>+</button>
+        <li id="${data.pantryItems[item].id}">${data.pantryItems[item].quantity} - ${data.pantryItems[item].name} <button id="js-subtract" class="increment">-</button><button id="js-add" class="increment">+</button></li>
         `);
     }
 }
 
 function getAndDisplayCategoriesAndItems() {
+    $('#js-pantry-items').empty();
     displayCategories(MOCK_PANTRY_DATA);
     getPantryItems(displayPantryItems);
+}
+
+function listenForIncrementItemClick() {
+    $('#js-pantry-items').on('click', '.increment', function(event) {
+        event.preventDefault();
+        const currentItemId = $(event.currentTarget).closest('li').attr('id');
+        const currentItem = MOCK_PANTRY_DATA.pantryItems.find(item => {
+                return item.id === currentItemId;
+            });
+
+        if(event.currentTarget.id === 'js-add') {
+           currentItem.quantity++;
+           getAndDisplayCategoriesAndItems();
+        }
+        else if (event.currentTarget.id === 'js-subtract') {
+            currentItem.quantity--;
+            getAndDisplayCategoriesAndItems();
+        }
+    });
 }
 
 $(function () {
     getAndDisplayCategoriesAndItems();
     listenforAddNewItem();
+    listenForIncrementItemClick();
 });
 
 
