@@ -1,1 +1,44 @@
-<p>Hello World</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>InStock</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+    <header role="banner">
+        <h1>InStock</h1>
+    </header>
+    <main role="main">
+        <h2>Pantry Items</h2>
+        <form id="js-add-item">
+            Quantity:<input id="js-quantity" type="number" name="quantity" value="1" min="1">
+            Item Name: <input id="js-item-name" type="text" name="item name" placeholder="Item Name" required>
+            Category: <select id="js-category" name="category" required>
+                <option value="" disabled selected>Select a category</option>
+                <option value="Bread">Bread</option>
+                <option value="Condiment">Condiments</option>
+                <option value="Canned">Canned Goods</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Dry/Baking">Dry/Baking Goods</option>
+                <option value="Frozen">Frozen Foods</option>
+                <option value="Fruits">Fruits</option>
+                <option value="Meats">Meats</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Spices/Seasonings">Spices/Seasongings</option>
+                <option value="Vegetables">Vegetables</option>
+                <option value="Miscellaneous">Miscellaneous</option>
+            </select>
+            <button type="submit" role="button">Add Item</button>
+        </form>
+        <div id="js-alert"></div>
+        <section id="js-pantry-items">
+        </section>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+</body>
+</html>
