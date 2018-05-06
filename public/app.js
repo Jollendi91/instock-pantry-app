@@ -127,6 +127,9 @@ function listenforAddNewItem() {
         let newItem = $('#js-item-name').val();
         let quantity = $('#js-quantity').val();
         let category = $('#js-category').val();
+        $('#js-item-name').val("");
+        $('#js-quantity').val("1");
+        $('#js-category').val("");
         searchDatabaseForExistingItem(newItem, quantity, category);
         $('#js-pantry-items').empty();
         getAndDisplayCategoriesAndItems();
