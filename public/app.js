@@ -4,14 +4,14 @@ const MOCK_PANTRY_DATA = {
             "id": "111111",
             "name": "Black beans",
             "quantity": 4,
-            "category": "Canned Items",
+            "category": "Canned",
             "dateAdded": Date.now()
         },
         {
             "id": "222222",
             "name": "Apples",
             "quantity": 2,
-            "category": "Fruit",
+            "category": "Fruits",
             "dateAdded": Date.now()
         },
         {
@@ -25,7 +25,7 @@ const MOCK_PANTRY_DATA = {
             "id": "444444",
             "name": "Blueberries",
             "quantity": 1,
-            "category": "Fruit",
+            "category": "Fruits",
             "dateAdded": Date.now()
         },
         {
@@ -76,21 +76,21 @@ const MOCK_PANTRY_DATA = {
             "image": "https://spoonacular.com/recipeImages/Grandmas-Apple-Crisp-645152.jpg",
             "usedIngredientCount": 3,
             "missedIngredientCount": 6
-          },
-          {
+        },
+        {
             "id": "131313",
             "title": "Quick Apple Ginger Pie",
             "image": "https://spoonacular.com/recipeImages/Quick-Apple-Ginger-Pie-657563.jpg",
             "usedIngredientCount": 3,
             "missedIngredientCount": 6
-          },
-          {
+        },
+        {
             "id": "141414",
             "title": "Cinnamon Sugar Fried Apples",
             "image": "https://spoonacular.com/recipeImages/Cinnamon-Sugar-Fried-Apples-639487.jpg",
             "usedIngredientCount": 3,
             "missedIngredientCount": 8
-          }
+        }
     ]
 };
 
@@ -102,7 +102,7 @@ function addNewItem(itemName, quantity, category) {
         "addedDate": Date.now()
     }
 
-    MOCK_PANTRY_DATA.pantryItems.push(newItem);   
+    MOCK_PANTRY_DATA.pantryItems.push(newItem);
 }
 
 function searchDatabaseForExistingItem(newItem, quantity, category) {
@@ -112,14 +112,14 @@ function searchDatabaseForExistingItem(newItem, quantity, category) {
     const similarItem = MOCK_PANTRY_DATA.pantryItems.find(item => {
         return item.name.toLowerCase().includes(newItem.toLowerCase());
     });
-    if(existingItem || similarItem){
+    if (existingItem || similarItem) {
         console.log('This item exists');
         existingItem.quantity++;
     }
-    else{
+    else {
         addNewItem(newItem, quantity, category);
-    } 
-} 
+    }
+}
 
 function listenforAddNewItem() {
     $('#js-add-item').submit(event => {
@@ -129,29 +129,58 @@ function listenforAddNewItem() {
         let category = $('#js-category').val();
         searchDatabaseForExistingItem(newItem, quantity, category);
         $('#js-pantry-items').empty();
-        getAndDisplayPantryItems();
+        getAndDisplayCategoriesAndItems();
     });
 }
 
+function getExistingCategories(data) {
+    const categories = [];
+    for (item in data.pantryItems) {
+        const currentCategory = data.pantryItems[item].category;
+        const existingCategory = categories.find(item => {
+            return item === currentCategory;
+        });
+        if (!(existingCategory)) {
+            categories.push(currentCategory);
+        }
+    }
+    return categories;
+}
+
+function displayCategories(data) {
+    const displayedCategories = getExistingCategories(data);
+
+    for (category in displayedCategories) {
+
+        $('#js-pantry-items').append(`
+            <h3>${displayedCategories[category]}</h3>
+            <ul id="${displayedCategories[category]}">
+            </ul>
+        `);
+    }
+}
+
 function getPantryItems(callbackFn) {
-    setTimeout(function() { callbackFn(MOCK_PANTRY_DATA)}, 100);
+    setTimeout(function () { callbackFn(MOCK_PANTRY_DATA) }, 100);
 }
 
 function displayPantryItems(data) {
     for (item in data.pantryItems) {
-        $('#js-pantry-items').append(`
-        <li>${data.pantryItems[item].quantity} ${data.pantryItems[item].name}</li>
+        const selector = `#${data.pantryItems[item].category}`;
+        $(selector).append(`
+        <li>${data.pantryItems[item].quantity} - ${data.pantryItems[item].name}</li>
         <button>-</button><button>+</button>
         `);
     }
 }
 
-function getAndDisplayPantryItems() {
+function getAndDisplayCategoriesAndItems() {
+    displayCategories(MOCK_PANTRY_DATA);
     getPantryItems(displayPantryItems);
 }
 
-$(function() {
-    getAndDisplayPantryItems();
+$(function () {
+    getAndDisplayCategoriesAndItems();
     listenforAddNewItem();
 });
 
