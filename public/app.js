@@ -115,9 +115,13 @@ function searchDatabaseForExistingItem(newItem, quantity, category) {
     const similarItem = MOCK_PANTRY_DATA.pantryItems.find(item => {
         return item.name.toLowerCase().includes(newItem.toLowerCase());
     });
-    if (existingItem || similarItem) {
-        console.log('This item exists');
-        existingItem.quantity++;
+
+    $('#js-alert').empty();
+    if (existingItem) {
+        $('#js-alert').append(`<h2>${newItem} already exists</h2>`);
+    }
+    else if (similarItem) {
+        $('#js-alert').append(`<h2>${newItem} is similiar to ${similarItem.name}, which is already in your pantry. Is this what you meant?</h2>`);
     }
     else {
         addNewItem(newItem, quantity, category);
