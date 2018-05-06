@@ -15,8 +15,8 @@
     <main role="main">
         <h2>Pantry Items</h2>
         <form id="js-add-item">
-            Quantity:<input id="js-quantity" type="number" name="quantity" value="1">
-            Item Name: <input id="js-item-name" type="text" name="item name" required>
+            Quantity:<input id="js-quantity" type="number" name="quantity" value="1" min="1">
+            Item Name: <input id="js-item-name" type="text" name="item name" placeholder="Item Name" required>
             Category: <select id="js-category" name="category" required>
                 <option value="" disabled selected>Select a category</option>
                 <option value="Bread">Bread</option>
@@ -35,8 +35,8 @@
             <button type="submit" role="button">Add Item</button>
         </form>
         <div id="js-alert"></div>
-        <ul id="js-pantry-items">
-        </ul>
+        <section id="js-pantry-items">
+        </section>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
