@@ -118,7 +118,7 @@ function searchDatabaseForExistingItem(newItem, quantity, category) {
 
     $('#js-alert').empty();
     if (existingItem) {
-        $('#js-alert').append(`<h2>${newItem} already exists</h2>`);
+        $('#js-alert').append(`<h2>${newItem} already exists!</h2>`);
     }
     else if (similarItem) {
         $('#js-alert').append(`<h2>${newItem} is similiar to ${similarItem.name}, which is already in your pantry. Is this what you meant?</h2>`);
@@ -202,6 +202,12 @@ function listenForIncrementItemClick() {
         }
         else if (event.currentTarget.id === 'js-subtract') {
             currentItem.quantity--;
+            if(currentItem.quantity === 0) {
+                const itemIndex = MOCK_PANTRY_DATA.pantryItems.indexOf(currentItem);
+                if (itemIndex != -1) {
+                    MOCK_PANTRY_DATA.pantryItems.splice(itemIndex, 1);
+                }
+            }
             getAndDisplayCategoriesAndItems();
         }
     });
