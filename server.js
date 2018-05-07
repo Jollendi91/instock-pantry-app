@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
 
 mongoose.Promise = global.Promise;
 
@@ -7,9 +8,16 @@ const { PORT, DATABASE_URL } = require('./config');
 const {Pantry} = require('./models');
 
 const app = express();
-app.use(express.json());
 
+const pantryItemsRouter = require('./pantryItemsRouter');
+
+app.use('/pantry-items', pantryItemsRouter);
+
+app.use(express.json());
+app.use(morgan('common'));
 app.use(express.static('public'));
+
+
 
 let server;
 
