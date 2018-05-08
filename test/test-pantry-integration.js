@@ -141,4 +141,33 @@ describe('Pantry API resource', function() {
                 });
         });
     });
+
+    describe('PUT endpoint', function() {
+
+        it('should update fields sent over', function() {
+            const updateData = {
+                name: 'Updated Grapes',
+                category: 'Fruits'
+            };
+
+            return Pantry
+                .findOne()
+                .then(function(pantryItem) {
+                    updateData.id = pantryItem.id;
+
+                    return chai.request(app)
+                        .put(`/pantry-items/${pantryItem.id}`)
+                        .send(updateData)
+                        .then(function(res) {
+                            expect(res).to.have.status(204);
+
+                            return Pantry.findById(updateData.id);
+                        })
+                        .then(function(pantryItem) {
+                            expect(pantryItem.name).to.equal(updateData.name);
+                            expect(pantryItem.category).to.equal(updateData.category);
+                        });
+                });
+        });
+    });
 });
