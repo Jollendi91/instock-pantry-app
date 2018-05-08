@@ -36,7 +36,8 @@ function generatePantryData() {
     return {
         name: faker.commerce.productName(),
         quantity: faker.random.number(),
-        category: generateCategoryName()
+        category: generateCategoryName(),
+        dateAdded: Date.now()
     };
 }
 
@@ -79,6 +80,34 @@ describe('Pantry API resource', function() {
                 })
                 .then(function(count) {
                     expect(res.body.pantryItems).to.have.lengthOf(count);
+                });
+        });
+
+        it('should return pantry items with right fields', function() {
+            let resPantryItem;
+
+            return chai.request(app)
+                .get('/pantry-items')
+                .then(function(res) {
+                    expect(res).to.have.status(200);
+                    expect(res).to.be.json;
+                    expect(res.body.pantryItems).to.be.an('array');
+                    expect(res.body.pantryItems).to.have.lengthOf.at.least(1);
+
+                    res.body.pantryItems.forEach(function(item) {
+                        expect(item).to.be.an('object');
+                        expect(item).to.include.keys('id', 'name', 'quantity', 'category', 'dateAdded');
+                    });
+
+                    resPantryItem = res.body.pantryItems[0];
+                    return Pantry.findById(resPantryItem.id);
+                })
+                .then(function(pantryItem) {
+                    expect(resPantryItem.id).to.equal(pantryItem.id);
+                    expect(resPantryItem.name).to.equal(pantryItem.name);
+                    expect(resPantryItem.quantity).to.equal(pantryItem.quantity);
+                    expect(resPantryItem.category).to.equal(pantryItem.category);
+                    expect(pantryItem.dateAdded).to.not.be.null;
                 });
         });
     });
