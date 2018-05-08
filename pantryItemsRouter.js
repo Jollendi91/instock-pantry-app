@@ -5,6 +5,20 @@ router.use(express.json());
 
 const {Pantry} = require('./models');
 
+router.get('/', (req, res) => {
+    Pantry
+        .find()
+        .then(pantryItems => {
+            res.json({
+                pantryItems: pantryItems.map((item) => item.serialize())
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({message: 'Internal server error'});
+        });
+});
+
 router.post('/', (req, res) => {
    
     const requiredFields = ['name', 'quantity', 'category'];

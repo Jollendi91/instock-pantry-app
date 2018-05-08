@@ -63,7 +63,25 @@ describe('Pantry API resource', function() {
         return closeServer();
     });
     
+    describe('GET endpoint', function() {
 
+        it('should get all pantry items', function() {
+            let res;
+            return chai.request(app)
+                .get('/pantry-items')
+                .then(function(_res) {
+                    res = _res;
+                    expect(res).to.have.status(200);
+                    expect(res).to.be.json;
+                    expect(res.body.pantryItems).to.have.length.of.at.least(1);
+
+                    return Pantry.count();
+                })
+                .then(function(count) {
+                    expect(res.body.pantryItems).to.have.lengthOf(count);
+                });
+        });
+    });
 
     describe('POST endpoint', function() {
 
