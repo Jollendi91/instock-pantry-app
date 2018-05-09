@@ -170,4 +170,26 @@ describe('Pantry API resource', function() {
                 });
         });
     });
+
+   describe('DELETE endpoint', function() {
+
+        it('should remove the requested item', function() {
+            let pantryItem;
+            Pantry
+                .findOne()
+                .then(function(_pantryItem) {
+                    pantryItem = _pantryItem;
+
+                    return chai.request(app)
+                        .delete(`/pantry-items/${pantryItem.id}`)    
+                })
+                .then(function(res) {
+                    expect(res).to.have.status(204);
+                    return Pantry.findById(pantryItem.id);
+                })
+                .then(function(_pantryItem) {
+                    expect(_pantryItem).to.be.null;
+                });
+        });
+    });
 });
