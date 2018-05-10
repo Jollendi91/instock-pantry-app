@@ -73,7 +73,8 @@ function displayPantryItems(data) {
     for (let item in data.pantryItems) {
         const selector = `#${data.pantryItems[item].category}`;
         $(selector).append(`
-        <li id="${data.pantryItems[item].id}">${data.pantryItems[item].quantity} - ${data.pantryItems[item].name} <button id="js-subtract" class="increment">-</button><button id="js-add" class="increment">+</button></li>
+        <li id="${data.pantryItems[item].id}"><span class="js-quantity">${data.pantryItems[item].quantity}</span> - <span class="js-item-name">${data.pantryItems[item].name}</span> 
+        <button id="js-subtract" class="increment">-</button><button id="js-add" class="increment">+</button></li>
         `);
     }
 }
@@ -84,16 +85,26 @@ function getAndDisplayCategoriesAndItems(PANTRY_DATA) {
     displayPantryItems(PANTRY_DATA);
 }
 
+function updateItemInDatabase(itemId, itemQuantity) {
+    $.ajax(`/pantry-items/${itemId}`, {
+        method: 'PUT',
+        data: JSON.stringify({
+            id: itemId,
+            quantity: itemQuantity
+        }),
+        contentType: 'application/json',
+    });
+}
+
 function listenForIncrementItemClick() {
     $('#js-pantry-items').on('click', '.increment', function(event) {
         event.preventDefault();
         const currentItemId = $(event.currentTarget).closest('li').attr('id');
-        const currentItem = MOCK_PANTRY_DATA.pantryItems.find(item => {
-                return item.id === currentItemId;
-            });
-
+    
         if(event.currentTarget.id === 'js-add') {
-           currentItem.quantity++;
+           let itemQuantity = $(event.currentTarget).parent().children('.js-quantity').text();
+            itemQuantity++;
+            updateItemInDatabase(currentItemId, itemQuantity);
            getPantryItems();
         }
         else if (event.currentTarget.id === 'js-subtract') {

@@ -79,7 +79,7 @@ router.put('/:id', (req, res) => {
     });
 
     Pantry
-        .findByIdAndUpdate(req.params.id, {$set: toUpdate})
+        .findByIdAndUpdate(req.params.id, {$set: toUpdate}, {new: true})
         .then(pantryItem => res.status(204).end())
         .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
