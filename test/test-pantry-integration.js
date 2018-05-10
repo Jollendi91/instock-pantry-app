@@ -83,6 +83,26 @@ describe('Pantry API resource', function() {
                 });
         });
 
+        it('should return a single item if passed id', function() {
+            let pantryItem;
+            
+            return Pantry.findOne()
+                .then(function(_pantryItem) {
+                    pantryItem = _pantryItem;
+
+                    return chai.request(app)
+                        .get(`/pantry-items/${_pantryItem.id}`)
+                })
+                .then(function(res) {
+                    expect(res).to.have.status(200);
+                    expect(res).to.be.json;
+                    expect(res.body).to.be.an('object');
+                    expect(res.body.name).to.equal(pantryItem.name);
+                    expect(res.body.quantity).to.equal(pantryItem.quantity);
+                    expect(res.body.category).to.equal(pantryItem.category);
+                });
+        });
+
         it('should return pantry items with right fields', function() {
             let resPantryItem;
 

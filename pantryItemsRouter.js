@@ -19,6 +19,16 @@ router.get('/', (req, res) => {
         });
 });
 
+router.get('/:id', (req, res) => {
+    Pantry
+        .findById(req.params.id)
+        .then(pantyItem => res.json(pantyItem))
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({message: 'Internal server error'});
+        });
+});
+
 router.post('/', (req, res) => {
    
     const requiredFields = ['name', 'quantity', 'category'];
