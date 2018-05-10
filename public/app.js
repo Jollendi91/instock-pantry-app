@@ -96,6 +96,12 @@ function updateItemInDatabase(itemId, itemQuantity) {
     });
 }
 
+function deleteItemInDatabase(itemId) {
+    $.ajax(`/pantry-items/${itemId}`, {
+        method: 'DELETE'
+    });
+}
+
 function listenForIncrementItemClick() {
     $('#js-pantry-items').on('click', '.increment', function(event) {
         event.preventDefault();
@@ -108,12 +114,14 @@ function listenForIncrementItemClick() {
            getPantryItems();
         }
         else if (event.currentTarget.id === 'js-subtract') {
-            currentItem.quantity--;
-            if(currentItem.quantity === 0) {
-                const itemIndex = MOCK_PANTRY_DATA.pantryItems.indexOf(currentItem);
-                if (itemIndex != -1) {
-                    MOCK_PANTRY_DATA.pantryItems.splice(itemIndex, 1);
-                }
+            let itemQuantity = $(event.currentTarget).parent().children('.js-quantity').text();
+            itemQuantity--;
+
+            if (itemQuantity === 0) {
+                deleteItemInDatabase(currentItemId);
+            }
+            else{
+               updateItemInDatabase(currentItemId, itemQuantity);
             }
             getPantryItems();
         }
