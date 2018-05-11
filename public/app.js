@@ -138,7 +138,7 @@ function listenforAddNewItem() {
         $('#js-quantity').val(1);
         $('#js-category').val("");
         searchDatabaseForExistingItem(newItem, quantity, category);
-        getAndDisplayCategoriesAndItems();
+        getPantryItems();
     });
 }
 
@@ -170,7 +170,7 @@ function displayCategories(data) {
 }
 
 function getPantryItems(callbackFn) {
-    setTimeout(function () { callbackFn(MOCK_PANTRY_DATA) }, 100);
+    $.ajax('/pantry-items', {success: getAndDisplayCategoriesAndItems});
 }
 
 function displayPantryItems(data) {
@@ -182,10 +182,10 @@ function displayPantryItems(data) {
     }
 }
 
-function getAndDisplayCategoriesAndItems() {
+function getAndDisplayCategoriesAndItems(PANTRY_DATA) {
     $('#js-pantry-items').empty();
-    displayCategories(MOCK_PANTRY_DATA);
-    getPantryItems(displayPantryItems);
+    displayCategories(PANTRY_DATA);
+    displayPantryItems(PANTRY_DATA);
 }
 
 function listenForIncrementItemClick() {
@@ -198,7 +198,7 @@ function listenForIncrementItemClick() {
 
         if(event.currentTarget.id === 'js-add') {
            currentItem.quantity++;
-           getAndDisplayCategoriesAndItems();
+           getPantryItems();
         }
         else if (event.currentTarget.id === 'js-subtract') {
             currentItem.quantity--;
@@ -208,27 +208,13 @@ function listenForIncrementItemClick() {
                     MOCK_PANTRY_DATA.pantryItems.splice(itemIndex, 1);
                 }
             }
-            getAndDisplayCategoriesAndItems();
+            getPantryItems();
         }
     });
 }
 
 $(function () {
-    getAndDisplayCategoriesAndItems();
+    getPantryItems();
     listenforAddNewItem();
     listenForIncrementItemClick();
 });
-
-
-/*for(item in data.shoppingListItems) {
-        $('#js-shopping-list').append(`<p>${data.shoppingListItems[item].quantity} ${data.shoppingListItems[item].name}`);
-    }
-
-    for(recipe in data.recipes) {
-        $('#js-recipes').append(`
-        <h2>${data.recipes[recipe].title}</h2>
-        <img src="${data.recipes[recipe].image}">
-        <p>Number of ingredients used from Pantry: ${data.recipes[recipe].usedIngredientCount}</p>
-        <p>Number of ingredients missing for this recipe: ${data.recipes[recipe].missedIngredientCount}</p>
-        `);
-    }*/
