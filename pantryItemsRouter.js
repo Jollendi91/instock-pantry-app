@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
     Pantry.findOne({name: {$regex : `${req.body.name}?`, $options : 'i'}})
     .then(function(pantryItem) {
         if (pantryItem) {
-            return res.status(200).json({message: `This item already exists!`});
+            return res.status(200).json({message: `This item already exists!`}).end();
         }
         else {
           return  Pantry
