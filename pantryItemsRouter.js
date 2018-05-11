@@ -40,15 +40,22 @@ router.post('/', (req, res) => {
             return res.status(400).send(message);
         }
     }
-
-    Pantry
-        .create({
-            name: req.body.name,
-            quantity: req.body.quantity,
-            category: req.body.category,
-            dateAdded: Date.now()
-        })
-        .then(item => res.status(201).json(item))
+    Pantry.findOne({name: {$regex : `${req.body.name}?`, $options : 'i'}})
+    .then(function(pantryItem) {
+        if (pantryItem) {
+            return res.status(200).json({message: `This item already exists!`});
+        }
+        else {
+          return  Pantry
+                    .create({
+                        name: req.body.name,
+                        quantity: req.body.quantity,
+                        category: req.body.category,
+                        dateAdded: Date.now()
+                    });
+        }
+    })
+        .then(newItem => {if (newItem) res.status(201).json(newItem)})
         .catch(err => {
             console.error(err);
             res.status(500).json({message: 'Internal server error'});
@@ -72,7 +79,7 @@ router.put('/:id', (req, res) => {
     });
 
     Pantry
-        .findByIdAndUpdate(req.params.id, {$set: toUpdate})
+        .findByIdAndUpdate(req.params.id, {$set: toUpdate}, {new: true})
         .then(pantryItem => res.status(204).end())
         .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
