@@ -34,6 +34,13 @@ MOCK_RECIPE_DATA = {
           "image": "https://spoonacular.com/recipeImages/Fresh-Apple-Cake-With-Caramel-Sauce-643426.jpg",
           "usedIngredientCount": 3,
           "missedIngredientCount": 12,
+        },
+        {
+            "id": 156992,
+            "title": "Char-Grilled Beef Tenderloin with Three-Herb Chimichurri",
+            "image": "https://spoonacular.com/recipeImages/char-grilled-beef-tenderloin-with-three-herb-chimichurri-156992.jpg",
+            "usedIngredientCount": 4,
+            "missedIngredientCount": 10,
         }
     ]
 };
@@ -328,8 +335,8 @@ function displayRecipes(recipeData) {
 
     for(let recipe in recipeData.recipes) {
         let RECIPE = recipeData.recipes[recipe];
-        $('#js-recipes').append(`
-            <article id="${RECIPE.id}">
+        $('#js-recipe-list').append(`
+            <article id="${RECIPE.id}" class="js-single-recipe">
                 <h3>${RECIPE.title}</h3>
                 <img class="js-recipe-img" src="${RECIPE.image}" alt="${RECIPE.title}">
                 <p>Number of ingredients used from pantry:<span id="js-exist-ingredients">${RECIPE.usedIngredientCount}</span></p>
@@ -347,10 +354,45 @@ function listenForSearchRecipesClick() {
     });
 }
 
+
+
+function getIngredientList() {
+    for(let ingredient in MOCK_INSTRUCTION_DATA.extendedIngredients) {
+        let INGREDIENT = MOCK_INSTRUCTION_DATA.extendedIngredients[ingredient];
+
+        $('#js-ingredient-list').append(`
+        <li id="${INGREDIENT.id}">
+            <img src="${INGREDIENT.image}" alt="${INGREDIENT.name}">
+            <p>${INGREDIENT.originalString}</p>
+        </li>
+        `);   
+    }
+}
+
+function displaySingleRecipeDetails(recipeId) {
+    console.log(MOCK_INSTRUCTION_DATA.id);
+    if (MOCK_INSTRUCTION_DATA.id == recipeId) {
+        $('#js-recipe-details').append(`
+            <h2>${MOCK_INSTRUCTION_DATA.title}</h2>
+            <img src="${MOCK_INSTRUCTION_DATA.image}" alt="${MOCK_INSTRUCTION_DATA.title}">
+            <p><a href="${MOCK_INSTRUCTION_DATA.sourceUrl}">${MOCK_INSTRUCTION_DATA.sourceName}</a></p>
+            <p>Ready in: ${MOCK_INSTRUCTION_DATA.readyInMinutes} minutes</p>
+            <p>Servings: ${MOCK_INSTRUCTION_DATA.servings}</p>
+            <ul id="js-ingredient-list">
+                <h3>Ingredients</h3>
+            </ul>
+            <p>${MOCK_INSTRUCTION_DATA.instructions}</p>
+        `);
+        getIngredientList();
+    }
+}
+
 function listenForRecipeClick() {
-    $('#js-recipes').on('click', '.js-recipe-img', function(event){
-        const recipeID = $(event.target).parent('article').attr('id');
+    $('#js-recipes').on('click', '.js-single-recipe', function(event){
+        const recipeID = $(event.currentTarget).attr('id');
+
         console.log(recipeID);
+        displaySingleRecipeDetails(recipeID);
     });
 }
 
