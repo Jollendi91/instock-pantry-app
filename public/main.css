@@ -3,3 +3,27 @@
     flex-wrap: wrap;
     justify-content: space-around;
 }
+
+#js-ingredient-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#js-ingredient-list li {
+    display: flex;
+    align-items: center;
+    width: 33%;
+}
+
+li p {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+#js-instruction-list {
+    width: 50%;
+}
+
+#js-instruction-list li {
+    margin: 25px;
+}

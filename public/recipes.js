@@ -383,12 +383,15 @@ function displaySingleRecipeDetails(recipeInfo) {
     $('#js-recipe-details').append(`
             <h2>${RECIPE.title}</h2>
             <img src="${RECIPE.image}" alt="${RECIPE.title}">
-            <p><a href="${RECIPE.sourceUrl}">${RECIPE.sourceName}</a></p>
-            <p>Ready in: ${RECIPE.readyInMinutes} minutes</p>
-            <p>Servings: ${RECIPE.servings}</p>
+            <div id="recipe-info">
+              <p><a href="${RECIPE.sourceUrl}">${RECIPE.sourceName}</a></p>
+              <p>Ready in: ${RECIPE.readyInMinutes} minutes</p>
+              <p>Servings: ${RECIPE.servings}</p>
+            </div>
+            <h3>Ingredients</h3>
             <ul id="js-ingredient-list">
-                <h3>Ingredients</h3>
             </ul>
+            <h3>Instructions</h3>
             <ol id="js-instruction-list">
             </ol>
         `);
