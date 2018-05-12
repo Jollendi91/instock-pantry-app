@@ -2,6 +2,11 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    margin: 10px;
+}
+
+#recipe-info {
+    display: inline-block;
 }
 
 #js-ingredient-list {
