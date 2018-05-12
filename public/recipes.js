@@ -1,78 +1,76 @@
 MOCK_RECIPE_DATA = {
-    recipes: [
-        {
-          "id": 641803,
-          "title": "Easy & Delish! ~ Apple Crumble",
-          "image": "https://spoonacular.com/recipeImages/Easy---Delish--Apple-Crumble-641803.jpg",
-          "usedIngredientCount": 3,
-          "missedIngredientCount": 4,
-        },
-        {
-          "id": 645152,
-          "title": "Grandma's Apple Crisp",
-          "image": "https://spoonacular.com/recipeImages/Grandmas-Apple-Crisp-645152.jpg",
-          "usedIngredientCount": 3,
-          "missedIngredientCount": 6,
-        },
-        {
-          "id": 657563,
-          "title": "Quick Apple Ginger Pie",
-          "image": "https://spoonacular.com/recipeImages/Quick-Apple-Ginger-Pie-657563.jpg",
-          "usedIngredientCount": 3,
-          "missedIngredientCount": 6,
-        },
-        {
-          "id": 639487,
-          "title": "Cinnamon Sugar Fried Apples",
-          "image": "https://spoonacular.com/recipeImages/Cinnamon-Sugar-Fried-Apples-639487.jpg",
-          "usedIngredientCount": 3,
-          "missedIngredientCount": 8,
-        },
-        {
-          "id": 643426,
-          "title": "Fresh Apple Cake With Caramel Sauce",
-          "image": "https://spoonacular.com/recipeImages/Fresh-Apple-Cake-With-Caramel-Sauce-643426.jpg",
-          "usedIngredientCount": 3,
-          "missedIngredientCount": 12,
-        },
-        {
-            "id": 156992,
-            "title": "Char-Grilled Beef Tenderloin with Three-Herb Chimichurri",
-            "image": "https://spoonacular.com/recipeImages/char-grilled-beef-tenderloin-with-three-herb-chimichurri-156992.jpg",
-            "usedIngredientCount": 4,
-            "missedIngredientCount": 10,
-        }
-    ]
+  recipes: [{
+      "id": 641803,
+      "title": "Easy & Delish! ~ Apple Crumble",
+      "image": "https://spoonacular.com/recipeImages/Easy---Delish--Apple-Crumble-641803.jpg",
+      "usedIngredientCount": 3,
+      "missedIngredientCount": 4,
+    },
+    {
+      "id": 645152,
+      "title": "Grandma's Apple Crisp",
+      "image": "https://spoonacular.com/recipeImages/Grandmas-Apple-Crisp-645152.jpg",
+      "usedIngredientCount": 3,
+      "missedIngredientCount": 6,
+    },
+    {
+      "id": 657563,
+      "title": "Quick Apple Ginger Pie",
+      "image": "https://spoonacular.com/recipeImages/Quick-Apple-Ginger-Pie-657563.jpg",
+      "usedIngredientCount": 3,
+      "missedIngredientCount": 6,
+    },
+    {
+      "id": 639487,
+      "title": "Cinnamon Sugar Fried Apples",
+      "image": "https://spoonacular.com/recipeImages/Cinnamon-Sugar-Fried-Apples-639487.jpg",
+      "usedIngredientCount": 3,
+      "missedIngredientCount": 8,
+    },
+    {
+      "id": 643426,
+      "title": "Fresh Apple Cake With Caramel Sauce",
+      "image": "https://spoonacular.com/recipeImages/Fresh-Apple-Cake-With-Caramel-Sauce-643426.jpg",
+      "usedIngredientCount": 3,
+      "missedIngredientCount": 12,
+    },
+    {
+      "id": 156992,
+      "title": "Char-Grilled Beef Tenderloin with Three-Herb Chimichurri",
+      "image": "https://spoonacular.com/recipeImages/char-grilled-beef-tenderloin-with-three-herb-chimichurri-156992.jpg",
+      "usedIngredientCount": 4,
+      "missedIngredientCount": 10,
+    }
+  ]
 };
 
 MOCK_INSTRUCTION_DATA = {
-    "vegetarian": false,
-    "vegan": false,
-    "glutenFree": true,
-    "dairyFree": true,
-    "veryHealthy": false,
-    "cheap": false,
-    "veryPopular": false,
-    "sustainable": false,
-    "weightWatcherSmartPoints": 21,
-    "gaps": "no",
-    "lowFodmap": false,
-    "ketogenic": false,
-    "whole30": false,
-    "servings": 10,
-    "sourceUrl": "http://www.epicurious.com/recipes/food/views/Char-Grilled-Beef-Tenderloin-with-Three-Herb-Chimichurri-235342",
-    "spoonacularSourceUrl": "https://spoonacular.com/char-grilled-beef-tenderloin-with-three-herb-chimichurri-156992",
-    "aggregateLikes": 0,
-    "creditText": "Epicurious",
-    "sourceName": "Epicurious",
-    "extendedIngredients": [
-      {
-        "id": 1022009,
-        "aisle": "Ethnic Foods",
-        "image": "https://spoonacular.com/cdn/ingredients_100x100/chili-powder.jpg",
-        "name": "ancho chile powder",
-        "amount": 1.5,
-        "unit": "teaspoons",
+  "vegetarian": false,
+  "vegan": false,
+  "glutenFree": true,
+  "dairyFree": true,
+  "veryHealthy": false,
+  "cheap": false,
+  "veryPopular": false,
+  "sustainable": false,
+  "weightWatcherSmartPoints": 21,
+  "gaps": "no",
+  "lowFodmap": false,
+  "ketogenic": false,
+  "whole30": false,
+  "servings": 10,
+  "sourceUrl": "http://www.epicurious.com/recipes/food/views/Char-Grilled-Beef-Tenderloin-with-Three-Herb-Chimichurri-235342",
+  "spoonacularSourceUrl": "https://spoonacular.com/char-grilled-beef-tenderloin-with-three-herb-chimichurri-156992",
+  "aggregateLikes": 0,
+  "creditText": "Epicurious",
+  "sourceName": "Epicurious",
+  "extendedIngredients": [{
+      "id": 1022009,
+      "aisle": "Ethnic Foods",
+      "image": "https://spoonacular.com/cdn/ingredients_100x100/chili-powder.jpg",
+      "name": "ancho chile powder",
+      "amount": 1.5,
+      "unit": "teaspoons",
       "unitShort": "t",
       "unitLong": "teaspoons",
       "originalString": "1 1/2 teaspoons chipotle chile powder or ancho chile powder",
@@ -149,59 +147,59 @@ MOCK_INSTRUCTION_DATA = {
       ]
     },
     {
-        "id": 2064,
-        "aisle": "Produce",
-        "image": "https://spoonacular.com/cdn/ingredients_100x100/mint.jpg",
-        "name": "fresh mint",
-        "amount": 1,
-        "unit": "cup",
-        "unitShort": "c",
-        "unitLong": "cup",
-        "originalString": "1 cup (packed) stemmed fresh mint",
-        "metaInformation": [
-          "fresh",
-          "packed",
-          "stemmed",
-          "()"
-        ]
-      },
-      {
-        "id": 11297,
-        "aisle": "Produce",
-        "image": "https://spoonacular.com/cdn/ingredients_100x100/parsley.jpg",
-        "name": "fresh parsley",
-        "amount": 3,
-        "unit": "cups",
-        "unitShort": "c",
-        "unitLong": "cups",
-        "originalString": "3 cups (packed) stemmed fresh parsley",
-        "metaInformation": [
-            "fresh",
-            "packed",
-            "stemmed",
-            "()"
-          ]
-        },
-        {
-          "id": 11215,
-          "aisle": "Produce",
-          "image": "https://spoonacular.com/cdn/ingredients_100x100/garlic.jpg",
-          "name": "garlic cloves",
-          "amount": 3,
-          "unit": "",
-          "unitShort": "",
-          "unitLong": "",
-          "originalString": "3 garlic cloves, peeled",
-          "metaInformation": [
-            "peeled"
-          ]
-        },
-        {
-          "id": 1002030,
-          "aisle": "Spices and Seasonings",
-          "image": "https://spoonacular.com/cdn/ingredients_100x100/pepper.jpg",
-          "name": "ground pepper",
-          "amount": 1,
+      "id": 2064,
+      "aisle": "Produce",
+      "image": "https://spoonacular.com/cdn/ingredients_100x100/mint.jpg",
+      "name": "fresh mint",
+      "amount": 1,
+      "unit": "cup",
+      "unitShort": "c",
+      "unitLong": "cup",
+      "originalString": "1 cup (packed) stemmed fresh mint",
+      "metaInformation": [
+        "fresh",
+        "packed",
+        "stemmed",
+        "()"
+      ]
+    },
+    {
+      "id": 11297,
+      "aisle": "Produce",
+      "image": "https://spoonacular.com/cdn/ingredients_100x100/parsley.jpg",
+      "name": "fresh parsley",
+      "amount": 3,
+      "unit": "cups",
+      "unitShort": "c",
+      "unitLong": "cups",
+      "originalString": "3 cups (packed) stemmed fresh parsley",
+      "metaInformation": [
+        "fresh",
+        "packed",
+        "stemmed",
+        "()"
+      ]
+    },
+    {
+      "id": 11215,
+      "aisle": "Produce",
+      "image": "https://spoonacular.com/cdn/ingredients_100x100/garlic.jpg",
+      "name": "garlic cloves",
+      "amount": 3,
+      "unit": "",
+      "unitShort": "",
+      "unitLong": "",
+      "originalString": "3 garlic cloves, peeled",
+      "metaInformation": [
+        "peeled"
+      ]
+    },
+    {
+      "id": 1002030,
+      "aisle": "Spices and Seasonings",
+      "image": "https://spoonacular.com/cdn/ingredients_100x100/pepper.jpg",
+      "name": "ground pepper",
+      "amount": 1,
       "unit": "teaspoon",
       "unitShort": "t",
       "unitLong": "teaspoon",
@@ -279,32 +277,32 @@ MOCK_INSTRUCTION_DATA = {
       ]
     },
     {
-        "id": 1012047,
-        "aisle": "Spices and Seasonings",
-        "image": "https://spoonacular.com/cdn/ingredients_100x100/salt.jpg",
-        "name": "sea salt",
-        "amount": 1,
-        "unit": "teaspoon",
-        "unitShort": "t",
-        "unitLong": "teaspoon",
-        "originalString": "1 teaspoon fine sea salt",
-        "metaInformation": [
-          "fine"
-        ]
-      },
-      {
-        "id": 11677,
-        "aisle": "Produce",
-        "image": "https://spoonacular.com/cdn/ingredients_100x100/shallots.jpg",
-        "name": "shallots",
-        "amount": 2,
-        "unit": "",
-        "unitShort": "",
-        "unitLong": "",
-        "originalString": "2 medium shallots, peeled, quartered",
-        "metaInformation": [
-          "medium",
-          "peeled",
+      "id": 1012047,
+      "aisle": "Spices and Seasonings",
+      "image": "https://spoonacular.com/cdn/ingredients_100x100/salt.jpg",
+      "name": "sea salt",
+      "amount": 1,
+      "unit": "teaspoon",
+      "unitShort": "t",
+      "unitLong": "teaspoon",
+      "originalString": "1 teaspoon fine sea salt",
+      "metaInformation": [
+        "fine"
+      ]
+    },
+    {
+      "id": 11677,
+      "aisle": "Produce",
+      "image": "https://spoonacular.com/cdn/ingredients_100x100/shallots.jpg",
+      "name": "shallots",
+      "amount": 2,
+      "unit": "",
+      "unitShort": "",
+      "unitLong": "",
+      "originalString": "2 medium shallots, peeled, quartered",
+      "metaInformation": [
+        "medium",
+        "peeled",
         "quartered"
       ]
     },
@@ -328,14 +326,14 @@ MOCK_INSTRUCTION_DATA = {
   "readyInMinutes": 45,
   "image": "https://spoonacular.com/recipeImages/char-grilled-beef-tenderloin-with-three-herb-chimichurri-156992.jpg",
   "imageType": "jpg",
-  "instructions": "PreparationFor spice rub:                                        Combine all ingredients in small bowl.                                                                            Do ahead: Can be made 2 days ahead. Store airtight at room temperature.                                    For chimichurri sauce:                                        Combine first 8 ingredients in blender; blend until almost smooth. Add 1/4 of parsley, 1/4 of cilantro, and 1/4 of mint; blend until incorporated. Add remaining herbs in 3 more additions, pureeing until almost smooth after each addition.                                                                            Do ahead: Can be made 3 hours ahead. Cover; chill.                                    For beef tenderloin:                                        Let beef stand at room temperature 1 hour.                                                                            Prepare barbecue (high heat). Pat beef dry with paper towels; brush with oil. Sprinkle all over with spice rub, using all of mixture (coating will be thick). Place beef on grill; sear 2 minutes on each side. Reduce heat to medium-high. Grill uncovered until instant-read thermometer inserted into thickest part of beef registers 130F for medium-rare, moving beef to cooler part of grill as needed to prevent burning, and turning occasionally, about 40 minutes. Transfer to platter; cover loosely with foil and let rest 15 minutes. Thinly slice beef crosswise. Serve with chimichurri sauce.                                                                            *Available at specialty foods stores and from tienda.com."
+  "instructions": "Preparation for spice rub:                                        Combine all ingredients in small bowl.                                                                            Do ahead: Can be made 2 days ahead. Store airtight at room temperature.                                    For chimichurri sauce:                                        Combine first 8 ingredients in blender; blend until almost smooth. Add 1/4 of parsley, 1/4 of cilantro, and 1/4 of mint; blend until incorporated. Add remaining herbs in 3 more additions, pureeing until almost smooth after each addition.                                                                            Do ahead: Can be made 3 hours ahead. Cover; chill.                                    For beef tenderloin:                                        Let beef stand at room temperature 1 hour.                                                                            Prepare barbecue (high heat). Pat beef dry with paper towels; brush with oil. Sprinkle all over with spice rub, using all of mixture (coating will be thick). Place beef on grill; sear 2 minutes on each side. Reduce heat to medium-high. Grill uncovered until instant-read thermometer inserted into thickest part of beef registers 130F for medium-rare, moving beef to cooler part of grill as needed to prevent burning, and turning occasionally, about 40 minutes. Transfer to platter; cover loosely with foil and let rest 15 minutes. Thinly slice beef crosswise. Serve with chimichurri sauce.                                                                            *Available at specialty foods stores and from tienda.com."
 };
 
 function displayRecipes(recipeData) {
 
-    for(let recipe in recipeData.recipes) {
-        let RECIPE = recipeData.recipes[recipe];
-        $('#js-recipe-list').append(`
+  for (let recipe in recipeData.recipes) {
+    let RECIPE = recipeData.recipes[recipe];
+    $('#js-recipe-list').append(`
             <article id="${RECIPE.id}" class="js-single-recipe">
                 <h3>${RECIPE.title}</h3>
                 <img class="js-recipe-img" src="${RECIPE.image}" alt="${RECIPE.title}">
@@ -344,35 +342,35 @@ function displayRecipes(recipeData) {
             </article>
         `);
 
-    }
+  }
 }
 
 function listenForSearchRecipesClick() {
-    $('#js-search-recipes').click(() => {
-        console.log("I was clicked");
-       displayRecipes(MOCK_RECIPE_DATA);
-    });
+  $('#js-search-recipes').click(() => {
+    console.log("I was clicked");
+    displayRecipes(MOCK_RECIPE_DATA);
+  });
 }
 
 
 
 function getIngredientList() {
-    for(let ingredient in MOCK_INSTRUCTION_DATA.extendedIngredients) {
-        let INGREDIENT = MOCK_INSTRUCTION_DATA.extendedIngredients[ingredient];
+  for (let ingredient in MOCK_INSTRUCTION_DATA.extendedIngredients) {
+    let INGREDIENT = MOCK_INSTRUCTION_DATA.extendedIngredients[ingredient];
 
-        $('#js-ingredient-list').append(`
+    $('#js-ingredient-list').append(`
         <li id="${INGREDIENT.id}">
             <img src="${INGREDIENT.image}" alt="${INGREDIENT.name}">
             <p>${INGREDIENT.originalString}</p>
         </li>
-        `);   
-    }
+        `);
+  }
 }
 
 function displaySingleRecipeDetails(recipeId) {
-    console.log(MOCK_INSTRUCTION_DATA.id);
-    if (MOCK_INSTRUCTION_DATA.id == recipeId) {
-        $('#js-recipe-details').append(`
+  console.log(MOCK_INSTRUCTION_DATA.id);
+  if (MOCK_INSTRUCTION_DATA.id == recipeId) {
+    $('#js-recipe-details').append(`
             <h2>${MOCK_INSTRUCTION_DATA.title}</h2>
             <img src="${MOCK_INSTRUCTION_DATA.image}" alt="${MOCK_INSTRUCTION_DATA.title}">
             <p><a href="${MOCK_INSTRUCTION_DATA.sourceUrl}">${MOCK_INSTRUCTION_DATA.sourceName}</a></p>
@@ -381,22 +379,22 @@ function displaySingleRecipeDetails(recipeId) {
             <ul id="js-ingredient-list">
                 <h3>Ingredients</h3>
             </ul>
-            <p>${MOCK_INSTRUCTION_DATA.instructions}</p>
+            <p>${MOCK_INSTRUCTION_DATA.instructions.replace(/(\.\s+)/g,"\$1<br />")}</p>
         `);
-        getIngredientList();
-    }
+    getIngredientList();
+  }
 }
 
 function listenForRecipeClick() {
-    $('#js-recipes').on('click', '.js-single-recipe', function(event){
-        const recipeID = $(event.currentTarget).attr('id');
+  $('#js-recipes').on('click', '.js-single-recipe', function (event) {
+    const recipeID = $(event.currentTarget).attr('id');
 
-        console.log(recipeID);
-        displaySingleRecipeDetails(recipeID);
-    });
+    console.log(recipeID);
+    displaySingleRecipeDetails(recipeID);
+  });
 }
 
 $(function () {
-    listenForSearchRecipesClick();
-    listenForRecipeClick();
+  listenForSearchRecipesClick();
+  listenForRecipeClick();
 });
