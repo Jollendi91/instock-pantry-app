@@ -25,9 +25,10 @@ router.get('/', (req, res) => {
                 fillIngredients: false,
                 ingredients: ingredientList,
                 limitLicense: false,
-                number: 10,
+                number: 5,
                 ranking: 1
-            }).end(function(response) {
+            })
+            .end(function(response) {
                 res.json(response);
             })
         })
@@ -36,5 +37,21 @@ router.get('/', (req, res) => {
             res.status(500).json({message: 'Internal server error'});
         });
 }); 
+
+
+router.get('/:id', (req, res) => {
+
+    unirest.get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${req.params.id}/information`)
+    .headers({
+        "X-Mashape-Key": "zg5hoQFND2mshRWVxJwHg4AC71z7p1MueSnjsncnpsbAVkLerP",
+        "Accept": "application/json"
+    })
+    .query({
+        includeNutrition: false
+    })
+    .end(function(response) {
+        res.json(response);
+    });
+});
 
 module.exports = router;
