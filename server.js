@@ -11,9 +11,11 @@ const {Pantry} = require('./models');
 
 const app = express();
 
-const pantryItemsRouter = require('./pantryItemsRouter');
+const pantryItemsRouter = require('./routers/pantryItemsRouter');
+const recipesRouter = require('./routers/recipesRouter');
 
 app.use('/pantry-items', pantryItemsRouter);
+app.use('/recipes', recipesRouter);
 
 app.use(express.json());
 app.use(morgan('common'));
