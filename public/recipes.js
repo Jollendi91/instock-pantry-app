@@ -353,43 +353,56 @@ function listenForSearchRecipesClick() {
 
 
 
-function getIngredientList() {
-  for (let ingredient in MOCK_INSTRUCTION_DATA.extendedIngredients) {
-    let INGREDIENT = MOCK_INSTRUCTION_DATA.extendedIngredients[ingredient];
+function getIngredientList(recipeInfo) {
+  for (let ingredient in recipeInfo.body.extendedIngredients) {
+    let INGREDIENT = recipeInfo.body.extendedIngredients[ingredient];
 
     $('#js-ingredient-list').append(`
         <li id="${INGREDIENT.id}">
-            <img src="${INGREDIENT.image}" alt="${INGREDIENT.name}">
+            <img src="https://spoonacular.com/cdn/ingredients_100x100/${INGREDIENT.image}" alt="${INGREDIENT.name}">
             <p>${INGREDIENT.originalString}</p>
         </li>
         `);
   }
 }
 
-function displaySingleRecipeDetails(recipeId) {
-  console.log(MOCK_INSTRUCTION_DATA.id);
-  if (MOCK_INSTRUCTION_DATA.id == recipeId) {
+function getInstructionList(recipeInfo) {
+  for (let instruction in recipeInfo.body.analyzedInstructions[0].steps) {
+    let INSTRUCTION = recipeInfo.body.analyzedInstructions[0].steps[instruction];
+
+    $('#js-instruction-list').append(`
+      <li id="step-${INSTRUCTION.number}">
+        ${INSTRUCTION.step}
+      </li>
+    `);
+  }
+}
+
+function displaySingleRecipeDetails(recipeInfo) {
+    let RECIPE = recipeInfo.body;
     $('#js-recipe-details').append(`
-            <h2>${MOCK_INSTRUCTION_DATA.title}</h2>
-            <img src="${MOCK_INSTRUCTION_DATA.image}" alt="${MOCK_INSTRUCTION_DATA.title}">
-            <p><a href="${MOCK_INSTRUCTION_DATA.sourceUrl}">${MOCK_INSTRUCTION_DATA.sourceName}</a></p>
-            <p>Ready in: ${MOCK_INSTRUCTION_DATA.readyInMinutes} minutes</p>
-            <p>Servings: ${MOCK_INSTRUCTION_DATA.servings}</p>
+            <h2>${RECIPE.title}</h2>
+            <img src="${RECIPE.image}" alt="${RECIPE.title}">
+            <p><a href="${RECIPE.sourceUrl}">${RECIPE.sourceName}</a></p>
+            <p>Ready in: ${RECIPE.readyInMinutes} minutes</p>
+            <p>Servings: ${RECIPE.servings}</p>
             <ul id="js-ingredient-list">
                 <h3>Ingredients</h3>
             </ul>
-            <p>${MOCK_INSTRUCTION_DATA.instructions.replace(/(\.\s+)/g,"\$1<br />")}</p>
+            <ol id="js-instruction-list">
+            </ol>
         `);
-    getIngredientList();
+    getIngredientList(recipeInfo);
+    getInstructionList(recipeInfo);
   }
-}
+
 
 function listenForRecipeClick() {
   $('#js-recipes').on('click', '.js-single-recipe', function (event) {
     const recipeID = $(event.currentTarget).attr('id');
 
-    console.log(recipeID);
-    displaySingleRecipeDetails(recipeID);
+    $.ajax(`/recipes/${recipeID}`, {success: displaySingleRecipeDetails});
+        
   });
 }
 
