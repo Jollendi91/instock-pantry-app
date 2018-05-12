@@ -331,8 +331,8 @@ MOCK_INSTRUCTION_DATA = {
 
 function displayRecipes(recipeData) {
 
-  for (let recipe in recipeData.recipes) {
-    let RECIPE = recipeData.recipes[recipe];
+  for (let recipe in recipeData.body) {
+    let RECIPE = recipeData.body[recipe];
     $('#js-recipe-list').append(`
             <article id="${RECIPE.id}" class="js-single-recipe">
                 <h3>${RECIPE.title}</h3>
@@ -347,8 +347,7 @@ function displayRecipes(recipeData) {
 
 function listenForSearchRecipesClick() {
   $('#js-search-recipes').click(() => {
-    console.log("I was clicked");
-    displayRecipes(MOCK_RECIPE_DATA);
+      $.ajax('/recipes', {success: displayRecipes});
   });
 }
 

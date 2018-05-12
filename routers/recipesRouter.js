@@ -25,12 +25,11 @@ router.get('/', (req, res) => {
                 fillIngredients: false,
                 ingredients: ingredientList,
                 limitLicense: false,
-                number: 5,
+                number: 10,
                 ranking: 1
             }).end(function(response) {
                 res.json(response);
             })
-            
         })
         .catch(err => {
             console.error(err);
