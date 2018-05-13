@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
                 ingredients: ingredientList,
                 limitLicense: false,
                 number: 5,
-                ranking: 1
+                ranking: 2
             })
             .end(function(response) {
                 res.json(response);

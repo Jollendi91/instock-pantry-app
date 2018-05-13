@@ -337,12 +337,17 @@ function displayRecipes(recipeData) {
             <article id="${RECIPE.id}" class="js-single-recipe">
                 <h3>${RECIPE.title}</h3>
                 <img class="js-recipe-img" src="${RECIPE.image}" alt="${RECIPE.title}">
-                <p>Number of ingredients used from pantry:<span id="js-exist-ingredients">${RECIPE.usedIngredientCount}</span></p>
-                <p>Number of missing ingredients:<span id="js-missing-ingredients">${RECIPE.missedIngredientCount}</span></p>
+                <p>Number of ingredients used from pantry: <span id="js-exist-ingredients">${RECIPE.usedIngredientCount}</span></p>
+                <p>Number of missing ingredients: <span id="js-missing-ingredients">${RECIPE.missedIngredientCount}</span></p>
             </article>
         `);
 
   }
+
+  $('html, body').animate({
+    scrollTop: ($('#js-recipe-list').offset().top)
+  }, 700, 'swing');
+
 }
 
 function listenForSearchRecipesClick() {
@@ -384,7 +389,7 @@ function displaySingleRecipeDetails(recipeInfo) {
             <h2>${RECIPE.title}</h2>
             <img src="${RECIPE.image}" alt="${RECIPE.title}">
             <div id="recipe-info">
-              <p><a href="${RECIPE.sourceUrl}">${RECIPE.sourceName}</a></p>
+              <p>From: <a href="${RECIPE.sourceUrl}">${RECIPE.sourceName}</a></p>
               <p>Ready in: ${RECIPE.readyInMinutes} minutes</p>
               <p>Servings: ${RECIPE.servings}</p>
             </div>
@@ -397,6 +402,9 @@ function displaySingleRecipeDetails(recipeInfo) {
         `);
     getIngredientList(recipeInfo);
     getInstructionList(recipeInfo);
+    $('html, body').animate({
+      scrollTop: ($('#js-recipe-details').offset().top)
+    }, 700, 'swing');
   }
 
 
