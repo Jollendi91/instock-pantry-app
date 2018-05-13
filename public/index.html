@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>InStock</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="main.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <header role="banner">
@@ -20,6 +21,7 @@
             <label for="js-category">Category:</label> 
             <select id="js-category" name="category" required>
                 <option value="" disabled selected>Select a category</option>
+                <option value="Beverages">Beverages</option>
                 <option value="Bread">Bread</option>
                 <option value="Condiments">Condiments</option>
                 <option value="Canned">Canned Goods</option>
@@ -29,7 +31,7 @@
                 <option value="Fruits">Fruits</option>
                 <option value="Meats">Meats</option>
                 <option value="Snacks">Snacks</option>
-                <option value="Spices">Spices/Seasongings</option>
+                <option value="Spices">Spices/Seasonings</option>
                 <option value="Vegetables">Vegetables</option>
                 <option value="Miscellaneous">Miscellaneous</option>
             </select>
@@ -38,8 +40,17 @@
         <div id="js-alert"></div>
         <section id="js-pantry-items">
         </section>
+        <section id="js-recipes">
+            <h2>Find recipes that use items from your pantry!</h2>
+            <button id="js-search-recipes">Search Recipes</button>
+            <section id="js-recipe-list">
+            </section>
+            <section id="js-recipe-details">
+            </section>
+        </section>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="pantry.js"></script>
+    <script type="text/javascript" src="recipes.js"></script>
 </body>
 </html>

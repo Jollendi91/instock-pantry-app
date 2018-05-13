@@ -1,0 +1,73 @@
+/*Pantry Items */
+#js-pantry-items {
+    column-width: 265px;
+    padding-top: 20px;
+}
+
+#js-pantry-items ul {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border-bottom: 1px solid black;
+    padding-bottom: 15px;
+}
+
+
+
+/* Recipe List */
+
+#js-recipe-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 10px;
+}
+
+article {
+    max-width: 312px;
+}
+
+article h3 {
+    min-height: 46px;
+}
+/* Single Recipe Info */
+
+#js-recipe-details > img {
+    max-width: 100%;
+}
+
+#recipe-info {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+/* Single Recipe Ingredient List */
+
+#js-ingredient-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#js-ingredient-list li {
+    display: flex;
+    align-items: center;
+    flex-basis: 33%;
+}
+
+li img {
+    max-width: 100px;
+}
+
+li p {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+/* Single Recipe Instruction List */
+
+#js-instruction-list {
+    max-width: 600px;
+}
+
+#js-instruction-list li {
+    margin: 25px;
+}
