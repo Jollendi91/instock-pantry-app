@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
         .then(ingredientList => {
             unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients')
             .headers({
-                "X-Mashape-Key": "zg5hoQFND2mshRWVxJwHg4AC71z7p1MueSnjsncnpsbAVkLerP",
+                "X-Mashape-Key": SPOONACULAR_KEY,
                 "Accept": "application/json"
             })
             .query({
