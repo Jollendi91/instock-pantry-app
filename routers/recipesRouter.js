@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.use(express.json());
 
+const {SPOONACULAR_KEY} = require('../config');
 const {Pantry} = require('../models');
 
 
@@ -43,7 +44,7 @@ router.get('/:id', (req, res) => {
 
     unirest.get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${req.params.id}/information`)
     .headers({
-        "X-Mashape-Key": "zg5hoQFND2mshRWVxJwHg4AC71z7p1MueSnjsncnpsbAVkLerP",
+        "X-Mashape-Key": SPOONACULAR_KEY,
         "Accept": "application/json"
     })
     .query({
