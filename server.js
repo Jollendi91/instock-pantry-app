@@ -5,8 +5,6 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
 
-mongoose.Promise = global.Promise;
-
 const { PORT, DATABASE_URL } = require('./config');
 const {Pantry} = require('./models');
 
@@ -16,19 +14,34 @@ const {router: pantryItemsRouter} = require('./routers/pantryItemsRouter');
 const {router: recipesRouter} = require('./routers/recipesRouter');
 
 const {router: userRouter} = require('./users');
-const {localStrategy} = require('./auth');
+const {router: authRouter, localStrategy} = require('./auth');
+
+mongoose.Promise = global.Promise;
+
+app.use(express.static('public'));
+app.use(express.json());
+
+// Logging
+app.use(morgan('common'));
+
+// CORS
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+    if (req.method === 'OPTIONS') {
+        return res.send(204);
+    }
+    next();
+});
 
 passport.use(localStrategy);
 
-
+// Routers
 app.use('/pantry-items', pantryItemsRouter);
 app.use('/recipes', recipesRouter);
-
-app.use(express.json());
-app.use(morgan('common'));
-app.use(express.static('public'));
-
-
+app.use('/instock/users/', userRouter);
+app.use('/instock/auth/', authRouter);
 
 let server;
 
