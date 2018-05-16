@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const passport = require('passport');
 
 mongoose.Promise = global.Promise;
 
@@ -11,8 +12,14 @@ const {Pantry} = require('./models');
 
 const app = express();
 
-const pantryItemsRouter = require('./routers/pantryItemsRouter');
-const recipesRouter = require('./routers/recipesRouter');
+const {router: pantryItemsRouter} = require('./routers/pantryItemsRouter');
+const {router: recipesRouter} = require('./routers/recipesRouter');
+
+const {router: userRouter} = require('./users');
+const {localStrategy} = require('./auth');
+
+passport.use(localStrategy);
+
 
 app.use('/pantry-items', pantryItemsRouter);
 app.use('/recipes', recipesRouter);
