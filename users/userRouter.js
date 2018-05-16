@@ -97,7 +97,7 @@ router.post('/', (req, res) => {
         .then(user => {
             return res.status(201).json(user.serialize());
         })
-        .cath(err => {
+        .catch(err => {
             if (err.reason === 'ValidationError') {
                 return res.status(err.code).json(err);
             }
