@@ -14,7 +14,7 @@ const {router: pantryItemsRouter} = require('./routers/pantryItemsRouter');
 const {router: recipesRouter} = require('./routers/recipesRouter');
 
 const {router: userRouter} = require('./users');
-const {router: authRouter, localStrategy} = require('./auth');
+const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
 
 mongoose.Promise = global.Promise;
 
@@ -36,12 +36,25 @@ app.use(function (req, res, next) {
 });
 
 passport.use(localStrategy);
+passport.use(jwtStrategy);
 
 // Routers
 app.use('/pantry-items', pantryItemsRouter);
 app.use('/recipes', recipesRouter);
 app.use('/instock/users/', userRouter);
 app.use('/instock/auth/', authRouter);
+
+const jwtAuth = passport.authenticate('jwt', {session: false});
+
+app.get('/instock/protected', jwtAuth, (req, res) => {
+    return res.json({
+        data: 'Pantry items'
+    });
+});
+
+app.use('*', (req, res) => {
+    return res.status(404).json({message: 'Not found'});
+})
 
 let server;
 
