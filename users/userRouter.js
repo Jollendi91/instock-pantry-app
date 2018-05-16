@@ -104,3 +104,5 @@ router.post('/', (req, res) => {
             res.status(500).json({code: 500, message: 'Internal server error'});
         });
 });
+
+module.exports = {router};
