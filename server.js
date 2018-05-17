@@ -39,6 +39,10 @@ passport.use(localStrategy);
 passport.use(jwtStrategy);
 
 // Routers
+app.get('/', (req, res) => {
+    return res.sendFile('login.html', {root: `${__dirname}/public/`});
+});
+
 app.use('/pantry-items', pantryItemsRouter);
 app.use('/recipes', recipesRouter);
 app.use('/instock/users/', userRouter);
