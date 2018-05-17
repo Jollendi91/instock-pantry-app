@@ -5,19 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>InStock -</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="main.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <header role="banner">
             <h1>Welcome to InStock</h1>
     </header>
     <main role="main">
-        <form id='js-login-form'>
-            <label for="js-login-email">Email:</label>
-            <input id="js-login-email" type="email" name="Email" placeholder="john.doe@blank.com">
-            <label for="js-login-password">Password:</label>
-            <input id="js-login-password" type="password">
-            <button type="submit" name="login">Login</button>
-        </form>
+        <section id="js-login">
+            <form id='js-login-form'>
+                <label for="js-login-email">Email:</label>
+                <input id="js-login-email" type="email" name="Email" placeholder="john.doe@blank.com">
+                <label for="js-login-password">Password:</label>
+                <input id="js-login-password" type="password">
+                <button type="submit" name="login">Login</button>
+            </form>
+            <button id="signup-button">Sign-up</button>
+        </section>
     </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="login.js"></script>
 </body>
 </html>
