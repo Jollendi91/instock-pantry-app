@@ -3,6 +3,10 @@
 function listenforSignUpClick() {
     $('#signup-button').click(event => {
         event.preventDefault;
-        //Create Ajax call to endpoint that serves sign up form
+        location.href = `/signup`;
     })
 }
+
+$(function() {
+    listenforSignUpClick();
+});
