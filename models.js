@@ -3,11 +3,21 @@ const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 
 const pantrySchema = mongoose.Schema({
-    name: {type: String, required: true},
+    user: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User', 
+        unique: true,
+        required: [true, 'No User id found'] 
+    },
+    items: [{
+        name: {type: String, required: true},
     quantity: {type: Number, required: true},
     category: {type: String, required: true},
     dateAdded: {type: Date}
+    }]  
 });
+
+pantrySchema.index( { "user": 1, "items.name": 1 }, { unique: true }); 
 
 pantrySchema.virtual('itemString').get(function() {
     return `${this.quantity} - ${this.name}`.trim()
@@ -15,11 +25,7 @@ pantrySchema.virtual('itemString').get(function() {
 
 pantrySchema.methods.serialize = function() {
     return {
-        id: this._id,
-        name: this.name,
-        quantity: this.quantity,
-        category: this.category,
-        dateAdded: this.dateAdded
+        items: this.items
     }
 }
 
