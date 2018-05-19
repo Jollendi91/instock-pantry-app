@@ -29,6 +29,10 @@ article {
 article h3 {
     min-height: 46px;
 }
+
+article img {
+    max-width: 312px;
+}
 /* Single Recipe Info */
 
 #js-recipe-details > img {

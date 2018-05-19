@@ -11,7 +11,6 @@ const {Pantry} = require('../models');
 const jwtAuth = passport.authenticate('jwt', {session: false});
 
 router.get('/', jwtAuth, (req, res) => {
-    console.log(req);
     Pantry
         .findOne({user: req.user._id})
         .then(userPantry => {
@@ -97,7 +96,7 @@ router.post('/', jwtAuth, (req, res) => {
         });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', jwtAuth, (req, res) => {
     if(!(req.params.id && req.body.id && req.params.id === req.body.id)) {
         const message = (`Request path id (${req.params.id}) and request body id (${req.body.id}) must match`);
         console.error(message);
@@ -119,7 +118,7 @@ router.put('/:id', (req, res) => {
         .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', jwtAuth, (req, res) => {
     Pantry
         .findOneAndUpdate({'items._id': req.params.id}, {$pull: {items: {_id: req.params.id}}})
         .then(pantryItem => res.status(204).end())

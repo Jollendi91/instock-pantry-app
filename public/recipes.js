@@ -352,7 +352,12 @@ function displayRecipes(recipeData) {
 
 function listenForSearchRecipesClick() {
   $('#js-search-recipes').click(() => {
-      $.ajax('/recipes', {success: displayRecipes});
+      $.ajax('/recipes', {
+        beforeSend : function( xhr ) {
+          xhr.setRequestHeader( 'Authorization', `Bearer ${window.localStorage.token}`);
+      },
+        success: displayRecipes
+      });
   });
 }
 
