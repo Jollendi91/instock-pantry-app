@@ -121,7 +121,7 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     Pantry
-        .findByIdAndRemove(req.params.id)
+        .findOneAndUpdate({'items._id': req.params.id}, {$pull: {items: {_id: req.params.id}}})
         .then(pantryItem => res.status(204).end())
         .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
