@@ -45,15 +45,23 @@ router.post('/', jwtAuth, (req, res) => {
         }
     }
 
+    let itemNameCapital = req.body.name.charAt(0).toUpperCase() + req.body.name.substr(1);
+
     const newItem = {
-        name: req.body.name,
+        name: itemNameCapital,
         quantity: req.body.quantity,
         category: req.body.category
     };
 
+    let expression = `${req.body.name}?`;
+    let itemNameRegex = new RegExp(expression, 'i');
+
+    console.log(itemNameCapital);
+
     Pantry.findOneAndUpdate({
         user: req.user._id,
         'items.name': { $ne: req.body.name},
+        'items.name': { $not: itemNameRegex },
     }, 
         {
         $set: {user: req.user._id},
