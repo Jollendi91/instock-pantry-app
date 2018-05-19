@@ -81,7 +81,7 @@ function displayPantryItems(data) {
     for (let item in data.items) {
         const selector = `#${data.items[item].category}`;
         $(selector).append(`
-        <li id="${data.items[item].id}"><span class="js-quantity">${data.items[item].quantity}</span> - <span class="js-item-name">${data.items[item].name}</span> 
+        <li id="${data.items[item]._id}"><span class="js-quantity">${data.items[item].quantity}</span> - <span class="js-item-name">${data.items[item].name}</span> 
         <button id="js-subtract" class="increment">-</button><button id="js-add" class="increment">+</button></li>
         `);
     }

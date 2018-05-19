@@ -56,11 +56,9 @@ router.post('/', jwtAuth, (req, res) => {
     let expression = `${req.body.name}?`;
     let itemNameRegex = new RegExp(expression, 'i');
 
-    console.log(itemNameCapital);
-
     Pantry.findOneAndUpdate({
         user: req.user._id,
-        'items.name': { $ne: req.body.name},
+        'items.name': { $ne: itemNameCapital},
         'items.name': { $not: itemNameRegex },
     }, 
         {
@@ -116,7 +114,7 @@ router.put('/:id', (req, res) => {
     });
 
     Pantry
-        .findByIdAndUpdate(req.params.id, {$set: toUpdate}, {new: true})
+        .findOneAndUpdate({'items._id': req.params.id}, {$set: {'items.$.quantity': toUpdate.quantity}}, {new: true})
         .then(pantryItem => res.status(204).end())
         .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
