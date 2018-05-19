@@ -1,11 +1,8 @@
 'use strict';
 
 function displayError(err) {
-    const error = err.responseJSON;
-    console.log(err);
     $('#js-login-status').html(`
-        <h2>${error.reason}</h2>
-        <p>${error.message}</p>
+        <p>Invalid username or password! Please try again.</p>
     `);
 }
 
@@ -31,6 +28,7 @@ function sendUserLoginData(_username, _password) {
 function listenForLoginClick() {
     $('#js-login-form').submit(event => {
         event.preventDefault();
+        $('#js-login-status').empty();
         const username = $('#js-login-username').val();
         const password = $('#js-login-password').val();
 

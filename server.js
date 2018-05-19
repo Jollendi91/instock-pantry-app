@@ -38,21 +38,14 @@ app.use(function (req, res, next) {
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
+const jwtAuth = passport.authenticate('jwt', {session: false});
+
 // Routers
 app.use('/pantry-items', pantryItemsRouter);
 app.use('/recipes', recipesRouter);
 app.use('/instock/users/', userRouter);
 app.use('/instock/auth/', authRouter);
 
-
-const jwtAuth = passport.authenticate('jwt', {session: false});
-
-app.get('/instock/protected', jwtAuth, (req, res) => {
-    User.findById(req.user._id)
-        .then(user => {
-            res.json(user.serialize());
-        });
-});
 
 app.use('*', (req, res) => {
     return res.status(404).json({message: 'Not found'});
