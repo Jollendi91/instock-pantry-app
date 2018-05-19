@@ -1,19 +1,21 @@
 'use strict';
 
 const express = require('express');
+const passport = require('passport');
 const router = express.Router();
 
 router.use(express.json());
 
 const {Pantry} = require('../models');
 
-router.get('/', (req, res) => {
+const jwtAuth = passport.authenticate('jwt', {session: false});
+
+router.get('/', jwtAuth, (req, res) => {
+    console.log(req);
     Pantry
-        .find()
-        .then(pantryItems => {
-            res.json({
-                pantryItems: pantryItems.map((item) => item.serialize())
-            });
+        .findOne({user: req.user._id})
+        .then(userPantry => {
+            res.json(userPantry);
         })
         .catch(err => {
             console.error(err);
@@ -31,7 +33,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.post('/', (req, res) => {
+router.post('/', jwtAuth, (req, res) => {
    
     const requiredFields = ['name', 'quantity', 'category'];
     for (let i=0; i < requiredFields.length; i++) {
@@ -42,7 +44,33 @@ router.post('/', (req, res) => {
             return res.status(400).send(message);
         }
     }
-    Pantry.findOne({name: {$regex : `${req.body.name}?`, $options : 'i'}})
+
+    const newItem = {
+        name: req.body.name,
+        quantity: req.body.quantity,
+        category: req.body.category
+    };
+
+    Pantry.findOneAndUpdate({
+        user: req.user._id,
+        'items.name': { $ne: req.body.name},
+    }, 
+        {
+        $set: {user: req.user._id},
+        $push: {items: [newItem]}
+      },
+      {
+        new: true, 
+        upsert: true
+      })
+      .then(pantry =>{
+          res.status(201).json({
+              pantry: pantry.serialize(),
+              newItem: newItem
+        });
+      })
+
+    /* Pantry.findOne({name: {$regex : `${req.body.name}?`, $options : 'i'}})
     .then(function(pantryItem) {
         if (pantryItem) {
             return res.status(200).json({message: `This item already exists!`}).end();
@@ -56,8 +84,7 @@ router.post('/', (req, res) => {
                         dateAdded: Date.now()
                     });
         }
-    })
-        .then(newItem => {if (newItem) res.status(201).json(newItem)})
+    })*/
         .catch(err => {
             console.error(err);
             res.status(500).json({message: 'Internal server error'});

@@ -44,20 +44,14 @@ app.use('/recipes', recipesRouter);
 app.use('/instock/users/', userRouter);
 app.use('/instock/auth/', authRouter);
 
-app.get('/', (req, res) => {
-    return res.sendFile('login.html', {root: `${__dirname}/public/`});
-});
-
-app.get('/signup', (req, res) => {
-    return res.sendFile('signup.html', {root: `${__dirname}/public/`});
-})
 
 const jwtAuth = passport.authenticate('jwt', {session: false});
 
 app.get('/instock/protected', jwtAuth, (req, res) => {
-    return res.json({
-        data: 'Pantry items'
-    });
+    User.findById(req.user._id)
+        .then(user => {
+            res.json(user.serialize());
+        });
 });
 
 app.use('*', (req, res) => {

@@ -2,6 +2,9 @@
 
 function addNewItem(itemName, quantity, category) {
     $.ajax('/pantry-items', {
+        beforeSend : function( xhr ) {
+            xhr.setRequestHeader( 'Authorization', `Bearer ${window.localStorage.token}`);
+        },
         method: 'POST',
         data: JSON.stringify({
             name: itemName,
@@ -14,11 +17,12 @@ function addNewItem(itemName, quantity, category) {
 }
 
 function alertItemStatus(data) { 
+    console.log(data);
     if (data.message) {
         $('#js-alert').append(`<h2>${data.message}</h2>`); 
     }
     else {
-        $('#js-alert').append(`<h2>${data.name} has been added!</h2>`);
+        $('#js-alert').append(`<h2>${data.newItem.name} has been added!</h2>`);
         getPantryItems();
     }
 }
@@ -40,8 +44,8 @@ function listenforAddNewItem() {
 
 function getExistingCategories(data) {
     const categories = [];
-    for (let item in data.pantryItems) {
-        const currentCategory = data.pantryItems[item].category;
+    for (let item in data.items) {
+        const currentCategory = data.items[item].category;
         const existingCategory = categories.find(item => {
             return item === currentCategory;
         });
@@ -66,14 +70,18 @@ function displayCategories(data) {
 }
 
 function getPantryItems() {
-    $.ajax('/pantry-items', {success: getAndDisplayCategoriesAndItems});
+    $.ajax('/pantry-items', {
+        beforeSend : function( xhr ) {
+            xhr.setRequestHeader( 'Authorization', `Bearer ${window.localStorage.token}`);
+        },
+        success: getAndDisplayCategoriesAndItems});
 }
 
 function displayPantryItems(data) {
-    for (let item in data.pantryItems) {
-        const selector = `#${data.pantryItems[item].category}`;
+    for (let item in data.items) {
+        const selector = `#${data.items[item].category}`;
         $(selector).append(`
-        <li id="${data.pantryItems[item].id}"><span class="js-quantity">${data.pantryItems[item].quantity}</span> - <span class="js-item-name">${data.pantryItems[item].name}</span> 
+        <li id="${data.items[item].id}"><span class="js-quantity">${data.items[item].quantity}</span> - <span class="js-item-name">${data.items[item].name}</span> 
         <button id="js-subtract" class="increment">-</button><button id="js-add" class="increment">+</button></li>
         `);
     }

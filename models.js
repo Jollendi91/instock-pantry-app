@@ -10,7 +10,7 @@ const pantrySchema = mongoose.Schema({
         required: [true, 'No User id found'] 
     },
     items: [{
-        name: {type: String, required: true},
+        name: {type: String, required: true, unique: true},
     quantity: {type: Number, required: true},
     category: {type: String, required: true},
     dateAdded: {type: Date}
@@ -47,6 +47,7 @@ const UserSchema = mongoose.Schema({
 
 UserSchema.methods.serialize = function() {
     return {
+        _id: this._id,
         username: this.username || '',
         firstName: this.firstName || '',
         lastName: this.lastName || ''

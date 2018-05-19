@@ -36,7 +36,14 @@ function sendRegisterUserData(_username, _password, _firstName, _lastName) {
 function listenForLoginClick() {
     $('#js-signup').on('click', '#js-login-button', event => {
         event.preventDefault();
-        location.href = "..";
+        location.href = "/";
+    });
+}
+
+function listenForBackToLoginClick() {
+    $('#js-back-to-login').click(event => {
+        event.preventDefault();
+        window.location.href = '/';
     });
 }
 
@@ -48,6 +55,10 @@ function listenForSignupSubmit() {
         const firstName = $('#js-signup-firstName').val();
         const lastName = $('#js-signup-lastName').val();
 
+        $('#js-signup-form').each(function() {
+            this.reset();
+        });
+
         sendRegisterUserData(username, password, firstName, lastName);
         });  
     }
@@ -55,5 +66,6 @@ function listenForSignupSubmit() {
 
 $(function() {
     listenForSignupSubmit();
+    listenForBackToLoginClick();
     listenForLoginClick();
 });
