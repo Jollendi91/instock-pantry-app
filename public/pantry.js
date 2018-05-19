@@ -12,19 +12,21 @@ function addNewItem(itemName, quantity, category) {
             category: category
         }),
         contentType: 'application/json',
-        success: alertItemStatus
+        success: alertItemAdded,
+        error: alertItemExists
     });
 }
 
-function alertItemStatus(data) { 
-    console.log(data);
-    if (data.message) {
-        $('#js-alert').append(`<h2>${data.message}</h2>`); 
-    }
-    else {
-        $('#js-alert').append(`<h2>${data.newItem.name} has been added!</h2>`);
-        getPantryItems();
-    }
+function alertItemExists(err) {
+    const error = err.responseJSON;
+    $('#js-alert').append(`<h2>${error.message} - This item already exists!</h2>`);
+}
+
+function alertItemAdded(data) { 
+    
+     $('#js-alert').append(`<h2>${data.newItem.name} has been added!</h2>`);
+    getPantryItems();
+
 }
 
 
