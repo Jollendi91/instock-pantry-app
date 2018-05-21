@@ -8,8 +8,9 @@ function displayRecipes(recipeData) {
             <article id="${RECIPE.id}" class="js-single-recipe">
                 <h3>${RECIPE.title}</h3>
                 <img class="js-recipe-img" src="${RECIPE.image}" alt="${RECIPE.title}">
-                <p>Number of ingredients used from pantry: <span id="js-exist-ingredients">${RECIPE.usedIngredientCount}</span></p>
-                <p>Number of missing ingredients: <span id="js-missing-ingredients">${RECIPE.missedIngredientCount}</span></p>
+                <p>Ingredients used from pantry: <span id="js-exist-ingredients">${RECIPE.usedIngredientCount}</span></p>
+                <p>Missing ingredients: <span id="js-missing-ingredients">${RECIPE.missedIngredientCount}</span></p>
+                <button id="js-make-recipe-button">Make this!</button>
             </article>
         `);
 
@@ -65,7 +66,7 @@ function displaySingleRecipeDetails(recipeInfo) {
             <h2>${RECIPE.title}</h2>
             <img src="${RECIPE.image}" alt="${RECIPE.title}">
             <div id="recipe-info">
-              <p>From: <a href="${RECIPE.sourceUrl}">${RECIPE.sourceName}</a></p>
+              <p>From: <a href="${RECIPE.sourceUrl}" target="_blank">${RECIPE.sourceName}</a></p>
               <p>Ready in: ${RECIPE.readyInMinutes} minutes</p>
               <p>Servings: ${RECIPE.servings}</p>
             </div>
@@ -85,9 +86,10 @@ function displaySingleRecipeDetails(recipeInfo) {
 
 
 function listenForRecipeClick() {
-  $('#js-recipes').on('click', '.js-single-recipe', function (event) {
-    const recipeID = $(event.currentTarget).attr('id');
+  $('#js-recipes').on('click', '#js-make-recipe-button', function (event) {
 
+    const recipeID = $(event.currentTarget).parent().attr('id');
+    
     $.ajax(`/recipes/${recipeID}`, {success: displaySingleRecipeDetails});
         
   });
