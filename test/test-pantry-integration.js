@@ -7,21 +7,50 @@ const mongoose = require('mongoose');
 
 const expect = chai.expect;
 
-const {Pantry} = require('../models');
+const {Pantry, User} = require('../models');
 const {app, runServer, closeServer} = require('../server');
 const {TEST_DATABASE_URL} = require('../config');
 
 
 chai.use(chaiHttp);
 
+let testUser = {
+    username: faker.internet.userName(),
+    password: faker.internet.password()
+}
+
+testUser.verifyPassword = testUser.password;
+
+function addUser() {
+   return chai.request('http://localhost:8080')
+    .post('/instock/users/')
+    .send(testUser)
+    .then(function(res) {
+        console.log('this is returned user', res.body);
+        testUser._id = res.body._id;
+        console.log('this is testUser', testUser);
+        return chai.request('http://localhost:8080')
+            .post('/instock/auth/login')
+            .set('Content-Type', 'application/json')
+            .send({
+                username: testUser.username,
+                password: testUser.password
+            })
+    })
+    .then(function(res) {
+        console.log(res.body);
+        testUser.authToken = res.body.authToken;
+       return seedPantryData();
+    });
+   // .catch(error => console.log('blah', error));
+}
+
 function seedPantryData() {
     console.info('seeding pantry data');
     const seedData = [];
 
-    for (let i=1; i<=10; i++) {
-        seedData.push(generatePantryData());
-    }
-
+    seedData.push(generatePantryData());
+    console.log(seedData);
     return Pantry.insertMany(seedData);
 }
 
@@ -32,12 +61,30 @@ function generateCategoryName() {
     return categories[Math.floor(Math.random() * categories.length)];
 }
 
-function generatePantryData() {
+function seedItemData() {
+    const itemData = [];
+
+    for (let i=1; i<=10; i++) {
+        itemData.push(generateItemData());
+    }
+
+    return itemData;
+}
+
+function generateItemData() {
     return {
         name: faker.commerce.productName(),
         quantity: faker.random.number(),
         category: generateCategoryName(),
         dateAdded: Date.now()
+    }
+}
+
+function generatePantryData() {
+    console.log();
+    return {
+        user: testUser._id,
+        items: seedItemData()
     };
 }
 
@@ -53,7 +100,7 @@ describe('Pantry API resource', function() {
     });
 
     beforeEach(function() {
-        return seedPantryData();
+        return addUser();
     });
 
     afterEach(function() {
@@ -70,6 +117,7 @@ describe('Pantry API resource', function() {
             let res;
             return chai.request(app)
                 .get('/pantry-items')
+                .set('Authorization', `Bearer ${testUser.authToken}`)
                 .then(function(_res) {
                     res = _res;
                     expect(res).to.have.status(200);
