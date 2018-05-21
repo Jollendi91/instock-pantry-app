@@ -1,10 +1,46 @@
+/* CSS reset */
+
+/* Sign up Form */
+
+.form-section {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 272px;
+    margin: auto;
+}
+
+label {
+    text-align: right;
+    margin: 6px 0;
+}
+
+.form-section > button {
+    margin-top: 20px;
+}
+
+
+
 /*Pantry Items */
+
+#js-add-item {
+    display: inline;
+}
+
+#js-add-item label {
+    margin-left: 10px;
+}
+
 #js-pantry-items {
     column-width: 265px;
     padding-top: 20px;
 }
 
 #js-pantry-items ul {
+    display: inline-block;
     break-inside: avoid;
     page-break-inside: avoid;
     border-bottom: 1px solid black;

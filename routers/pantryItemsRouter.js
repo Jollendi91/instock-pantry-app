@@ -74,22 +74,6 @@ router.post('/', jwtAuth, (req, res) => {
               newItem: newItem
         });
       })
-
-    /* Pantry.findOne({name: {$regex : `${req.body.name}?`, $options : 'i'}})
-    .then(function(pantryItem) {
-        if (pantryItem) {
-            return res.status(200).json({message: `This item already exists!`}).end();
-        }
-        else {
-          return  Pantry
-                    .create({
-                        name: req.body.name,
-                        quantity: req.body.quantity,
-                        category: req.body.category,
-                        dateAdded: Date.now()
-                    });
-        }
-    })*/
         .catch(err => {
             console.error(err);
             res.status(500).json({message: 'Internal server error'});
