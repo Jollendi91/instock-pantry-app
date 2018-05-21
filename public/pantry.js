@@ -96,19 +96,27 @@ function getAndDisplayCategoriesAndItems(PANTRY_DATA) {
 }
 
 function updateItemInDatabase(itemId, itemQuantity) {
-    $.ajax(`/pantry-items/${itemId}`, {
+    $.ajax({
+        url: `/pantry-items/${itemId}`,
         method: 'PUT',
         data: JSON.stringify({
             id: itemId,
             quantity: itemQuantity
         }),
-        contentType: 'application/json',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${window.localStorage.token}`
+        }
     });
 }
 
 function deleteItemInDatabase(itemId) {
-    $.ajax(`/pantry-items/${itemId}`, {
-        method: 'DELETE'
+    $.ajax({
+        url: `/pantry-items/${itemId}`, 
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${window.localStorage.token}`
+        }
     });
 }
 
