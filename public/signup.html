@@ -12,17 +12,23 @@
             <h1>Welcome to InStock</h1>
     </header>
     <main role="main">
-        <section id="js-signup">
+        <section id="js-signup" class="form-section">
             <div id="js-signup-status"></div>
             <form id="js-signup-form">
-                <label for="js-signup-username">Username:</label>
-                <input id="js-signup-username" type="text" name="username" placeholder="Johndoe15" required>
-                <label for="js-signup-password">Password:</label>
-                <input id="js-signup-password" type="password" name="password" required>
-                <label for="js-signup-firstName">First Name:</label>
-                <input id="js-signup-firstName" type="text" name="firstName" placeholder="John">
-                <label for="js-signup-lastName">Last Name:</label>
-                <input id="js-signup-lastName" type="text" name="lastName" placeholder="Doe">
+                <label for="js-signup-username">Username:
+                    <input id="js-signup-username" type="text" name="username" placeholder="Johndoe15" required>
+                </label>
+                <label for="js-signup-password">Password:
+                    <input id="js-signup-password" type="password" name="password" required>
+                </label>
+                <label for="js-signup-password"> Re-type Password:
+                    <input id="js-signup-retype-password" type="password" name="verify-password" required></label>
+                <label for="js-signup-firstName">First Name:
+                    <input id="js-signup-firstName" type="text" name="firstName" placeholder="John">
+                </label>
+                <label for="js-signup-lastName">Last Name:
+                     <input id="js-signup-lastName" type="text" name="lastName" placeholder="Doe">
+                 </label>
                 <button id="js-submit-signup" type="submit">Submit</button>
             </form>
             <button id="js-back-to-login">Back to Login</button>

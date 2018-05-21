@@ -12,16 +12,19 @@
             <h1>Welcome to InStock</h1>
     </header>
     <main role="main">
-        <section id="js-login">
+        <section id="js-login" class="form-section">
             <div id="js-login-status"></div>
             <form id='js-login-form'>
-                <label for="js-login-username">Username:</label>
-                <input id="js-login-username" type="text" name="Username" placeholder="JohnDoe15">
-                <label for="js-login-password">Password:</label>
-                <input id="js-login-password" type="password">
+                <label>Username:
+                <input id="js-login-username" type="text" name="Username" placeholder="JohnDoe15"></label>
+                <label>Password:
+                <input id="js-login-password" type="password"></label>
                 <button type="submit" name="login">Login</button>
             </form>
-            <button id="signup-button">Sign-up</button>
+            <section class="sign-up">
+                <p>Don't have an account?</p>
+                <button id="signup-button">Sign-up</button>
+            </section>
         </section>
     </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
