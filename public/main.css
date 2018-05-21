@@ -1,4 +1,7 @@
 /* CSS reset */
+* {
+    box-sizing: border-box;
+}
 
 /* Sign up Form */
 
@@ -59,7 +62,11 @@ label {
 }
 
 article {
-    max-width: 312px;
+    width: 100%;
+    max-width: 325px;
+    padding: 0 15px 10px;
+    margin-bottom: 20px;
+    border: 1px solid black;
 }
 
 article h3 {
@@ -67,12 +74,19 @@ article h3 {
 }
 
 article img {
+    width: 100%;
     max-width: 312px;
+}
+
+article button {
+    display: block;
+    margin: auto;
 }
 /* Single Recipe Info */
 
 #js-recipe-details > img {
     max-width: 100%;
+    padding: 0 10px;
 }
 
 #recipe-info {

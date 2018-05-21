@@ -22,13 +22,13 @@ let testUser = {
 testUser.verifyPassword = testUser.password;
 
 function addUser() {
+    console.info('registering test user');
    return chai.request('http://localhost:8080')
     .post('/instock/users/')
     .send(testUser)
     .then(function(res) {
-        console.log('this is returned user', res.body);
+        console.info('authenticating test user');
         testUser._id = res.body._id;
-        console.log('this is testUser', testUser);
         return chai.request('http://localhost:8080')
             .post('/instock/auth/login')
             .set('Content-Type', 'application/json')
@@ -38,11 +38,10 @@ function addUser() {
             })
     })
     .then(function(res) {
-        console.log(res.body);
         testUser.authToken = res.body.authToken;
        return seedPantryData();
-    });
-   // .catch(error => console.log('blah', error));
+    })
+    .catch(error => console.log(error));
 }
 
 function seedPantryData() {
@@ -50,7 +49,7 @@ function seedPantryData() {
     const seedData = [];
 
     seedData.push(generatePantryData());
-    console.log(seedData);
+
     return Pantry.insertMany(seedData);
 }
 
@@ -62,6 +61,7 @@ function generateCategoryName() {
 }
 
 function seedItemData() {
+    console.info('seeding item data');
     const itemData = [];
 
     for (let i=1; i<=10; i++) {
@@ -75,13 +75,11 @@ function generateItemData() {
     return {
         name: faker.commerce.productName(),
         quantity: faker.random.number(),
-        category: generateCategoryName(),
-        dateAdded: Date.now()
+        category: generateCategoryName()
     }
 }
 
 function generatePantryData() {
-    console.log();
     return {
         user: testUser._id,
         items: seedItemData()
@@ -122,7 +120,7 @@ describe('Pantry API resource', function() {
                     res = _res;
                     expect(res).to.have.status(200);
                     expect(res).to.be.json;
-                    expect(res.body.pantryItems).to.have.length.of.at.least(1);
+                    expect(res.body.items).to.have.length.of.at.least(1);
 
                     return Pantry.count();
                 })
