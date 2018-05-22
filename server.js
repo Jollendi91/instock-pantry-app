@@ -3,25 +3,66 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-
-mongoose.Promise = global.Promise;
+const passport = require('passport');
 
 const { PORT, DATABASE_URL } = require('./config');
 const {Pantry} = require('./models');
 
 const app = express();
 
-const pantryItemsRouter = require('./routers/pantryItemsRouter');
-const recipesRouter = require('./routers/recipesRouter');
+const {router: pantryItemsRouter} = require('./routers/pantryItemsRouter');
+const {router: recipesRouter} = require('./routers/recipesRouter');
 
+const {router: userRouter} = require('./users');
+const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
+
+mongoose.Promise = global.Promise;
+
+app.use(express.static('public'));
+app.use(express.json());
+
+// Logging
+app.use(morgan('common'));
+
+// CORS
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+    if (req.method === 'OPTIONS') {
+        return res.send(204);
+    }
+    next();
+});
+
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+// Routers
 app.use('/pantry-items', pantryItemsRouter);
 app.use('/recipes', recipesRouter);
+app.use('/instock/users/', userRouter);
+app.use('/instock/auth/', authRouter);
 
-app.use(express.json());
-app.use(morgan('common'));
-app.use(express.static('public'));
+app.get('/', (req, res) => {
+    return res.sendFile('login.html', {root: `${__dirname}/public/`});
+});
 
+app.get('/signup', (req, res) => {
+    return res.sendFile('signup.html', {root: `${__dirname}/public/`});
+})
 
+const jwtAuth = passport.authenticate('jwt', {session: false});
+
+app.get('/instock/protected', jwtAuth, (req, res) => {
+    return res.json({
+        data: 'Pantry items'
+    });
+});
+
+app.use('*', (req, res) => {
+    return res.status(404).json({message: 'Not found'});
+})
 
 let server;
 
