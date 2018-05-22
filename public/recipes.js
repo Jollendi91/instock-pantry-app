@@ -24,6 +24,7 @@ function displayRecipes(recipeData) {
 
 function listenForSearchRecipesClick() {
   $('#js-search-recipes').click(() => {
+    $('#js-recipe-list').empty();
       $.ajax('/recipes', {
         beforeSend : function( xhr ) {
           xhr.setRequestHeader( 'Authorization', `Bearer ${window.localStorage.token}`);
@@ -87,7 +88,7 @@ function displaySingleRecipeDetails(recipeInfo) {
 
 function listenForRecipeClick() {
   $('#js-recipes').on('click', '#js-make-recipe-button', function (event) {
-
+    $('#js-recipe-details').empty();
     const recipeID = $(event.currentTarget).parent().attr('id');
     
     $.ajax(`/recipes/${recipeID}`, {success: displaySingleRecipeDetails});
