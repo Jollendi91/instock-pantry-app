@@ -25,6 +25,7 @@ pantrySchema.virtual('itemString').get(function() {
 
 pantrySchema.methods.serialize = function() {
     return {
+        user: this.user,
         items: this.items
     }
 }

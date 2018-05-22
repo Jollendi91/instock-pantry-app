@@ -4,6 +4,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const faker = require('faker');
 const mongoose = require('mongoose');
+const ObjectId = require('mongoose').Types.ObjectId;
 
 const expect = chai.expect;
 
@@ -118,15 +119,20 @@ describe('Pantry API resource', function() {
                 .set('Authorization', `Bearer ${testUser.authToken}`)
                 .then(function(_res) {
                     res = _res;
-                    console.log(_res);
                     expect(res).to.have.status(200);
                     expect(res).to.be.json;
                     expect(res.body.items).to.have.length.of.at.least(1);
 
-                    return Pantry.count();
+                    return Pantry.aggregate([
+                        {
+                            $match: {user: ObjectId(_res.body.user)}
+                         }, 
+                         {
+                             $project: { numberOfItems: {$size: "$items"}}
+                         }]);
                 })
                 .then(function(count) {
-                    expect(res.body.items).to.have.lengthOf(count);
+                    expect(res.body.items).to.have.lengthOf(count[0].numberOfItems);
                 });
         });
 
@@ -155,26 +161,27 @@ describe('Pantry API resource', function() {
 
             return chai.request(app)
                 .get('/pantry-items')
+                .set('Authorization', `Bearer ${testUser.authToken}`)
                 .then(function(res) {
                     expect(res).to.have.status(200);
                     expect(res).to.be.json;
-                    expect(res.body.pantryItems).to.be.an('array');
-                    expect(res.body.pantryItems).to.have.lengthOf.at.least(1);
+                    expect(res.body.items).to.be.an('array');
+                    expect(res.body.items).to.have.lengthOf.at.least(1);
 
-                    res.body.pantryItems.forEach(function(item) {
+                    res.body.items.forEach(function(item) {
                         expect(item).to.be.an('object');
-                        expect(item).to.include.keys('id', 'name', 'quantity', 'category', 'dateAdded');
+                        expect(item).to.include.keys('_id', 'name', 'quantity', 'category');
                     });
 
-                    resPantryItem = res.body.pantryItems[0];
-                    return Pantry.findById(resPantryItem.id);
+                    resPantryItem = res.body.items[0];
+                    return Pantry.findOne({user: ObjectId(res.body.user)});
                 })
                 .then(function(pantryItem) {
-                    expect(resPantryItem.id).to.equal(pantryItem.id);
-                    expect(resPantryItem.name).to.equal(pantryItem.name);
-                    expect(resPantryItem.quantity).to.equal(pantryItem.quantity);
-                    expect(resPantryItem.category).to.equal(pantryItem.category);
-                    expect(pantryItem.dateAdded).to.not.be.null;
+                    const item = pantryItem.items[0];
+                    expect(resPantryItem._id).to.equal(item._id.toString());
+                    expect(resPantryItem.name).to.equal(item.name);
+                    expect(resPantryItem.quantity).to.equal(item.quantity);
+                    expect(resPantryItem.category).to.equal(item.category);
                 });
         });
     });
@@ -183,28 +190,32 @@ describe('Pantry API resource', function() {
 
         it('should add a new pantry item', function() {
 
-            const newPantryItem = generatePantryData();
+            const newPantryItem = generateItemData();
 
             return chai.request(app)
                 .post('/pantry-items')
+                .set('Authorization', `Bearer ${testUser.authToken}`)
                 .send(newPantryItem)
                 .then(function(res) {
                     expect(res).to.have.status(201);
                     expect(res).to.be.json;
                     expect(res.body).to.be.an('object');
-                    expect(res.body).to.include.keys('_id', 'name', 'quantity', 'category', 'dateAdded');
-                    expect(res.body.name).to.equal(newPantryItem.name);
-                    expect(res.body.id).to.not.be.null;
-                    expect(res.body.quantity).to.equal(newPantryItem.quantity);
-                    expect(res.body.category).to.equal(newPantryItem.category);
+                    
+                    const index = res.body.pantry.items.length - 1;
+                    const newItemIndex = res.body.pantry.items[index];
+                    expect(newItemIndex).to.include.keys('_id', 'name', 'quantity', 'category');
+                    expect(newItemIndex.name).to.equal(newPantryItem.name);
+                    expect(newItemIndex.id).to.not.be.null;
+                    expect(newItemIndex.quantity).to.equal(newPantryItem.quantity);
+                    expect(newItemIndex.category).to.equal(newPantryItem.category);
 
-                   return Pantry.findById(res.body._id);
+                    return Pantry.findOne({user: ObjectId(res.body.pantry.user)});
                 })
                 .then(function(pantryItem) {
-                    expect(pantryItem.name).to.equal(newPantryItem.name);
-                    expect(pantryItem.quantity).to.equal(newPantryItem.quantity);
-                    expect(pantryItem.category).to.equal(newPantryItem.category);
-                    expect(pantryItem.dateAdded).to.not.be.null;
+                    const index = pantryItem.items.length - 1;
+                    expect(pantryItem.items[index].name).to.equal(newPantryItem.name);
+                    expect(pantryItem.items[index].quantity).to.equal(newPantryItem.quantity);
+                    expect(pantryItem.items[index].category).to.equal(newPantryItem.category);
                 });
         });
     });
@@ -213,26 +224,27 @@ describe('Pantry API resource', function() {
 
         it('should update fields sent over', function() {
             const updateData = {
-                name: 'Updated Grapes',
-                category: 'Fruits'
+                quantity: 15
             };
 
             return Pantry
                 .findOne()
                 .then(function(pantryItem) {
-                    updateData.id = pantryItem.id;
-
+                    console.log(pantryItem);
+                    
+                    updateData.id = pantryItem.items[0]._id;
+                    console.log(updateData);
                     return chai.request(app)
-                        .put(`/pantry-items/${pantryItem.id}`)
+                        .put(`/pantry-items/${pantryItem.items[0]._id}`)
+                        .set('Authorization', `Bearer ${testUser.authToken}`)
                         .send(updateData)
                         .then(function(res) {
                             expect(res).to.have.status(204);
 
-                            return Pantry.findById(updateData.id);
+                            return Pantry.findOne({'items._id': updateData.id});
                         })
                         .then(function(pantryItem) {
-                            expect(pantryItem.name).to.equal(updateData.name);
-                            expect(pantryItem.category).to.equal(updateData.category);
+                            expect(pantryItem.items[0].quantity).to.equal(updateData.quantity);
                         });
                 });
         });
@@ -242,13 +254,14 @@ describe('Pantry API resource', function() {
 
         it('should remove the requested item', function() {
             let pantryItem;
-            Pantry
+            return Pantry
                 .findOne()
                 .then(function(_pantryItem) {
                     pantryItem = _pantryItem;
 
                     return chai.request(app)
-                        .delete(`/pantry-items/${pantryItem.id}`)    
+                        .delete(`/pantry-items/${pantryItem._id}`) 
+                        .set('Authorization', `Bearer ${testUser.authToken}`)  
                 })
                 .then(function(res) {
                     expect(res).to.have.status(204);
