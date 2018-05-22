@@ -141,18 +141,18 @@ describe('Pantry API resource', function() {
             
             return Pantry.findOne()
                 .then(function(_pantryItem) {
-                    pantryItem = _pantryItem;
-
+                    pantryItem = _pantryItem.items[0];
                     return chai.request(app)
-                        .get(`/pantry-items/${_pantryItem.id}`)
+                        .get(`/pantry-items/${_pantryItem.items[0]._id}`)
                 })
                 .then(function(res) {
+                    const resItem = res.body[0].items[0];
                     expect(res).to.have.status(200);
                     expect(res).to.be.json;
-                    expect(res.body).to.be.an('object');
-                    expect(res.body.name).to.equal(pantryItem.name);
-                    expect(res.body.quantity).to.equal(pantryItem.quantity);
-                    expect(res.body.category).to.equal(pantryItem.category);
+                    expect(resItem).to.be.an('object');
+                    expect(resItem.name).to.equal(pantryItem.name);
+                    expect(resItem.quantity).to.equal(pantryItem.quantity);
+                    expect(resItem.category).to.equal(pantryItem.category);
                 });
         });
 
@@ -230,10 +230,8 @@ describe('Pantry API resource', function() {
             return Pantry
                 .findOne()
                 .then(function(pantryItem) {
-                    console.log(pantryItem);
                     
                     updateData.id = pantryItem.items[0]._id;
-                    console.log(updateData);
                     return chai.request(app)
                         .put(`/pantry-items/${pantryItem.items[0]._id}`)
                         .set('Authorization', `Bearer ${testUser.authToken}`)
@@ -257,7 +255,7 @@ describe('Pantry API resource', function() {
             return Pantry
                 .findOne()
                 .then(function(_pantryItem) {
-                    pantryItem = _pantryItem;
+                    pantryItem = _pantryItem.items[0];
 
                     return chai.request(app)
                         .delete(`/pantry-items/${pantryItem._id}`) 
@@ -265,7 +263,7 @@ describe('Pantry API resource', function() {
                 })
                 .then(function(res) {
                     expect(res).to.have.status(204);
-                    return Pantry.findById(pantryItem.id);
+                    return Pantry.findOne({'items._id': pantryItem._id});
                 })
                 .then(function(_pantryItem) {
                     expect(_pantryItem).to.be.null;

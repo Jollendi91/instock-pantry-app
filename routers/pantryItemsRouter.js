@@ -24,7 +24,7 @@ router.get('/', jwtAuth, (req, res) => {
 
 router.get('/:id', (req, res) => {
     Pantry
-        .findById(req.params.id)
+        .find({"items._id": req.params.id}, {"items.$": 1, _id: 0 })
         .then(pantyItem => res.json(pantyItem))
         .catch(err => {
             console.error(err);
