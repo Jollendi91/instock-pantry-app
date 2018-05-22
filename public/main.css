@@ -3,6 +3,22 @@
     box-sizing: border-box;
 }
 
+
+
+/* Login Page */
+
+.login-intro {
+    max-width: 721px;
+    margin: auto;
+}
+
+.login-intro p {
+    font-family: sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: center;
+}
+
 /* Sign up Form */
 
 .form-section {

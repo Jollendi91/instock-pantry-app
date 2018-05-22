@@ -118,6 +118,7 @@ describe('Pantry API resource', function() {
                 .set('Authorization', `Bearer ${testUser.authToken}`)
                 .then(function(_res) {
                     res = _res;
+                    console.log(_res);
                     expect(res).to.have.status(200);
                     expect(res).to.be.json;
                     expect(res.body.items).to.have.length.of.at.least(1);
@@ -125,7 +126,7 @@ describe('Pantry API resource', function() {
                     return Pantry.count();
                 })
                 .then(function(count) {
-                    expect(res.body.pantryItems).to.have.lengthOf(count);
+                    expect(res.body.items).to.have.lengthOf(count);
                 });
         });
 
