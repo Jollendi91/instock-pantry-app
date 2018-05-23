@@ -1,4 +1,7 @@
+'use strict';
+
 const express = require('express');
+const passport = require('passport');
 const unirest = require('unirest');
 const router = express.Router();
 
@@ -8,12 +11,14 @@ router.use(express.json());
 const {SPOONACULAR_KEY} = require('../config');
 const {Pantry} = require('../models');
 
+const jwtAuth = passport.authenticate('jwt', {session: false});
 
-router.get('/', (req, res) => {
+router.get('/', jwtAuth, (req, res) => {
+
     Pantry
-        .find()
-        .then(pantryItems => {
-         let ingredientList = pantryItems.map((item) => item.name).toString();
+        .findOne({user: req.user._id})
+        .then(userPantry => {
+         let ingredientList = userPantry.items.map((item) => item.name).toString();
          return ingredientList;
         })
         .then(ingredientList => {

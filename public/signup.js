@@ -3,9 +3,7 @@
 function displayError(error) {
     const ERROR = error.responseJSON;
     $('#js-signup-status').html(`
-        <h2>${ERROR.reason}</h2>
         <p>${ERROR.message}</p>
-        <p>Error location: ${ERROR.location}</p>
     `);
 }
 
@@ -17,7 +15,7 @@ function displaySuccess(data) {
     <button id="js-login-button">Login</button>`);
 }
 
-function sendRegisterUserData(_username, _password, _firstName, _lastName) {
+function sendRegisterUserData(_username, _password, _verifyPassword, _firstName, _lastName) {
     $.ajax('/instock/users/', {
         method: 'POST',
         contentType: 'application/json',
@@ -25,6 +23,7 @@ function sendRegisterUserData(_username, _password, _firstName, _lastName) {
         data: JSON.stringify({
             username: _username,
             password: _password,
+            verifyPassword: _verifyPassword,
             firstName: _firstName,
             lastName: _lastName
         }),
@@ -36,7 +35,14 @@ function sendRegisterUserData(_username, _password, _firstName, _lastName) {
 function listenForLoginClick() {
     $('#js-signup').on('click', '#js-login-button', event => {
         event.preventDefault();
-        location.href = "..";
+        location.href = "/";
+    });
+}
+
+function listenForBackToLoginClick() {
+    $('#js-back-to-login').click(event => {
+        event.preventDefault();
+        window.location.href = '/';
     });
 }
 
@@ -45,15 +51,21 @@ function listenForSignupSubmit() {
         event.preventDefault();
         const username = $('#js-signup-username').val();
         const password = $('#js-signup-password').val();
+        const verifyPassword = $('#js-signup-retype-password').val();
         const firstName = $('#js-signup-firstName').val();
         const lastName = $('#js-signup-lastName').val();
 
-        sendRegisterUserData(username, password, firstName, lastName);
+        $('#js-signup-form').each(function() {
+            this.reset();
+        });
+
+        sendRegisterUserData(username, password, verifyPassword, firstName, lastName);
         });  
     }
 
 
 $(function() {
     listenForSignupSubmit();
+    listenForBackToLoginClick();
     listenForLoginClick();
 });

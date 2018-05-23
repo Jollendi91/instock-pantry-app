@@ -7,38 +7,47 @@ router.use(express.json());
 const {User} = require('../models');
 
 router.post('/', (req, res) => {
-    const requiredFields = ['username', 'password'];
+    const requiredFields = ['username', 'password', 'verifyPassword'];
     const missingField = requiredFields.find(field => !(field in req.body));
 
     if (missingField) {
         return res.status(422).json({
             code: 422, 
             reason: 'ValidationError',
-            message: 'Missing field',
+            message: 'You are missing a required field!',
             location: missingField
         });
     }
 
-    const stringFields = ['username', 'password', 'firstName', 'lastName'];
+    if (req.body.password !== req.body.verifyPassword) {
+        return res.status(422).json({
+            code: 422,
+            reason: 'ValidationError',
+            message: 'Your passwords do not match!',
+            location: 'Password'
+        });
+    }
+
+    const stringFields = ['username', 'password', 'verifyPassword','firstName', 'lastName'];
     const nonStringField = stringFields.find(field => field in req.body && typeof req.body[field] !== 'string');
 
     if (nonStringField) {
         return res.status(422).json({
             code: 422, 
             reason: 'ValidationError',
-            message: 'Incorrect field type: expected string',
+            message: `${nonStringField} must be a string!`,
             location: nonStringField
         });
     }
 
-    const explicitlyTrimmedFields = ['username', 'password'];
+    const explicitlyTrimmedFields = ['username', 'password', 'verifyPassword'];
     const nonTrimmedField = explicitlyTrimmedFields.find(field => req.body[field].trim() !== req.body[field]);
 
     if (nonTrimmedField) {
         return res.status(422).json({
             code: 422,
             reason: 'ValidationError',
-            message: 'Cannot start or end with whitespace',
+            message: 'You cannot start or end with whitespace!',
             location: nonTrimmedField
         });
     }
@@ -62,8 +71,8 @@ router.post('/', (req, res) => {
             code: 422,
             reason: 'ValidationError',
             message: tooSmallField
-                ? `Must be at least ${sizedFields[tooSmallField].min} characters long`
-                : `Must be at most ${sizedFields[tooLargeField].max} characters long`,
+                ? `${tooSmallField} must be at least ${sizedFields[tooSmallField].min} characters long!`
+                : `${tooLargeField} must be at most ${sizedFields[tooLargeField].max} characters long!`,
             location: tooSmallField || tooLargeField
         });
     }
@@ -80,7 +89,7 @@ router.post('/', (req, res) => {
                 return Promise.reject({
                     code: 422,
                     reason:'ValidationError',
-                    message: 'Username already taken',
+                    message: 'That username is already taken!',
                     location: 'username'
                 });
             }

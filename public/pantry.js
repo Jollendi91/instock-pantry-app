@@ -2,6 +2,9 @@
 
 function addNewItem(itemName, quantity, category) {
     $.ajax('/pantry-items', {
+        beforeSend : function( xhr ) {
+            xhr.setRequestHeader( 'Authorization', `Bearer ${window.localStorage.token}`);
+        },
         method: 'POST',
         data: JSON.stringify({
             name: itemName,
@@ -9,18 +12,21 @@ function addNewItem(itemName, quantity, category) {
             category: category
         }),
         contentType: 'application/json',
-        success: alertItemStatus
+        success: alertItemAdded,
+        error: alertItemExists
     });
 }
 
-function alertItemStatus(data) { 
-    if (data.message) {
-        $('#js-alert').append(`<h2>${data.message}</h2>`); 
-    }
-    else {
-        $('#js-alert').append(`<h2>${data.name} has been added!</h2>`);
-        getPantryItems();
-    }
+function alertItemExists(err) {
+    const error = err.responseJSON;
+    $('#js-alert').append(`<h2>${error.message} - This item already exists!</h2>`);
+}
+
+function alertItemAdded(data) { 
+    
+     $('#js-alert').append(`<h2>${data.newItem.name} has been added!</h2>`);
+    getPantryItems();
+
 }
 
 
@@ -40,8 +46,8 @@ function listenforAddNewItem() {
 
 function getExistingCategories(data) {
     const categories = [];
-    for (let item in data.pantryItems) {
-        const currentCategory = data.pantryItems[item].category;
+    for (let item in data.items) {
+        const currentCategory = data.items[item].category;
         const existingCategory = categories.find(item => {
             return item === currentCategory;
         });
@@ -66,14 +72,18 @@ function displayCategories(data) {
 }
 
 function getPantryItems() {
-    $.ajax('/pantry-items', {success: getAndDisplayCategoriesAndItems});
+    $.ajax('/pantry-items', {
+        beforeSend : function( xhr ) {
+            xhr.setRequestHeader( 'Authorization', `Bearer ${window.localStorage.token}`);
+        },
+        success: getAndDisplayCategoriesAndItems});
 }
 
 function displayPantryItems(data) {
-    for (let item in data.pantryItems) {
-        const selector = `#${data.pantryItems[item].category}`;
+    for (let item in data.items) {
+        const selector = `#${data.items[item].category}`;
         $(selector).append(`
-        <li id="${data.pantryItems[item].id}"><span class="js-quantity">${data.pantryItems[item].quantity}</span> - <span class="js-item-name">${data.pantryItems[item].name}</span> 
+        <li id="${data.items[item]._id}"><span class="js-quantity">${data.items[item].quantity}</span> - <span class="js-item-name">${data.items[item].name}</span> 
         <button id="js-subtract" class="increment">-</button><button id="js-add" class="increment">+</button></li>
         `);
     }
@@ -86,19 +96,27 @@ function getAndDisplayCategoriesAndItems(PANTRY_DATA) {
 }
 
 function updateItemInDatabase(itemId, itemQuantity) {
-    $.ajax(`/pantry-items/${itemId}`, {
+    $.ajax({
+        url: `/pantry-items/${itemId}`,
         method: 'PUT',
         data: JSON.stringify({
             id: itemId,
             quantity: itemQuantity
         }),
-        contentType: 'application/json',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${window.localStorage.token}`
+        }
     });
 }
 
 function deleteItemInDatabase(itemId) {
-    $.ajax(`/pantry-items/${itemId}`, {
-        method: 'DELETE'
+    $.ajax({
+        url: `/pantry-items/${itemId}`, 
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${window.localStorage.token}`
+        }
     });
 }
 

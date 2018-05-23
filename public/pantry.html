@@ -14,11 +14,11 @@
     <main role="main">
         <h2>Pantry Items</h2>
         <form id="js-add-item">
-            <label for="js-quantity">Quantity:</label>
-            <input id="js-quantity" type="number" name="quantity" value="1" min="1">
-            <label for="js-item-name">Item Name:</label>  
-            <input id="js-item-name" type="text" name="item name" placeholder="Item Name" required>
-            <label for="js-category">Category:</label> 
+            <label>Quantity:
+            <input id="js-quantity" type="number" name="quantity" value="1" min="1"></label>
+            <label>Item Name:  
+            <input id="js-item-name" type="text" name="item name" placeholder="Item Name" required></label>
+            <label>Category: 
             <select id="js-category" name="category" required>
                 <option value="" disabled selected>Select a category</option>
                 <option value="Beverages">Beverages</option>
@@ -34,7 +34,7 @@
                 <option value="Spices">Spices/Seasonings</option>
                 <option value="Vegetables">Vegetables</option>
                 <option value="Miscellaneous">Miscellaneous</option>
-            </select>
+            </select></label>
             <button type="submit" role="button">Add Item</button>
         </form>
         <div id="js-alert"></div>

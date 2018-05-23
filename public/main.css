@@ -1,10 +1,65 @@
+/* CSS reset */
+* {
+    box-sizing: border-box;
+}
+
+
+
+/* Login Page */
+
+.login-intro {
+    max-width: 721px;
+    margin: auto;
+}
+
+.login-intro p {
+    font-family: sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Sign up Form */
+
+.form-section {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 272px;
+    margin: auto;
+}
+
+label {
+    text-align: right;
+    margin: 6px 0;
+}
+
+.form-section > button {
+    margin-top: 20px;
+}
+
+
+
 /*Pantry Items */
+
+#js-add-item {
+    display: inline;
+}
+
+#js-add-item label {
+    margin-left: 10px;
+}
+
 #js-pantry-items {
     column-width: 265px;
     padding-top: 20px;
 }
 
 #js-pantry-items ul {
+    display: inline-block;
     break-inside: avoid;
     page-break-inside: avoid;
     border-bottom: 1px solid black;
@@ -23,16 +78,31 @@
 }
 
 article {
-    max-width: 312px;
+    width: 100%;
+    max-width: 325px;
+    padding: 0 15px 10px;
+    margin-bottom: 20px;
+    border: 1px solid black;
 }
 
 article h3 {
     min-height: 46px;
 }
+
+article img {
+    width: 100%;
+    max-width: 312px;
+}
+
+article button {
+    display: block;
+    margin: auto;
+}
 /* Single Recipe Info */
 
 #js-recipe-details > img {
     max-width: 100%;
+    padding: 0 10px;
 }
 
 #recipe-info {
