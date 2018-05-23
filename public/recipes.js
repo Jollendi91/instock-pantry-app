@@ -23,7 +23,7 @@ function displayRecipes(recipeData) {
 }
 
 function listenForSearchRecipesClick() {
-  $('#js-search-recipes').click(() => {
+  $('#js-recipes').on('click', '#js-search-recipes', (event) => {
     $('#js-recipe-list').empty();
       $.ajax('/recipes', {
         beforeSend : function( xhr ) {
