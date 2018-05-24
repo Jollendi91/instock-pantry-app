@@ -17,10 +17,16 @@
     text-align: center;
 }
 
+label {
+    display: block;
+    margin: 6px 0;
+}
+
 /* Sign up Form */
 
 .form-section {
     text-align: center;
+    padding: 20px 0;
 }
 
 form {
@@ -28,12 +34,8 @@ form {
     margin: auto;
 }
 
-
-
-label {
-    display: block;
+.signup-form label {
     text-align: right;
-    margin: 6px 0;
 }
 
 .form-section > button {
@@ -54,9 +56,11 @@ label {
     
 }
 
-#js-pantry-items {
-    column-width: 265px;
+.pantry-items {
     padding-top: 20px;
+    text-align: center;
+    columns: auto 250px;
+    column-gap: 20px;
 }
 
 #js-pantry-items ul {

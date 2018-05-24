@@ -18,8 +18,7 @@ function addNewItem(itemName, quantity, category) {
 }
 
 function alertItemExists(err) {
-    const error = err.responseJSON;
-    $('#js-alert').append(`<h2>${error.message} - This item already exists!</h2>`);
+    $('#js-alert').append(`<h2>This item already exists!</h2>`);
 }
 
 function alertItemAdded(data) { 
