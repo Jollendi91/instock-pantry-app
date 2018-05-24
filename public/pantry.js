@@ -18,8 +18,7 @@ function addNewItem(itemName, quantity, category) {
 }
 
 function alertItemExists(err) {
-    const error = err.responseJSON;
-    $('#js-alert').append(`<h2>${error.message} - This item already exists!</h2>`);
+    $('#js-alert').append(`<h2>This item already exists!</h2>`);
 }
 
 function alertItemAdded(data) { 
@@ -80,12 +79,26 @@ function getPantryItems() {
 }
 
 function displayPantryItems(data) {
+
     for (let item in data.items) {
         const selector = `#${data.items[item].category}`;
         $(selector).append(`
         <li id="${data.items[item]._id}"><span class="js-quantity">${data.items[item].quantity}</span> - <span class="js-item-name">${data.items[item].name}</span> 
         <button id="js-subtract" class="increment">-</button><button id="js-add" class="increment">+</button></li>
         `);
+    }
+
+    if (data.items[0]) {
+        $('#js-recipes').html(`
+        <h2>Find recipes that use items from your pantry!</h2>
+        <button id="js-search-recipes">Search Recipes</button>
+        <section id="js-recipe-list">
+        </section>
+        <section id="js-recipe-details">
+        </section>`);
+    }
+    else {
+        $('#js-recipes').empty();
     }
 }
 

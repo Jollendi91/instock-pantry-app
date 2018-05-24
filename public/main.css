@@ -3,8 +3,6 @@
     box-sizing: border-box;
 }
 
-
-
 /* Login Page */
 
 .login-intro {
@@ -19,22 +17,25 @@
     text-align: center;
 }
 
+label {
+    display: block;
+    margin: 6px 0;
+}
+
 /* Sign up Form */
 
 .form-section {
     text-align: center;
+    padding: 20px 0;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    width: 272px;
+    width: 300px;
     margin: auto;
 }
 
-label {
+.signup-form label {
     text-align: right;
-    margin: 6px 0;
 }
 
 .form-section > button {
@@ -50,12 +51,16 @@ label {
 }
 
 #js-add-item label {
+    display: inline-block;
     margin-left: 10px;
+    
 }
 
-#js-pantry-items {
-    column-width: 265px;
+.pantry-items {
     padding-top: 20px;
+    text-align: center;
+    columns: auto 250px;
+    column-gap: 20px;
 }
 
 #js-pantry-items ul {
@@ -81,7 +86,7 @@ article {
     width: 100%;
     max-width: 325px;
     padding: 0 15px 10px;
-    margin-bottom: 20px;
+    margin: 0 20px 5px;
     border: 1px solid black;
 }
 
