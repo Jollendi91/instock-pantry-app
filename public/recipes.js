@@ -61,8 +61,22 @@ function getInstructionList(recipeInfo) {
   }
 }
 
+let currentRecipe;
+
 function displaySingleRecipeDetails(recipeInfo) {
     let RECIPE = recipeInfo.body;
+
+    currentRecipe = {
+      title: RECIPE.title,
+      image: RECIPE.image,
+      source: RECIPE.sourceUrl,
+      sourceName: RECIPE.sourceName,
+      timeReady: RECIPE.readyInMinutes,
+      servings: RECIPE.servings,
+      ingredients: RECIPE.extendedIngredients,
+      instructions: RECIPE.analyzedInstructions
+      };
+
     $('#js-recipe-details').append(`
             <h2>${RECIPE.title}</h2>
             <img src="${RECIPE.image}" alt="${RECIPE.title}">
@@ -71,6 +85,8 @@ function displaySingleRecipeDetails(recipeInfo) {
               <p>Ready in: ${RECIPE.readyInMinutes} minutes</p>
               <p>Servings: ${RECIPE.servings}</p>
             </div>
+            <button id="js-save-recipe">Add to my recipes!</button>
+            <div id="js-recipe-saved-status"></div>
             <h3>Ingredients</h3>
             <ul id="js-ingredient-list">
             </ul>
@@ -80,12 +96,31 @@ function displaySingleRecipeDetails(recipeInfo) {
         `);
     getIngredientList(recipeInfo);
     getInstructionList(recipeInfo);
+
     $('html, body').animate({
       scrollTop: ($('#js-recipe-details').offset().top)
     }, 700, 'swing');
-  }
+  };
 
+function alertRecipeSaved() {
+  $('#js-recipe-saved-status').html(`<p>This recipe has been added to your recipe box!</p>`);
+}
 
+function listenForSaveRecipe() {
+  $('#js-recipes').on('click', '#js-save-recipe', function () {
+    $.ajax({
+      url: '/recipes',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${window.localStorage.token}`
+      },
+      data: JSON.stringify(currentRecipe),
+      success: alertRecipeSaved,
+    });
+  });
+}
+ 
 function listenForRecipeClick() {
   $('#js-recipes').on('click', '#js-make-recipe-button', function (event) {
     $('#js-recipe-details').empty();
@@ -99,4 +134,5 @@ function listenForRecipeClick() {
 $(function () {
   listenForSearchRecipesClick();
   listenForRecipeClick();
+  listenForSaveRecipe();
 });
