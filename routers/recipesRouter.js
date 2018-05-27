@@ -9,7 +9,7 @@ const router = express.Router();
 router.use(express.json());
 
 const {SPOONACULAR_KEY} = require('../config');
-const {Pantry} = require('../models');
+const {Pantry, Recipe} = require('../models');
 
 const jwtAuth = passport.authenticate('jwt', {session: false});
 
@@ -57,6 +57,32 @@ router.get('/:id', (req, res) => {
     })
     .end(function(response) {
         res.json(response);
+    });
+});
+
+router.post('/' , jwtAuth, (req, res) => {
+    const newRecipe = req.body;
+       
+    Recipe.findOneAndUpdate({
+        user: req.user._id,
+    },
+    {
+        $set: {user: req.user._id},
+        $push: {recipes: [newRecipe]}
+    },
+    {
+        new: true,
+        upsert: true
+    })
+    .then(recipeBox => {
+        res.status(201).json({
+            recipeBox: recipeBox,
+            newRecipe: newRecipe
+        });
+    })
+    .catch(err => {
+        console.error(err);
+        res.status(500).json({message: 'Internal server error'});
     });
 });
 
