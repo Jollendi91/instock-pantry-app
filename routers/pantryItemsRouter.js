@@ -8,7 +8,14 @@ router.use(express.json());
 
 const {Pantry} = require('../models');
 
-const jwtAuth = passport.authenticate('jwt', {session: false});
+const jwtAuth = function(req, res, next) {
+    passport.authenticate('jwt', {sessions: false}, function(err, user, info) {
+        if (err) { return next(err); };
+        if (!user) { return res.status(401).send({redirect: '/'});};
+        req.user = user;
+        next();
+      })(req, res, next);
+}
 
 router.get('/', jwtAuth, (req, res) => {
     Pantry
