@@ -25,7 +25,7 @@ function displayRecipes(recipeData) {
 function listenForSearchRecipesClick() {
   $('#js-recipes').on('click', '#js-search-recipes', (event) => {
     $('#js-recipe-list').empty();
-      $.ajax('/recipes', {
+      $.ajax('/recipes/mashape', {
         beforeSend : function( xhr ) {
           xhr.setRequestHeader( 'Authorization', `Bearer ${window.localStorage.token}`);
       },
@@ -126,7 +126,12 @@ function listenForRecipeClick() {
     $('#js-recipe-details').empty();
     const recipeID = $(event.currentTarget).parent().attr('id');
     
-    $.ajax(`/recipes/${recipeID}`, {success: displaySingleRecipeDetails});
+    $.ajax(`/recipes/mashape/${recipeID}`, {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.token}`
+      },
+      success: displaySingleRecipeDetails
+    });
         
   });
 }
