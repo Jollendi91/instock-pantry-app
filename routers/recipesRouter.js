@@ -10,10 +10,22 @@ router.use(express.json());
 
 const {SPOONACULAR_KEY} = require('../config');
 const {Pantry, Recipe} = require('../models');
+const {jwtAuth} = require('../auth');
 
-const jwtAuth = passport.authenticate('jwt', {session: false});
 
-router.get('/', jwtAuth, (req, res) => {
+router.get('/recipe-box', jwtAuth, (req, res) => {
+
+    Recipe.findOne({user: req.user._id})
+        .then(recipeBox => {
+            res.json(recipeBox);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({message: 'Internal server error'});
+        });
+});
+
+router.get('/mashape', jwtAuth, (req, res) => {
 
     Pantry
         .findOne({user: req.user._id})
@@ -45,7 +57,7 @@ router.get('/', jwtAuth, (req, res) => {
 }); 
 
 
-router.get('/:id', (req, res) => {
+router.get('/mashape/:id', jwtAuth, (req, res) => {
 
     unirest.get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${req.params.id}/information`)
     .headers({
