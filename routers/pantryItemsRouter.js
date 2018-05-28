@@ -8,14 +8,7 @@ router.use(express.json());
 
 const {Pantry} = require('../models');
 
-const jwtAuth = function(req, res, next) {
-    passport.authenticate('jwt', {sessions: false}, function(err, user, info) {
-        if (err) { return next(err); };
-        if (!user) { return res.status(401).send({redirect: '/'});};
-        req.user = user;
-        next();
-      })(req, res, next);
-}
+const{jwtAuth} = require('../auth');
 
 router.get('/', jwtAuth, (req, res) => {
     Pantry
@@ -116,4 +109,4 @@ router.delete('/:id', jwtAuth, (req, res) => {
         .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-module.exports = {router};
+module.exports = {router, jwtAuth};
