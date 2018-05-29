@@ -164,24 +164,9 @@ function listenForIncrementItemClick() {
     });
 }
 
-function listenForUserLogOut() {
-    $('#js-user-logout').click(event => {
-        event.preventDefault();
-        $.ajax({
-            url: '/instock/auth/logout',
-            headers: {
-                Authorization: `Bearer ${window.localStorage.token}`
-            },
-            success: function(data) {
-                localStorage.clear();
-                window.location.href = data.redirect;        
-            }});
-    });
-}
-
 $(function () {
     getPantryItems();
     listenforAddNewItem();
     listenForIncrementItemClick();
-    listenForUserLogOut();
+    
     });
