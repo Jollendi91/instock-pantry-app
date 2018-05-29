@@ -1,7 +1,6 @@
 'use strict';
 
 const express = require('express');
-const passport = require('passport');
 const unirest = require('unirest');
 const router = express.Router();
 
@@ -18,6 +17,17 @@ router.get('/recipe-box', jwtAuth, (req, res) => {
     Recipe.findOne({user: req.user._id})
         .then(recipeBox => {
             res.json(recipeBox);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({message: 'Internal server error'});
+        });
+});
+
+router.get('/recipe-box/:id', jwtAuth, (req, res) => {
+    Recipe.findOne({"recipes._id": req.params.id}, {"recipes.$": 1})
+        .then(recipe => {
+            res.json(recipe);
         })
         .catch(err => {
             console.error(err);
