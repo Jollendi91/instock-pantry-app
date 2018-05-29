@@ -35,6 +35,43 @@ router.get('/recipe-box/:id', jwtAuth, (req, res) => {
         });
 });
 
+router.post('/' , jwtAuth, (req, res) => {
+    const newRecipe = req.body;
+       
+    Recipe.findOneAndUpdate({
+        user: req.user._id,
+    },
+    {
+        $set: {user: req.user._id},
+        $push: {recipes: [newRecipe]}
+    },
+    {
+        new: true,
+        upsert: true
+    })
+    .then(recipeBox => {
+        res.status(201).json({
+            recipeBox: recipeBox,
+            newRecipe: newRecipe
+        });
+    })
+    .catch(err => {
+        console.error(err);
+        res.status(500).json({message: 'Internal server error'});
+    });
+});
+
+router.delete('/recipe-box/:id', jwtAuth, (req, res) => {
+    Recipe
+        .findOneAndUpdate({'recipes._id': req.params.id}, {$pull: {recipes: {_id: req.params.id}}})
+        .then(recipes => res.status(204).end())
+        .catch(err => res.status(500).json({message: "Internal server error"}));
+}); 
+
+
+
+// Spoonacular API 
+
 router.get('/mashape', jwtAuth, (req, res) => {
 
     Pantry
@@ -79,32 +116,6 @@ router.get('/mashape/:id', jwtAuth, (req, res) => {
     })
     .end(function(response) {
         res.json(response);
-    });
-});
-
-router.post('/' , jwtAuth, (req, res) => {
-    const newRecipe = req.body;
-       
-    Recipe.findOneAndUpdate({
-        user: req.user._id,
-    },
-    {
-        $set: {user: req.user._id},
-        $push: {recipes: [newRecipe]}
-    },
-    {
-        new: true,
-        upsert: true
-    })
-    .then(recipeBox => {
-        res.status(201).json({
-            recipeBox: recipeBox,
-            newRecipe: newRecipe
-        });
-    })
-    .catch(err => {
-        console.error(err);
-        res.status(500).json({message: 'Internal server error'});
     });
 });
 
