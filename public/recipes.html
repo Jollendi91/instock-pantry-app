@@ -8,10 +8,25 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
 <body>
-    <section id="js-recipes">
-        <h1>Recipes</h1>
-    </section>
+    <header role="banner">
+        <h1>InStock</h1>
+        <nav role="navigation">
+            <ul>
+                <li id="js-pantry">Pantry</li>
+                <li id="js-recipe-box">Recipe Box</li>
+                <li id="js-user-logout">Logout</li>
+            </ul>
+        </nav>
+    </header>
+    <main role="main">
+        <h1>Recipe Box</h1>
+        <section id="js-recipes">
+        </section>
+        <section id="js-recipe-details">
+        </section>
+    </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="nav.js"></script>
     <script type="text/javascript" src="recipe-box.js"></script>
 </body>
 </html>

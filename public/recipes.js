@@ -122,9 +122,10 @@ function listenForSaveRecipe() {
 }
  
 function listenForRecipeClick() {
-  $('#js-recipes').on('click', '#js-make-recipe-button', function (event) {
+  $('#js-recipes').on('click', '.js-single-recipe', function (event) {
     $('#js-recipe-details').empty();
-    const recipeID = $(event.currentTarget).parent().attr('id');
+    console.log(event.currentTarget);
+    const recipeID = $(event.currentTarget).attr('id');
     
     $.ajax(`/recipes/mashape/${recipeID}`, {
       headers: {
