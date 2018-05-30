@@ -1,12 +1,18 @@
 
 function displayRecipes(recipeBox) {
+
+    $('#js-recipes').empty();
+
     for(let recipe in recipeBox.recipes) {
         let RECIPE = recipeBox.recipes[recipe];
         $('#js-recipes').append(`
-            <article id="${RECIPE._id}" class="js-single-recipe">
+        <article>
+            <div id="${RECIPE._id}" class="js-single-recipe">
                 <h3>${RECIPE.title}</h3>
                 <img class="js-recipe-img" src="${RECIPE.image}" alt="${RECIPE.title}">
-            </article>
+            </div>
+            <button id="js-recipe-delete">Delete</button>
+        </article>
         `);  
     }
 }
@@ -73,6 +79,24 @@ function displaySingleRecipeDetails(recipeInfo) {
     }, 700, 'swing');
   };
 
+function listenForRecipeDeleteClick() {
+    $('#js-recipes').on('click', '#js-recipe-delete', function(event) {
+        $('#js-recipe-details').empty();
+        $('#js-recipes').empty();
+       const recipeId = $(event.currentTarget).siblings('div').attr('id');
+        
+       $.ajax({
+           url: `recipes/recipe-box/${recipeId}`,
+           method: 'DELETE',
+           headers: {
+               Authorization: `Bearer ${window.localStorage.token}`
+           },
+           success: getRecipes
+       });
+
+    });
+}
+
 
 function listenForRecipeClick() {
     $('#js-recipes').on('click', '.js-single-recipe', function (event) {
@@ -92,6 +116,7 @@ function listenForRecipeClick() {
 }
 
 $(function () {
+    listenForRecipeDeleteClick();
     listenForRecipeClick();
     getRecipes();
 });
