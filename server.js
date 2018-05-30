@@ -16,6 +16,7 @@ const {router: recipesRouter} = require('./routers/recipesRouter');
 const {router: userRouter} = require('./users');
 const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
 
+
 mongoose.Promise = global.Promise;
 
 app.use(express.static('public'));
@@ -35,10 +36,10 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use(passport.initialize());
+
 passport.use(localStrategy);
 passport.use(jwtStrategy);
-
-const jwtAuth = passport.authenticate('jwt', {session: false});
 
 // Routers
 app.use('/pantry-items', pantryItemsRouter);

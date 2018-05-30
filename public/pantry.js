@@ -75,7 +75,11 @@ function getPantryItems() {
         beforeSend : function( xhr ) {
             xhr.setRequestHeader( 'Authorization', `Bearer ${window.localStorage.token}`);
         },
-        success: getAndDisplayCategoriesAndItems});
+        success: getAndDisplayCategoriesAndItems,
+        error: function() {
+            window.location.href = '/';
+        }
+    });
 }
 
 function displayPantryItems(data) {
@@ -159,8 +163,24 @@ function listenForIncrementItemClick() {
     });
 }
 
+function listenForUserLogOut() {
+    $('#js-user-logout').click(event => {
+        event.preventDefault();
+        $.ajax({
+            url: '/instock/auth/logout',
+            headers: {
+                Authorization: `Bearer ${window.localStorage.token}`
+            },
+            success: function(data) {
+                localStorage.removeItem('token');
+                window.location.href = data.redirect;        
+            }});
+    });
+}
+
 $(function () {
     getPantryItems();
     listenforAddNewItem();
     listenForIncrementItemClick();
+    listenForUserLogOut();
     });
