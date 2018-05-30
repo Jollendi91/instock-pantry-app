@@ -76,7 +76,7 @@ function getPantryItems() {
             xhr.setRequestHeader( 'Authorization', `Bearer ${window.localStorage.token}`);
         },
         success: getAndDisplayCategoriesAndItems,
-        error: function() {
+        error: function(err) { 
             window.location.href = '/';
         }
     });
@@ -108,6 +108,7 @@ function displayPantryItems(data) {
 
 function getAndDisplayCategoriesAndItems(PANTRY_DATA) {
     $('#js-pantry-items').empty();
+    $('body').css('display', 'block');
     displayCategories(PANTRY_DATA);
     displayPantryItems(PANTRY_DATA);
 }
@@ -163,24 +164,9 @@ function listenForIncrementItemClick() {
     });
 }
 
-function listenForUserLogOut() {
-    $('#js-user-logout').click(event => {
-        event.preventDefault();
-        $.ajax({
-            url: '/instock/auth/logout',
-            headers: {
-                Authorization: `Bearer ${window.localStorage.token}`
-            },
-            success: function(data) {
-                localStorage.removeItem('token');
-                window.location.href = data.redirect;        
-            }});
-    });
-}
-
 $(function () {
     getPantryItems();
     listenforAddNewItem();
     listenForIncrementItemClick();
-    listenForUserLogOut();
+    
     });

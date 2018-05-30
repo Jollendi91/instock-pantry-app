@@ -65,5 +65,25 @@ UserSchema.statics.hashPassword = function(password) {
 
 const User = mongoose.model('User', UserSchema);
 
+const recipeSchema = mongoose.Schema({
+    user: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User', 
+        unique: true,
+        required: [true, 'No User id found'] 
+    },
+    recipes: [{
+        title: {type: String, require: true },
+        image: {type: String },
+        source: {type: String },
+        sourceName: {type: String},
+        timeReady: {type: Number},
+        servings: {type: Number},
+        ingredients: {type: Array},
+        instructions: {type: Array}
+        }]
+});
 
-module.exports = {Pantry, User};
+const Recipe = mongoose.model('Recipe', recipeSchema);
+
+module.exports = {Pantry, User, Recipe};

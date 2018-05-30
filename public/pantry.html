@@ -7,10 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="main.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body style="display: none">
     <header role="banner">
         <h1>InStock</h1>
-        <button id="js-user-logout">Logout</button>
+        <nav role="navigation">
+            <ul>
+                <li id="js-pantry">Pantry</li>
+                <li id="js-recipe-box">Recipe Box</li>
+                <li id="js-user-logout">Logout</li>
+            </ul>
+        </nav>
     </header>
     <main role="main">
         <h2>Add an item:</h2>
@@ -46,6 +52,7 @@
         </section>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="nav.js"></script>
     <script type="text/javascript" src="pantry.js"></script>
     <script type="text/javascript" src="recipes.js"></script>
 </body>
