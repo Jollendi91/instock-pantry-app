@@ -103,6 +103,32 @@ router.get('/mashape', jwtAuth, (req, res) => {
         });
 }); 
 
+router.post('/mashape', jwtAuth, (req, res) => {
+
+    let ingredientList = req.body.ingredientList.toString();
+
+    unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients')
+            .headers({
+                "X-Mashape-Key": SPOONACULAR_KEY,
+                "Accept": "application/json"
+            })
+            .query({
+                fillIngredients: false,
+                ingredients: ingredientList,
+                limitLicense: false,
+                number: 5,
+                ranking: 2
+            })
+            .end(function(response) {
+                if (response.error) {
+                    console.error(response.error);
+                    res.status(500).json({message: 'Internal server error'});
+                }
+                else {
+                    res.json(response);
+                }
+            });
+});
 
 router.get('/mashape/:id', jwtAuth, (req, res) => {
 
