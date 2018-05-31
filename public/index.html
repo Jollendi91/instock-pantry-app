@@ -8,21 +8,19 @@
     <link href="main.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <header role="banner">
-        <h1>InStock</h1>
-    </header>
-    <main role="main">
+    <main role="main" id="intro">
+        
         <section class="login-intro">
-            <p>InStock keeps your pantry organized. No more guessing whether you're out of something, just check your virtual pantry! InStock can even help you find recipes that use the ingredients you have, so you can minimize your shopping list and maximize your time and money.</p>
+            <div id="logo">
+                <h1>InStock</h1>
+            </div>
+            <p>Stay organized! InStock can help you find recipes that use the ingredients you have, so you can minimize your shopping list and maximize your time and money.</p>
         </section>
         <section id="js-login" class="form-section">
             <div id="js-login-status"></div>
-            <p>Login in or sign up to get started!</p>
             <form id='js-login-form'>
-                <label>Username:
-                <input id="js-login-username" type="text" name="Username" placeholder="JohnDoe15"></label>
-                <label>Password:
-                <input id="js-login-password" type="password"></label>
+                <input id="js-login-username" type="text" name="Username" placeholder="Username">
+                <input id="js-login-password" type="password" placeholder="Password">
                 <button type="submit" name="login">Login</button>
             </form>
             <section class="sign-up">
