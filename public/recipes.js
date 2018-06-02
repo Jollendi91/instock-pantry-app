@@ -25,7 +25,7 @@ function displayRecipes(recipeData) {
 let custom = false;
 
 function listenForCustomSearchClick() {
-  $('#js-recipes').on('click', '#js-custom-recipe-search', (event) => {
+  $('#recipe-search').on('click', '#js-custom-recipe-search', (event) => {
     if (custom) {
       $('input[type="checkbox"]').css('display', 'none');
       custom = false;
@@ -38,7 +38,7 @@ function listenForCustomSearchClick() {
 }
 
 function listenForSearchRecipesClick() {
-  $('#js-recipes').on('click', '#js-search-recipes', (event) => {
+  $('#recipe-search').on('click', '#js-search-recipes', (event) => {
     $('#js-recipe-list').empty();
 
     if(custom) {

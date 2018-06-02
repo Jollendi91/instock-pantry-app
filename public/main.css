@@ -62,7 +62,7 @@ body {
 }
 
 #main-pantry {
-    padding-top: 55px;
+    padding-top: 65px;
 }
 
 button {
@@ -201,7 +201,7 @@ header, #js-pantry-items ul {
 
 header h1, .nav-toggle {
     padding: 12px;
-    font-size: 22px;
+    font-size: 28px;
 }
 
 .nav-toggle {
@@ -221,7 +221,7 @@ header h1, .nav-toggle {
 
 .nav-item li {
     display: block;
-    padding: 12px 20px;
+    padding: 18px 20px;
     cursor: pointer;
 }
 
@@ -241,12 +241,12 @@ header h1, .nav-toggle {
 
 /*Pantry Items */
 
-#add-item-container {
+#add-item-container, #recipe-search {
     display: block;
     margin: auto;
     width: -moz-fit-content;
     padding: 10px;
-    background: #00000080;
+    background: #0009;
     color: white;
     text-align: center;
     border-radius: 5px;
@@ -257,7 +257,7 @@ header h1, .nav-toggle {
     flex-direction: column;
 }
 
-form h2 {
+section h2 {
     display: inline;
     font-size: 20px;
     padding: 3px;
@@ -306,7 +306,7 @@ form select {
     pointer-events: none;
 }
 
-#js-add-item button {
+#js-add-item button, #recipe-search button {
     background: linear-gradient(to right, #11998e, #38ef7d);
     border: 0;
     padding: 5px;
@@ -355,6 +355,10 @@ li label {
     align-items: center;
 }
 
+.item-counter {
+    display: flex;
+}
+
 .item-counter button {
 	border: 0;
 	margin: 0px 15px;
@@ -387,6 +391,15 @@ li label {
 
 label input[type="checkbox"] {
     display: none;
+}
+
+#recipe-search {
+    display: flex;
+    align-items: center
+}
+
+#recipe-search button {
+    margin: 0 5px;
 }
 
 
