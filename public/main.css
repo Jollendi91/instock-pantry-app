@@ -51,8 +51,18 @@ table {
 
 
 /* Global Styles */
-html {
-    overflow: hidden;
+
+body {
+    min-height: 100vh;
+    padding: 0 20px;
+    background-image: url("https://source.unsplash.com/4R1YpmGO52I");
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+
+#main-pantry {
+    padding-top: 55px;
 }
 
 button {
@@ -67,13 +77,6 @@ button {
 
 /* Login Page */
 
-#login {
-    min-height: 100vh;
-    background-image: url("https://source.unsplash.com/4R1YpmGO52I");
-    background-size: cover;
-    background-attachment: fixed;
-}
-
 #intro::before {
     position: absolute;
     content: "";
@@ -82,6 +85,7 @@ button {
     height: 100%;
     z-index: -1;
     filter: blur(3px);
+    transform: scale(1.1);
     background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.75) 1%,rgba(0,0,0,0.1) 100%), url("https://source.unsplash.com/4R1YpmGO52I");
         background-attachment: fixed;
     background-size: cover;
@@ -99,7 +103,7 @@ button {
     margin: auto;
 }
 
-.login-intro div {
+.login-intro div, header h1 {
     background: linear-gradient(to right, #11998e, #38ef7d);
     background-clip: border-box;
     -webkit-background-clip: text;
@@ -146,6 +150,7 @@ form {
     border-radius: 2px;
     border: 0;
     background-color: rgba(255, 255, 255, .5);
+    font-size: 16px;
 }
 
 button[name="login"] {
@@ -177,17 +182,139 @@ button[name="login"] {
 }
 
 
+/* Header */
+
+header {
+    position: fixed;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    font-family: "Raleway";
+}
+
+header, #js-pantry-items ul {
+    background: linear-gradient(135deg, #ece9e6, #ffffff);
+}
+
+header h1, .nav-toggle {
+    padding: 12px;
+    font-size: 22px;
+}
+
+.nav-toggle {
+    align-self: flex-end;
+    display: initial;
+    position: absolute;
+    cursor: pointer;
+}
+
+.nav-toggle-width {
+    width: 100%;
+}
+
+.nav-item {
+    display: none;
+}
+
+.nav-item li {
+    display: block;
+    padding: 12px 20px;
+    cursor: pointer;
+}
+
+.nav-item li:hover {
+    background-color: #e2e2e2;
+}
+
+.navbar-toggle-show {
+    display: block;
+}
+
+.navbar-toggle-show li {
+    padding: 10px 20px;
+    border-top: 1px solid black;
+}
+
 
 /*Pantry Items */
 
+#add-item-container {
+    display: block;
+    margin: auto;
+    width: -moz-fit-content;
+    padding: 10px;
+    background: #00000080;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+}
+
 #js-add-item {
+    display: flex;
+    flex-direction: column;
+}
+
+form h2 {
     display: inline;
+    font-size: 20px;
+    padding: 3px;
 }
 
 #js-add-item label {
-    display: inline-block;
+    display: flex;
+    align-items: center;
     margin-left: 10px;
-    
+}
+
+#js-add-item input,
+#js-add-item select {
+    flex-grow: 2;
+    margin-left: 5px;
+    padding: 2px 5px;
+    border: 0;
+    border-radius: 2px;
+    font-size: 16px;
+}
+
+form select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+#select {
+    position: relative;
+}
+
+#select::after {
+    font-family: 'Font Awesome 5 Free';
+    margin-right: 0.5em;
+	display: inline-block;
+	font-style: normal;
+	font-variant: normal;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+    position: absolute;
+	top: 6px;
+	right: 0px;
+	color: black;
+	content: "\f107";
+    font-weight: 900;
+    pointer-events: none;
+}
+
+#js-add-item button {
+    background: linear-gradient(to right, #11998e, #38ef7d);
+    border: 0;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    font-size: 18px;
+    margin-top: 3px;
+    font-weight: bold;
 }
 
 .pantry-items {
@@ -198,15 +325,64 @@ button[name="login"] {
 }
 
 #js-pantry-items ul {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
     break-inside: avoid;
     page-break-inside: avoid;
-    border-bottom: 1px solid black;
-    padding-bottom: 15px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 0px 10px 0px 10px;
+}
+
+ul h3 {
+    font-size: 22px;
+    text-decoration: underline;
+    padding-bottom: 10px;
+}
+
+#js-pantry-items ul li {
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+	width: 95%;
+    margin: auto;
+    padding: 10px;
+	border-bottom: 2px solid #a3a3a34d;
 }
 
 li label {
-    display: inline;
+    display: flex;
+    align-items: center;
+}
+
+.item-counter button {
+	border: 0;
+	margin: 0px 15px;
+	width: 25px;
+	border-radius: 50px;
+	height: 25px;
+	font-size: 18px;
+	font-weight: bold;
+	color: white;
+}
+
+#js-pantry-items ul:nth-child(5n+1) button {
+	background: #324D5C;
+}
+
+#js-pantry-items ul:nth-child(5n+2) button {
+    background: #46B29D;  
+}
+
+#js-pantry-items ul:nth-child(5n+3) button {
+    background: #F0CA4D;
+}
+
+#js-pantry-items ul:nth-child(5n+4) button {
+	background: #E37B40;
+}
+#js-pantry-items ul:nth-child(5n+5) button {
+    background: #DE5B49;
 }
 
 label input[type="checkbox"] {
@@ -293,6 +469,25 @@ li p {
 
 @media all and (min-width: 480px) {
 
+    /* Navigation Bar */
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nav-toggle {
+        display: none;
+    }
+
+    .nav-item {
+        display: initial;
+    }
+    
+    .nav-item li {
+        display: inline-block; 
+    }
+
     /*Login Screen - Media query*/
 
     #login {
@@ -313,6 +508,7 @@ li p {
 
     #intro::before {
         filter: blur(10px);
+        transform: none;
     }
 
 }

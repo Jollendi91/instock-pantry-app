@@ -5,53 +5,60 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>InStock</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One|Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link href="main.css" rel="stylesheet" type="text/css" />
 </head>
 <body style="display: none">
     <header role="banner">
         <h1>InStock</h1>
+        <div class="nav-toggle">
+                <i class="fas fa-bars"></i>
+        </div>
         <nav role="navigation">
-            <ul>
+            <ul class="nav-item">
                 <li id="js-pantry">Pantry</li>
                 <li id="js-recipe-box">Recipe Box</li>
                 <li id="js-user-logout">Logout</li>
             </ul>
         </nav>
     </header>
-    <main role="main">
-        <h2>Add an item:</h2>
-        <form id="js-add-item">
-            <label>Quantity:
-            <input id="js-quantity" type="number" name="quantity" value="1" min="1"></label>
-            <label>Item Name:  
-            <input id="js-item-name" type="text" name="item name" placeholder="Item Name" required></label>
-            <label>Category: 
-            <select id="js-category" name="category" required>
-                <option value="" disabled selected>Select a category</option>
-                <option value="Beverages">Beverages</option>
-                <option value="Bread">Bread</option>
-                <option value="Condiments">Condiments</option>
-                <option value="Canned">Canned Goods</option>
-                <option value="Dairy">Dairy</option>
-                <option value="Dry">Dry/Baking Goods</option>
-                <option value="Frozen">Frozen Foods</option>
-                <option value="Fruits">Fruits</option>
-                <option value="Meats">Meats</option>
-                <option value="Snacks">Snacks</option>
-                <option value="Spices">Spices/Seasonings</option>
-                <option value="Vegetables">Vegetables</option>
-                <option value="Miscellaneous">Miscellaneous</option>
-            </select></label>
-            <button type="submit" role="button">Add Item</button>
-        </form>
-        <div id="js-alert"></div>
-        <h2>My Pantry</h2>
+    <main role="main" id="main-pantry">
+        <section id="add-item-container">
+            <form id="js-add-item">
+                <h2>Add an item</h2>
+                <label>Quantity:
+                <input id="js-quantity" type="number" name="quantity" value="1" min="1"></label>
+                <label>Item Name:  
+                <input id="js-item-name" type="text" name="item name" placeholder="Item Name" required></label>
+                <label id="select">Category: 
+                <select id="js-category" name="category" required>
+                    <option value="" disabled selected>Select a category</option>
+                    <option value="Beverages">Beverages</option>
+                    <option value="Bread">Bread</option>
+                    <option value="Condiments">Condiments</option>
+                    <option value="Canned">Canned Goods</option>
+                    <option value="Dairy">Dairy</option>
+                    <option value="Dry">Dry/Baking Goods</option>
+                    <option value="Frozen">Frozen Foods</option>
+                    <option value="Fruits">Fruits</option>
+                    <option value="Meats">Meats</option>
+                    <option value="Snacks">Snacks</option>
+                    <option value="Spices">Spices/Seasonings</option>
+                    <option value="Vegetables">Vegetables</option>
+                    <option value="Miscellaneous">Miscellaneous</option>
+                </select></label>
+                <button type="submit" role="button">Add Item</button>
+            </form>
+            <div id="js-alert"></div>
+        </section>
         <section id="js-pantry-items" class="pantry-items">
         </section>
         <section id="js-recipes">
         </section>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <!-- <script type="text/javascript" src="jquery-3.3.1.min.js"></script> -->
     <script type="text/javascript" src="nav.js"></script>
     <script type="text/javascript" src="pantry.js"></script>
     <script type="text/javascript" src="recipes.js"></script>

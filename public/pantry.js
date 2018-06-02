@@ -92,10 +92,12 @@ function displayPantryItems(data) {
         <label>
             <input type="checkbox" value="${data.items[item].name}">
             <span class="js-item-name">${data.items[item].name}</span>
-        </label> -
-        <button id="js-subtract" class="increment">-</button>
-        <span class="js-quantity">${data.items[item].quantity}</span>
-        <button id="js-add" class="increment">+</button>   
+        </label>
+        <div class="item-counter">
+            <button id="js-subtract" class="increment">-</button>
+            <span class="js-quantity">${data.items[item].quantity}</span>
+            <button id="js-add" class="increment">+</button>
+        </div>
        </li>
         `);
     }
