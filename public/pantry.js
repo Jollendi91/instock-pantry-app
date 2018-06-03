@@ -104,11 +104,13 @@ function displayPantryItems(data) {
 
     if (data.items[0]) {
         $('#recipe-search').html(`
-        <h2>Find recipes that use items from your pantry!</h2>
-        <button id="js-search-recipes">Search Recipes</button>
-        <button id="js-custom-recipe-search">Custom Search</button>
+        <h2>Find recipes with all your ingredients or pick the ingredients you would like to use!</h2>
+        <div id="recipe-button-container">
+            <button id="js-search-recipes">Search All</button>
+            <button id="js-custom-recipe-search">Choose Ingredients</button>
+        </div>
         `);
-        
+
         $('#js-recipes').html(`
         <section id="js-recipe-list">
         </section>

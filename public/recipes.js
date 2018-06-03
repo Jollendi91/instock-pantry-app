@@ -10,7 +10,6 @@ function displayRecipes(recipeData) {
                 <img class="js-recipe-img" src="${RECIPE.image}" alt="${RECIPE.title}">
                 <p>Ingredients used from pantry: <span id="js-exist-ingredients">${RECIPE.usedIngredientCount}</span></p>
                 <p>Missing ingredients: <span id="js-missing-ingredients">${RECIPE.missedIngredientCount}</span></p>
-                <button id="js-make-recipe-button">Make this!</button>
             </article>
         `);
 
@@ -28,10 +27,19 @@ function listenForCustomSearchClick() {
   $('#recipe-search').on('click', '#js-custom-recipe-search', (event) => {
     if (custom) {
       $('input[type="checkbox"]').css('display', 'none');
+      $('#js-search-recipes').text("Search All");
+      $('#js-custom-recipe-search').text("Choose Ingredients");
+      $('#js-custom-search-status').css('display', 'none');
       custom = false;
     }
     else {
       $('input[type="checkbox"]').css('display', 'block');
+      $('#js-search-recipes').text("Search Custom");
+      $('#js-custom-recipe-search').text("All Ingredients");
+      $('#js-custom-search-status').css('display', 'block');
+      $('html, body').animate({
+        scrollTop: ($('#js-custom-search-status').offset().top)
+      }, 700, 'swing');
        custom = true;
     }
   });

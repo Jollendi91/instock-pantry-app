@@ -241,7 +241,7 @@ header h1, .nav-toggle {
 
 /*Pantry Items */
 
-#add-item-container, #recipe-search {
+#add-item-container, #recipe-search, #js-custom-search-status {
     display: block;
     margin: auto;
     width: -moz-fit-content;
@@ -255,6 +255,7 @@ header h1, .nav-toggle {
 #js-add-item {
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
 }
 
 section h2 {
@@ -361,7 +362,7 @@ li label {
 
 .item-counter button {
 	border: 0;
-	margin: 0px 15px;
+	margin: 0px 10px;
 	width: 25px;
 	border-radius: 50px;
 	height: 25px;
@@ -391,15 +392,16 @@ li label {
 
 label input[type="checkbox"] {
     display: none;
-}
-
-#recipe-search {
-    display: flex;
-    align-items: center
+    margin-right: 5px;
 }
 
 #recipe-search button {
-    margin: 0 5px;
+    margin: 10px 5px;
+}
+
+#js-custom-search-status {
+    display: none;
+    margin-top: 10px;
 }
 
 
@@ -522,6 +524,18 @@ li p {
     #intro::before {
         filter: blur(10px);
         transform: none;
+    }
+
+    /* Recipe Search */
+
+    #recipe-search {
+        display: flex;
+        align-items: center;
+    }
+
+    #recipe-search button {
+        margin-top: 0;
+        margin-bottom: 0;
     }
 
 }
