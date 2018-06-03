@@ -8,15 +8,17 @@ function displayRecipes(recipeData) {
             <article id="${RECIPE.id}" class="js-single-recipe">
                 <h3>${RECIPE.title}</h3>
                 <img class="js-recipe-img" src="${RECIPE.image}" alt="${RECIPE.title}">
-                <p>Ingredients used from pantry: <span id="js-exist-ingredients">${RECIPE.usedIngredientCount}</span></p>
-                <p>Missing ingredients: <span id="js-missing-ingredients">${RECIPE.missedIngredientCount}</span></p>
+                <div class="ingredients-used-info">
+                  <p>Ingredients used from pantry: <span id="js-exist-ingredients">${RECIPE.usedIngredientCount}</span></p>
+                  <p>Missing ingredients: <span id="js-missing-ingredients">${RECIPE.missedIngredientCount}</span></p>
+                </div>
             </article>
         `);
 
   }
 
   $('html, body').animate({
-    scrollTop: ($('#js-recipe-list').offset().top)
+    scrollTop: ($('#js-recipes').offset().top - 60)
   }, 700, 'swing');
 
 }

@@ -417,24 +417,46 @@ label input[type="checkbox"] {
 article {
     width: 100%;
     max-width: 325px;
-    padding: 0 15px 10px;
-    margin: 0 20px 5px;
-    border: 1px solid black;
+    margin: 5px 0;
+    background: #0009;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
 }
 
 article h3 {
-    min-height: 46px;
+    padding: 10px;
 }
 
 article img {
     width: 100%;
-    max-width: 312px;
+    border-radius: 0 0 5px 5px;
 }
 
-article button {
-    display: block;
-    margin: auto;
+.ingredients-used-info {
+	position: absolute;
+	bottom: 2px;
+	background: #0009;
+	width: 100%;
+	border-radius: 0 0 5px 5px;
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    transition: all .5s ease;
 }
+
+.ingredients-used-info p {
+    padding: 5px 10px;
+}
+
+article:hover .ingredients-used-info {
+    visibility: visible;
+    opacity: 1;
+    height: 60px;
+}
+
 /* Single Recipe Info */
 
 #js-recipe-details > img {
@@ -489,6 +511,7 @@ li p {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        z-index: 2;
     }
 
     .nav-toggle {
