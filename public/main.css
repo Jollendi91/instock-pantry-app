@@ -232,7 +232,11 @@ header h1, .nav-toggle {
     cursor: pointer;
 }
 
-.nav-item li:hover {
+.nav-item .active {
+    background-color: #e2e2e2;
+}
+
+body.hasHover .nav-item li:hover {
     background-color: #e2e2e2;
 }
 
@@ -451,6 +455,9 @@ article img {
 	background: #0009;
 	width: 100%;
 	border-radius: 0 0 5px 5px;
+}
+
+body.hasHover .ingredients-used-info {
     visibility: hidden;
     opacity: 0;
     height: 0;
@@ -461,7 +468,7 @@ article img {
     padding: 5px 10px;
 }
 
-article:hover .ingredients-used-info {
+body.hasHover article:hover .ingredients-used-info {
     visibility: visible;
     opacity: 1;
     height: 60px;
@@ -555,10 +562,13 @@ article button {
 	border-radius: 50px;
 	width: 30px;
 	height: 30px;
-	display: none;
 }
 
-article:hover button {
+body.hasHover article button {
+    display: none;
+}
+
+body.hasHover article:hover button {
     display: block;
 }
 
