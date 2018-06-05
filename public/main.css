@@ -202,7 +202,7 @@ header {
     z-index: 2;
 }
 
-header, #js-pantry-items section {
+header, .pantry-items section {
     background: linear-gradient(135deg, #ece9e6, #ffffff);
 }
 
@@ -256,6 +256,7 @@ body.hasHover .nav-item li:hover {
     display: block;
     margin: auto;
     width: -moz-fit-content;
+    width: fit-content;
     padding: 10px;
     background: #0009;
     color: white;
@@ -336,7 +337,7 @@ form select {
     column-gap: 20px;
 }
 
-#js-pantry-items section {
+.pantry-items section {
 	page-break-inside: avoid;
 	margin-bottom: 15px;
 	padding-top: 10px;
@@ -344,7 +345,7 @@ form select {
 	break-inside: avoid;
 }
 
-#js-pantry-items ul {
+.pantry-items ul {
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -353,11 +354,10 @@ form select {
 section > h3 {
     font-size: 22px;
     text-align: center;
-    text-decoration: underline;
     padding-bottom: 10px;
 }
 
-#js-pantry-items ul li {
+.pantry-items ul li {
 	display: flex;
     justify-content: space-between;
     align-items: center;
@@ -386,22 +386,22 @@ li label {
 	color: white;
 }
 
-#js-pantry-items section:nth-child(5n+1) button {
+.pantry-items section:nth-child(5n+1) button {
 	background: #324D5C;
 }
 
-#js-pantry-items section:nth-child(5n+2) button {
+.pantry-items section:nth-child(5n+2) button {
     background: #46B29D;  
 }
 
-#js-pantry-items section:nth-child(5n+3) button {
+.pantry-items section:nth-child(5n+3) button {
     background: #F0CA4D;
 }
 
-#js-pantry-items section:nth-child(5n+4) button {
+.pantry-items section:nth-child(5n+4) button {
 	background: #E37B40;
 }
-#js-pantry-items section:nth-child(5n+5) button {
+.pantry-items section:nth-child(5n+5) button {
     background: #DE5B49;
 }
 
@@ -516,6 +516,10 @@ body.hasHover article:hover .ingredients-used-info {
     margin-top: 20px;
 }
 
+.list-container h3 {
+    text-decoration: underline;
+}
+
 .list {
     display: flex;
     flex-direction: column;
@@ -543,7 +547,7 @@ li p {
 #js-instruction-list {
     max-width: 600px;
     list-style: decimal;
-    padding: 0 25px;
+    padding: 0 25px 15px;
 }
 
 #js-instruction-list li {
