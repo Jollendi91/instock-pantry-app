@@ -9,9 +9,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
-<body>
+<body style="display: none">
     <header role="banner">
         <h1>InStock</h1>
+        <div class="nav-toggle">
+                <i class="fas fa-bars"></i>
+        </div>
         <nav role="navigation">
             <ul class="nav-item">
                 <li id="js-pantry">Pantry</li>
@@ -19,10 +22,10 @@
                 <li id="js-user-logout">Logout</li>
             </ul>
         </nav>
-    </header>
+        </header>
     <main role="main">
         <h1>Recipe Box</h1>
-        <section id="js-recipes">
+        <section id="js-recipes" class="recipe-list">
         </section>
         <section id="js-recipe-details">
         </section>

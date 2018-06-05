@@ -20,7 +20,7 @@ router.get('/recipe-box', jwtAuth, (req, res) => {
         })
         .catch(err => {
             console.error(err);
-            res.status(500).json({message: 'Internal server error'});
+            res.status(500).json({message: 'Internal server error'})
         });
 });
 
@@ -141,7 +141,21 @@ router.get('/mashape/:id', jwtAuth, (req, res) => {
         includeNutrition: false
     })
     .end(function(response) {
-        res.json(response);
+        let savedStatus;
+
+        Recipe
+        .findOne({"recipes.title": response.body.title},
+        {"recipes.$": 1})
+        .then(foundRecipe => {
+            if(foundRecipe) {
+                savedStatus = "Saved";
+            }
+            else {
+                savedStatus = "Save recipe!"
+            }
+
+            res.json({response, savedStatus});
+        });
     });
 });
 

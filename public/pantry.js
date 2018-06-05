@@ -64,7 +64,7 @@ function displayCategories(data) {
 
         $('#js-pantry-items').append(`
             <ul id="${displayedCategories[category]}">
-                <h3>${displayedCategories[category]}</h3>
+                <h3 class="category-header">${displayedCategories[category]}</h3>
             </ul>
         `);
     }

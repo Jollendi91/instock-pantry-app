@@ -1,6 +1,8 @@
 
 function displayRecipes(recipeBox) {
 
+    $('body').css('display', 'block');
+
     $('#js-recipes').empty();
 
     for(let recipe in recipeBox.recipes) {
@@ -11,7 +13,7 @@ function displayRecipes(recipeBox) {
                 <h3>${RECIPE.title}</h3>
                 <img class="js-recipe-img" src="${RECIPE.image}" alt="${RECIPE.title}">
             </div>
-            <button id="js-recipe-delete">Delete</button>
+            <button id="js-recipe-delete">X</button>
         </article>
         `);  
     }
@@ -23,7 +25,10 @@ function getRecipes() {
         headers: {
             Authorization: `Bearer ${window.localStorage.token}`
         },
-        success: displayRecipes
+        success: displayRecipes,
+        error: function(err) {
+            window.location.href = '/';
+        }
     });
 }
 
@@ -33,8 +38,10 @@ function getIngredientList(recipeInfo) {
   
       $('#js-ingredient-list').append(`
           <li id="${INGREDIENT.id}">
+            <div>
               <img src="https://spoonacular.com/cdn/ingredients_100x100/${INGREDIENT.image}" alt="${INGREDIENT.name}">
-              <p>${INGREDIENT.originalString}</p>
+            </div>
+            <p>${INGREDIENT.originalString}</p>
           </li>
           `);
     }
@@ -56,26 +63,27 @@ function displaySingleRecipeDetails(recipeInfo) {
     let RECIPE = recipeInfo.recipes[0];
 
     $('#js-recipe-details').append(`
+        <div id="recipe-header">
             <h2>${RECIPE.title}</h2>
             <img src="${RECIPE.image}" alt="${RECIPE.title}">
             <div id="recipe-info">
               <p>From: <a href="${RECIPE.sourceUrl}" target="_blank">${RECIPE.sourceName}</a></p>
-              <p>Ready in: ${RECIPE.readyInMinutes} minutes</p>
+              <p>Ready in: ${RECIPE.timeReady} minutes</p>
               <p>Servings: ${RECIPE.servings}</p>
             </div>
-            <div id="js-recipe-saved-status"></div>
+        </div>
+        <ul id="js-ingredient-list" class="list">
             <h3>Ingredients</h3>
-            <ul id="js-ingredient-list">
-            </ul>
+        </ul>
+        <ol id="js-instruction-list" class="list">
             <h3>Instructions</h3>
-            <ol id="js-instruction-list">
-            </ol>
+        </ol>
         `);
     getIngredientList(recipeInfo);
     getInstructionList(recipeInfo);
 
     $('html, body').animate({
-      scrollTop: ($('#js-recipe-details').offset().top)
+      scrollTop: ($('#js-recipe-details').offset().top - 60)
     }, 700, 'swing');
   };
 

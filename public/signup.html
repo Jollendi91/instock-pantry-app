@@ -5,33 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>InStock - Sign up</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One|Raleway" rel="stylesheet">
     <link href="main.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
-    <header role="banner">
-            <h1>Welcome to InStock</h1>
-    </header>
-    <main role="main">
+<body id="login">
+    <main role="main" id="signup">
+            <section class="login-intro">
+                    <div id="logo">
+                        <h1>InStock</h1>
+                    </div>
+                </section>
         <section id="js-signup" class="form-section">
+            <h2 id="create-account">Create your Account</h2>
             <div id="js-signup-status"></div>
             <form id="js-signup-form" class="signup-form">
-                <label for="js-signup-username">Username:
-                    <input id="js-signup-username" type="text" name="username" placeholder="Johndoe15" required>
-                </label>
-                <label for="js-signup-password">Password:
-                    <input id="js-signup-password" type="password" name="password" required>
-                </label>
-                <label for="js-signup-retype-password"> Re-type Password:
-                    <input id="js-signup-retype-password" type="password" name="verify-password" required></label>
-                <label for="js-signup-firstName">First Name:
-                    <input id="js-signup-firstName" type="text" name="firstName" placeholder="John">
-                </label>
-                <label for="js-signup-lastName">Last Name:
-                     <input id="js-signup-lastName" type="text" name="lastName" placeholder="Doe">
-                 </label>
-                <button id="js-submit-signup" type="submit">Submit</button>
+                    <input id="js-signup-username" type="text" name="username" placeholder="Username" required>
+                    <input id="js-signup-password" type="password" name="password" placeholder="Password" required>
+                    <input id="js-signup-retype-password" type="password" name="verify-password" placeholder="Re-type Password" required>
+                    <input id="js-signup-firstName" type="text" name="firstName" placeholder="First Name">
+                     <input id="js-signup-lastName" type="text" name="lastName" placeholder="Last Name">
+                <button id="js-submit-signup" type="submit">Sign Up</button>
             </form>
-            <button id="js-back-to-login">Back to Login</button>
+            <section class="sign-up">
+                <p>Already have an account?</p>
+                <button id="js-back-to-login">Login</button>
+            </section>
          </section>
     </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
