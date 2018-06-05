@@ -63,9 +63,11 @@ function displayCategories(data) {
     for (let category in displayedCategories) {
 
         $('#js-pantry-items').append(`
-            <ul id="${displayedCategories[category]}">
+            <section>
                 <h3 class="category-header">${displayedCategories[category]}</h3>
-            </ul>
+                <ul id="${displayedCategories[category]}">
+                </ul>
+            </section>
         `);
     }
 }
@@ -94,9 +96,9 @@ function displayPantryItems(data) {
             <span class="js-item-name">${data.items[item].name}</span>
         </label>
         <div class="item-counter">
-            <button id="js-subtract" class="increment"><i class="fas fa-minus"></i></button>
+            <button id="js-subtract" class="increment" value="subtract" aria-label="Subtract"><i class="fas fa-minus"></i></button>
             <span class="js-quantity">${data.items[item].quantity}</span>
-            <button id="js-add" class="increment"><i class="fas fa-plus"></i></button>
+            <button id="js-add" class="increment" value="add" aria-label="Add"><i class="fas fa-plus"></i></button>
         </div>
        </li>
         `);

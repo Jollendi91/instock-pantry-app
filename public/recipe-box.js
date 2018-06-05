@@ -13,7 +13,7 @@ function displayRecipes(recipeBox) {
                 <h3>${RECIPE.title}</h3>
                 <img class="js-recipe-img" src="${RECIPE.image}" alt="${RECIPE.title}">
             </div>
-            <button id="js-recipe-delete"><i class="fas fa-times"></i></button>
+            <button class="js-recipe-delete" value="delete" aria-label="Delete"><i class="fas fa-times"></i></button>
         </article>
         `);  
     }
@@ -72,12 +72,16 @@ function displaySingleRecipeDetails(recipeInfo) {
               <p>Servings: ${RECIPE.servings}</p>
             </div>
         </div>
-        <ul id="js-ingredient-list" class="list">
+        <section class="list-container">
             <h3>Ingredients</h3>
-        </ul>
-        <ol id="js-instruction-list" class="list">
+            <ul id="js-ingredient-list">
+            </ul>
+        </section>
+        <section class="list-container">
             <h3>Instructions</h3>
-        </ol>
+            <ol id="js-instruction-list" class="list">
+            </ol>
+        <section>
         `);
     getIngredientList(recipeInfo);
     getInstructionList(recipeInfo);
@@ -88,7 +92,7 @@ function displaySingleRecipeDetails(recipeInfo) {
   };
 
 function listenForRecipeDeleteClick() {
-    $('#js-recipes').on('click', '#js-recipe-delete', function(event) {
+    $('#js-recipes').on('click', '.js-recipe-delete', function(event) {
         $('#js-recipe-details').empty();
         $('#js-recipes').empty();
        const recipeId = $(event.currentTarget).siblings('div').attr('id');

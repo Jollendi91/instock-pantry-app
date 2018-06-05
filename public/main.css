@@ -202,7 +202,7 @@ header {
     z-index: 2;
 }
 
-header, #js-pantry-items ul {
+header, #js-pantry-items section {
     background: linear-gradient(135deg, #ece9e6, #ffffff);
 }
 
@@ -336,17 +336,21 @@ form select {
     column-gap: 20px;
 }
 
+#js-pantry-items section {
+	page-break-inside: avoid;
+	margin-bottom: 15px;
+	padding-top: 10px;
+	border-radius: 0 10px 0 10px;
+	break-inside: avoid;
+}
+
 #js-pantry-items ul {
     display: flex;
     flex-direction: column;
-    break-inside: avoid;
-    page-break-inside: avoid;
     padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 0px 10px 0px 10px;
 }
 
-ul h3, ol h3 {
+section > h3 {
     font-size: 22px;
     text-align: center;
     text-decoration: underline;
@@ -382,22 +386,22 @@ li label {
 	color: white;
 }
 
-#js-pantry-items ul:nth-child(5n+1) button {
+#js-pantry-items section:nth-child(5n+1) button {
 	background: #324D5C;
 }
 
-#js-pantry-items ul:nth-child(5n+2) button {
+#js-pantry-items section:nth-child(5n+2) button {
     background: #46B29D;  
 }
 
-#js-pantry-items ul:nth-child(5n+3) button {
+#js-pantry-items section:nth-child(5n+3) button {
     background: #F0CA4D;
 }
 
-#js-pantry-items ul:nth-child(5n+4) button {
+#js-pantry-items section:nth-child(5n+4) button {
 	background: #E37B40;
 }
-#js-pantry-items ul:nth-child(5n+5) button {
+#js-pantry-items section:nth-child(5n+5) button {
     background: #DE5B49;
 }
 
@@ -508,10 +512,13 @@ body.hasHover article:hover .ingredients-used-info {
 
 /* Single Recipe Ingredient List */
 
+.list-container {
+    margin-top: 20px;
+}
+
 .list {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
     padding: 0 15px;
 }
 

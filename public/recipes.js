@@ -141,12 +141,16 @@ function displaySingleRecipeDetails(recipeInfo) {
           <button id="js-save-recipe">${recipeInfo.savedStatus}</button>
         </div>
       </div>
-      <ul id="js-ingredient-list" class="list">
+      <section class="list-container">
         <h3>Ingredients</h3>
-      </ul>
-      <ol id="js-instruction-list" class="list">
+        <ul id="js-ingredient-list">
+        </ul>
+      </section>
+      <section class="list-container">
         <h3>Instructions</h3>
-      </ol>
+        <ol id="js-instruction-list" class="list">
+        </ol>
+      <section>
         `);
     getIngredientList(recipeInfo);
     getInstructionList(recipeInfo);
