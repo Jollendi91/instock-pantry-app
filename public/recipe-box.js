@@ -13,7 +13,7 @@ function displayRecipes(recipeBox) {
                 <h3>${RECIPE.title}</h3>
                 <img class="js-recipe-img" src="${RECIPE.image}" alt="${RECIPE.title}">
             </div>
-            <button id="js-recipe-delete">X</button>
+            <button id="js-recipe-delete"><i class="fas fa-times"></i></button>
         </article>
         `);  
     }

@@ -378,7 +378,6 @@ li label {
 	width: 25px;
 	border-radius: 50px;
 	height: 25px;
-	font-size: 18px;
 	font-weight: bold;
 	color: white;
 }
@@ -634,6 +633,7 @@ section h2 {
     #recipe-search {
         display: flex;
         align-items: center;
+        margin-top: 5px;
     }
 
     #recipe-search button {

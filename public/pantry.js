@@ -94,9 +94,9 @@ function displayPantryItems(data) {
             <span class="js-item-name">${data.items[item].name}</span>
         </label>
         <div class="item-counter">
-            <button id="js-subtract" class="increment">-</button>
+            <button id="js-subtract" class="increment"><i class="fas fa-minus"></i></button>
             <span class="js-quantity">${data.items[item].quantity}</span>
-            <button id="js-add" class="increment">+</button>
+            <button id="js-add" class="increment"><i class="fas fa-plus"></i></button>
         </div>
        </li>
         `);
