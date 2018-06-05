@@ -489,7 +489,7 @@ body.hasHover article:hover .ingredients-used-info {
 }
 
 #recipe-header p {
-	padding: 3px 0;
+	padding: 3px 5px;
 }
 
 #recipe-saved {
@@ -663,7 +663,7 @@ section h2 {
         max-width: 556px;
     }
 
-    section h2 {
+    #add-item-container h2 {
         font-size: 24px;
         padding: 15px 5px;
     }

@@ -74,7 +74,7 @@ function displaySingleRecipeDetails(recipeInfo) {
         </div>
         <section class="list-container">
             <h3>Ingredients</h3>
-            <ul id="js-ingredient-list">
+            <ul id="js-ingredient-list" class="list">
             </ul>
         </section>
         <section class="list-container">
