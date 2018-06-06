@@ -1,20 +1,124 @@
 /* CSS reset */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
 * {
     box-sizing: border-box;
+    font-family: "Raleway";
+    margin: 0;
+	padding: 0;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/* Global Styles */
+html {
+    overflow: hidden;
+}
+
+button {
+    cursor: pointer;
+}
+
+::placeholder {
+    font-size: 18px;
+    color: #222121;
+    opacity: 1;
 }
 
 /* Login Page */
 
+#login {
+    min-height: 100vh;
+    background-image: url("https://source.unsplash.com/4R1YpmGO52I");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+#intro::before {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    filter: blur(3px);
+    background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.75) 1%,rgba(0,0,0,0.1) 100%), url("https://source.unsplash.com/4R1YpmGO52I");
+        background-attachment: fixed;
+    background-size: cover;
+}
+
+#intro {
+    line-height: 1;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .login-intro {
-    max-width: 721px;
     margin: auto;
 }
 
-.login-intro p {
-    font-family: sans-serif;
-    font-size: 18px;
-    line-height: 1.5;
+.login-intro div {
+    background: linear-gradient(to right, #11998e, #38ef7d);
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;  
+}
+
+.login-intro div h1 {
+    font-size: 85px;
+    font-family: "Poiret One";
     text-align: center;
+}
+
+.login-intro p {
+    font-size: 18px;
+    color: #FBDD7B;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px 20px;
+    line-height: 1.2;
 }
 
 label {
@@ -34,12 +138,42 @@ form {
     margin: auto;
 }
 
-.signup-form label {
-    text-align: right;
+#js-login-form input {
+    display: block;
+    margin: 10px auto;
+    width: 80%;
+    padding: 10px;
+    border-radius: 2px;
+    border: 0;
+    background-color: rgba(255, 255, 255, .5);
 }
 
-.form-section > button {
+button[name="login"] {
+    width: 60%;
+    padding: 8px;
+    border: 0;
+    border-radius: 3px;
+    font-size: 18px;
+    background: linear-gradient(to right, #11998e, #38ef7d);
+    margin-top: 10px;
+    color: white;
+}
+
+.sign-up {
     margin-top: 20px;
+}
+
+.sign-up p {
+    display: inline-block;
+    color: white;
+    font-size: 18px;
+}
+
+.sign-up button {
+    font-size: 20px;
+    background: transparent;
+    border: 0;
+    color: #F0CA4D;
 }
 
 
@@ -71,6 +205,13 @@ form {
     padding-bottom: 15px;
 }
 
+li label {
+    display: inline;
+}
+
+label input[type="checkbox"] {
+    display: none;
+}
 
 
 /* Recipe List */
@@ -145,4 +286,33 @@ li p {
 
 #js-instruction-list li {
     margin: 25px;
+}
+
+
+/* Media Queries */
+
+@media all and (min-width: 480px) {
+
+    /*Login Screen - Media query*/
+
+    #login {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #intro {
+        height: auto;
+        max-width: 500px;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        padding: 50px 15px;
+    }
+
+    #intro::before {
+        filter: blur(10px);
+    }
+
 }

@@ -87,8 +87,16 @@ function displayPantryItems(data) {
     for (let item in data.items) {
         const selector = `#${data.items[item].category}`;
         $(selector).append(`
-        <li id="${data.items[item]._id}"><span class="js-quantity">${data.items[item].quantity}</span> - <span class="js-item-name">${data.items[item].name}</span> 
-        <button id="js-subtract" class="increment">-</button><button id="js-add" class="increment">+</button></li>
+        
+        <li id="${data.items[item]._id}">
+        <label>
+            <input type="checkbox" value="${data.items[item].name}">
+            <span class="js-item-name">${data.items[item].name}</span>
+        </label> -
+        <button id="js-subtract" class="increment">-</button>
+        <span class="js-quantity">${data.items[item].quantity}</span>
+        <button id="js-add" class="increment">+</button>   
+       </li>
         `);
     }
 
@@ -96,6 +104,7 @@ function displayPantryItems(data) {
         $('#js-recipes').html(`
         <h2>Find recipes that use items from your pantry!</h2>
         <button id="js-search-recipes">Search Recipes</button>
+        <button id="js-custom-recipe-search">Custom Search</button>
         <section id="js-recipe-list">
         </section>
         <section id="js-recipe-details">

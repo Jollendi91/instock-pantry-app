@@ -1,7 +1,7 @@
 'use strict';
 
 function displayRecipes(recipeData) {
-
+  
   for (let recipe in recipeData.body) {
     let RECIPE = recipeData.body[recipe];
     $('#js-recipe-list').append(`
@@ -22,15 +22,52 @@ function displayRecipes(recipeData) {
 
 }
 
+let custom = false;
+
+function listenForCustomSearchClick() {
+  $('#js-recipes').on('click', '#js-custom-recipe-search', (event) => {
+    if (custom) {
+      $('input[type="checkbox"]').css('display', 'none');
+      custom = false;
+    }
+    else {
+      $('input[type="checkbox"]').css('display', 'block');
+       custom = true;
+    }
+  });
+}
+
 function listenForSearchRecipesClick() {
   $('#js-recipes').on('click', '#js-search-recipes', (event) => {
     $('#js-recipe-list').empty();
+
+    if(custom) {
+      let ingredientList = [];
+
+      $("input:checked").each(function(index, ingredient) {
+        ingredientList.push(ingredient.value);
+      });
+
+       $.ajax({
+         url: '/recipes/mashape',
+         method: 'POST',
+         headers: {
+           "Content-Type": "application/json",
+           Authorization: `Bearer ${window.localStorage.token}`
+         },
+         data:JSON.stringify({ingredientList}),
+         success: displayRecipes
+       });
+    }
+    else {
       $.ajax('/recipes/mashape', {
-        beforeSend : function( xhr ) {
-          xhr.setRequestHeader( 'Authorization', `Bearer ${window.localStorage.token}`);
-      },
+        headers: {
+          Authorization: `Bearer ${window.localStorage.token}`
+        },
         success: displayRecipes
       });
+    };
+      
   });
 }
 
@@ -124,7 +161,7 @@ function listenForSaveRecipe() {
 function listenForRecipeClick() {
   $('#js-recipes').on('click', '.js-single-recipe', function (event) {
     $('#js-recipe-details').empty();
-    console.log(event.currentTarget);
+
     const recipeID = $(event.currentTarget).attr('id');
     
     $.ajax(`/recipes/mashape/${recipeID}`, {
@@ -138,6 +175,7 @@ function listenForRecipeClick() {
 }
 
 $(function () {
+  listenForCustomSearchClick();
   listenForSearchRecipesClick();
   listenForRecipeClick();
   listenForSaveRecipe();
