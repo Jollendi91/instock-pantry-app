@@ -52,11 +52,14 @@ table {
 
 /* Global Styles */
 
+html {
+    background-image: url("https://source.unsplash.com/4R1YpmGO52I");
+    background-size: cover;
+}
+
 body {
     min-height: 100vh;
     padding: 0 20px;
-    background-image: url("https://source.unsplash.com/4R1YpmGO52I");
-    background-size: cover;
     max-width: 1200px;
     margin: auto;
 }
