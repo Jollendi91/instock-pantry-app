@@ -1,5 +1,13 @@
 'use strict';
 
+function listenForNavToggleClick() {
+    $('.nav-toggle').click( () => {
+        $('.nav-item').toggleClass('navbar-toggle-show');
+        $('nav').toggleClass('nav-toggle-width');
+
+    });
+}
+
 function listenForPantryNavClick() {
     $('#js-pantry').click(() => {
         window.location.href = '/pantry.html';
@@ -28,6 +36,7 @@ function listenForUserLogOut() {
 }
 
 $(function () {
+    listenForNavToggleClick();
     listenForPantryNavClick();
     listenForRecipeNavClick();
     listenForUserLogOut();

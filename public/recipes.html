@@ -1,31 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>InStock</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One|Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
-<body>
+<body style="display: none">
     <header role="banner">
         <h1>InStock</h1>
+        <div class="nav-toggle">
+                <i class="fas fa-bars"></i>
+        </div>
         <nav role="navigation">
-            <ul>
+            <ul class="nav-item">
                 <li id="js-pantry">Pantry</li>
-                <li id="js-recipe-box">Recipe Box</li>
+                <li id="js-recipe-box" class="active">Recipe Box</li>
                 <li id="js-user-logout">Logout</li>
             </ul>
         </nav>
-    </header>
+        </header>
     <main role="main">
         <h1>Recipe Box</h1>
-        <section id="js-recipes">
+        <section id="js-recipes" class="recipe-list">
         </section>
         <section id="js-recipe-details">
         </section>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="hover.js"></script>
     <script type="text/javascript" src="nav.js"></script>
     <script type="text/javascript" src="recipe-box.js"></script>
 </body>

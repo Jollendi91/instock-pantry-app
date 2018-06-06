@@ -63,9 +63,11 @@ function displayCategories(data) {
     for (let category in displayedCategories) {
 
         $('#js-pantry-items').append(`
-            <ul id="${displayedCategories[category]}">
-                <h3>${displayedCategories[category]}</h3>
-            </ul>
+            <section>
+                <h3 class="category-header">${displayedCategories[category]}</h3>
+                <ul id="${displayedCategories[category]}">
+                </ul>
+            </section>
         `);
     }
 }
@@ -92,19 +94,26 @@ function displayPantryItems(data) {
         <label>
             <input type="checkbox" value="${data.items[item].name}">
             <span class="js-item-name">${data.items[item].name}</span>
-        </label> -
-        <button id="js-subtract" class="increment">-</button>
-        <span class="js-quantity">${data.items[item].quantity}</span>
-        <button id="js-add" class="increment">+</button>   
+        </label>
+        <div class="item-counter">
+            <button id="js-subtract" class="increment" value="subtract" aria-label="Subtract"><i class="fas fa-minus"></i></button>
+            <span class="js-quantity">${data.items[item].quantity}</span>
+            <button id="js-add" class="increment" value="add" aria-label="Add"><i class="fas fa-plus"></i></button>
+        </div>
        </li>
         `);
     }
 
     if (data.items[0]) {
+        $('#recipe-search').html(`
+        <h2>Find recipes with all your ingredients or pick the ingredients you would like to use!</h2>
+        <div id="recipe-button-container">
+            <button id="js-search-recipes">Search All</button>
+            <button id="js-custom-recipe-search">Choose Ingredients</button>
+        </div>
+        `);
+
         $('#js-recipes').html(`
-        <h2>Find recipes that use items from your pantry!</h2>
-        <button id="js-search-recipes">Search Recipes</button>
-        <button id="js-custom-recipe-search">Custom Search</button>
         <section id="js-recipe-list">
         </section>
         <section id="js-recipe-details">
