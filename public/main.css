@@ -52,12 +52,9 @@ table {
 
 /* Global Styles */
 
-html {
+body {
     background-image: url("https://source.unsplash.com/4R1YpmGO52I");
     background-size: cover;
-}
-
-body {
     min-height: 100vh;
     padding: 0 20px;
     max-width: 1200px;
@@ -69,7 +66,13 @@ body {
 }
 
 button {
+    font-size: 20px;
+    color: white;
+    padding: 5px 20px;
     cursor: pointer;
+    border: 0;
+    border-radius: 5px;
+    background: linear-gradient(to right, #11998e, #38ef7d);
 }
 
 ::placeholder {
@@ -145,6 +148,15 @@ label {
     padding: 20px 0;
 }
 
+.form-section h2 {
+    color: #FBDD7B;
+}
+
+.form-section p {
+    color: white;
+    padding: 5px;
+}
+
 form {
     width: 300px;
     margin: auto;
@@ -162,13 +174,7 @@ form {
 }
 
 button[type="submit"] {
-    padding: 8px 20px;
-    border: 0;
-    border-radius: 3px;
-    font-size: 20px;
-    background: linear-gradient(to right, #11998e, #38ef7d);
     margin-top: 10px;
-    color: white;
 }
 
 .sign-up {
@@ -177,15 +183,13 @@ button[type="submit"] {
 
 .sign-up p {
     display: inline-block;
-    color: white;
     font-size: 18px;
 }
 
 .sign-up button, #js-back-to-login {
-    font-size: 20px;
     background: transparent;
-    border: 0;
     color: #F0CA4D;
+    padding: 0;
 }
 
 #create-account {
@@ -271,6 +275,18 @@ body.hasHover .nav-item li:hover {
     border-radius: 5px;
 }
 
+#recipe-search {
+    padding: 0;
+}
+
+#recipe-search h2 {
+    padding: 20px 10px;
+}
+
+#recipe-search div {
+    padding: 10px;
+}
+
 #js-add-item {
     display: flex;
     flex-direction: column;
@@ -327,12 +343,7 @@ form select {
     pointer-events: none;
 }
 
-#js-add-item button, #recipe-search button {
-    background: linear-gradient(to right, #11998e, #38ef7d);
-    border: 0;
-    padding: 5px;
-    border-radius: 5px;
-    color: white;
+#js-add-item button, #recipe-search button {    
     font-size: 18px;
     margin-top: 3px;
     font-weight: bold;
@@ -350,7 +361,9 @@ form select {
 	margin-bottom: 15px;
 	padding-top: 10px;
 	border-radius: 0 10px 0 10px;
-	break-inside: avoid;
+    break-inside: avoid;
+    width: 100%;
+    display: inline-block;
 }
 
 .pantry-items ul {
@@ -385,13 +398,13 @@ li label {
 }
 
 .item-counter button {
-	border: 0;
-	margin: 0px 10px;
+    margin: 0px 10px;
+    padding: 0;
+    font-size: initial;
 	width: 25px;
 	border-radius: 50px;
 	height: 25px;
 	font-weight: bold;
-	color: white;
 }
 
 .pantry-items section:nth-child(5n+1) button {
@@ -505,15 +518,6 @@ body.hasHover article:hover .ingredients-used-info {
     padding: 10px;
 }
 
-#recipe-saved button {
-    padding: 5px 10px;
-    border: 0;
-    border-radius: 5px;
-    font-size: 16px;
-    color: white;
-    background: linear-gradient(to right, #11998e, #38ef7d);
-}
-
 #recipe-saved button:disabled {
     background: grey;
 }
@@ -576,10 +580,13 @@ article button {
 	position: absolute;
 	top: -10px;
 	right: -11px;
-	border: 0;
-	border-radius: 50px;
+    border-radius: 50px;
 	width: 30px;
-	height: 30px;
+    height: 30px;
+    padding: 0;
+    background: #e7dfdf;
+    font-size: initial;
+    color: #000;
 }
 
 body.hasHover article button {
