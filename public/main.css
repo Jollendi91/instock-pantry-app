@@ -111,7 +111,7 @@ button {
     display: inline-block;
 }
 
-.login-intro div, header h1 {
+.login-intro div h1, header h1 {
     background: linear-gradient(to right, #11998e, #38ef7d);
     background-clip: border-box;
     -webkit-background-clip: text;
