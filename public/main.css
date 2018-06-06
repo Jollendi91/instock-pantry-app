@@ -104,6 +104,11 @@ button {
 
 .login-intro {
     margin: auto;
+    text-align: center;
+}
+
+.login-intro div {
+    display: inline-block;
 }
 
 .login-intro div, header h1 {
