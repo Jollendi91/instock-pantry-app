@@ -1,6 +1,6 @@
 'use strict';
 
-function displayError(err) {
+function displayError() {
     $('#js-login-status').html(`
         <p>Invalid username or password! Please try again.</p>
     `);
@@ -8,7 +8,7 @@ function displayError(err) {
 
 function goToUserPantry(data) {
     window.localStorage.token = data.authToken;
-   window.location.href = '/pantry.html';
+    window.location.href = '/pantry.html';
 }
 
 function sendUserLoginData(_username, _password) {
@@ -32,7 +32,7 @@ function listenForLoginClick() {
         const username = $('#js-login-username').val();
         const password = $('#js-login-password').val();
 
-        $('#js-login-form').each(function() {
+        $('#js-login-form').each(function () {
             this.reset();
         });
 
@@ -47,7 +47,7 @@ function listenforSignUpClick() {
     })
 }
 
-$(function() {
+$(function () {
     listenforSignUpClick();
     listenForLoginClick();
 });

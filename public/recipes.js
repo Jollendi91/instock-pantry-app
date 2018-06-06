@@ -1,7 +1,7 @@
 'use strict';
 
 function displayRecipes(recipeData) {
-  
+
   for (let recipe in recipeData.body) {
     let RECIPE = recipeData.body[recipe];
     $('#js-recipe-list').append(`
@@ -25,16 +25,16 @@ function displayRecipes(recipeData) {
 
 let custom = false;
 
+// User can select ingredients they would like to use in search
 function listenForCustomSearchClick() {
-  $('#recipe-search').on('click', '#js-custom-recipe-search', (event) => {
+  $('#recipe-search').on('click', '#js-custom-recipe-search', () => {
     if (custom) {
       $('input[type="checkbox"]').css('display', 'none');
       $('#js-search-recipes').text("Search All");
       $('#js-custom-recipe-search').text("Choose Ingredients");
       $('#js-custom-search-status').css('display', 'none');
       custom = false;
-    }
-    else {
+    } else {
       $('input[type="checkbox"]').css('display', 'block');
       $('#js-search-recipes').text("Search Custom");
       $('#js-custom-recipe-search').text("All Ingredients");
@@ -42,34 +42,35 @@ function listenForCustomSearchClick() {
       $('html, body').animate({
         scrollTop: ($('#js-custom-search-status').offset().top - 60)
       }, 700, 'swing');
-       custom = true;
+      custom = true;
     }
   });
 }
 
 function listenForSearchRecipesClick() {
-  $('#recipe-search').on('click', '#js-search-recipes', (event) => {
+  $('#recipe-search').on('click', '#js-search-recipes', () => {
     $('#js-recipe-list').empty();
 
-    if(custom) {
+    if (custom) {
       let ingredientList = [];
 
-      $("input:checked").each(function(index, ingredient) {
+      $("input:checked").each(function (index, ingredient) {
         ingredientList.push(ingredient.value);
       });
 
-       $.ajax({
-         url: '/recipes/mashape',
-         method: 'POST',
-         headers: {
-           "Content-Type": "application/json",
-           Authorization: `Bearer ${window.localStorage.token}`
-         },
-         data:JSON.stringify({ingredientList}),
-         success: displayRecipes
-       });
-    }
-    else {
+      $.ajax({
+        url: '/recipes/mashape',
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${window.localStorage.token}`
+        },
+        data: JSON.stringify({
+          ingredientList
+        }),
+        success: displayRecipes
+      });
+    } else {
       $.ajax('/recipes/mashape', {
         headers: {
           Authorization: `Bearer ${window.localStorage.token}`
@@ -77,7 +78,7 @@ function listenForSearchRecipesClick() {
         success: displayRecipes
       });
     };
-      
+
   });
 }
 
@@ -114,20 +115,20 @@ let currentRecipe;
 
 function displaySingleRecipeDetails(recipeInfo) {
   console.log(recipeInfo);
-    let RECIPE = recipeInfo.response.body;
+  let RECIPE = recipeInfo.response.body;
 
-    currentRecipe = {
-      title: RECIPE.title,
-      image: RECIPE.image,
-      source: RECIPE.sourceUrl,
-      sourceName: RECIPE.sourceName,
-      timeReady: RECIPE.readyInMinutes,
-      servings: RECIPE.servings,
-      ingredients: RECIPE.extendedIngredients,
-      instructions: RECIPE.analyzedInstructions
-      };
+  currentRecipe = {
+    title: RECIPE.title,
+    image: RECIPE.image,
+    source: RECIPE.sourceUrl,
+    sourceName: RECIPE.sourceName,
+    timeReady: RECIPE.readyInMinutes,
+    servings: RECIPE.servings,
+    ingredients: RECIPE.extendedIngredients,
+    instructions: RECIPE.analyzedInstructions
+  };
 
-    $('#js-recipe-details').append(`
+  $('#js-recipe-details').append(`
       <div id="recipe-header">
         <h2>${RECIPE.title}</h2>
         <img src="${RECIPE.image}" alt="${RECIPE.title}">
@@ -152,24 +153,23 @@ function displaySingleRecipeDetails(recipeInfo) {
         </ol>
       <section>
         `);
-    getIngredientList(recipeInfo);
-    getInstructionList(recipeInfo);
+  getIngredientList(recipeInfo);
+  getInstructionList(recipeInfo);
 
-    if (recipeInfo.savedStatus === "Saved") {
-      $('#js-save-recipe').prop('disabled', true )
+  if (recipeInfo.savedStatus === "Saved") {
+    $('#js-save-recipe').prop('disabled', true)
       .css('cursor', 'default');
-    }
-    else {
-      $('#js-save-recipe').prop('disabled', false)
-        .css('cursor', 'pointer');
-    }
+  } else {
+    $('#js-save-recipe').prop('disabled', false)
+      .css('cursor', 'pointer');
+  }
 
-    $('html, body').animate({
-      scrollTop: ($('#js-recipe-details').offset().top - 60)
-    }, 700, 'swing');
-  };
+  $('html, body').animate({
+    scrollTop: ($('#js-recipe-details').offset().top - 60)
+  }, 700, 'swing');
+};
 
-function alertRecipeSaved(data) {
+function alertRecipeSaved() {
   $('#js-save-recipe').text('Added').prop('disabled', true).css('cursor', 'default');
   $('#js-recipe-saved-status').html(`<p>This recipe has been added to your recipe box!</p>`);
 }
@@ -188,20 +188,20 @@ function listenForSaveRecipe() {
     });
   });
 }
- 
+
 function listenForRecipeClick() {
   $('#js-recipes').on('click', '.js-single-recipe', function (event) {
     $('#js-recipe-details').empty();
 
     const recipeID = $(event.currentTarget).attr('id');
-    
+
     $.ajax(`/recipes/mashape/${recipeID}`, {
       headers: {
         Authorization: `Bearer ${window.localStorage.token}`
       },
       success: displaySingleRecipeDetails
     });
-        
+
   });
 }
 

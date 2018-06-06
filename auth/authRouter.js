@@ -8,38 +8,59 @@ const router = express.Router();
 
 router.use(express.json());
 
-const createAuthToken = function(user) {
-    return jwt.sign({user}, config.JWT_SECRET, {
+const createAuthToken = function (user) {
+    return jwt.sign({
+        user
+    }, config.JWT_SECRET, {
         subject: user.username,
         expiresIn: config.JWT_EXPIRY,
         algorithm: 'HS256'
     });
 };
 
-const localAuth = passport.authenticate('local', {session: false});
+const localAuth = passport.authenticate('local', {
+    session: false
+});
 
 router.post('/login', localAuth, (req, res) => {
     const authToken = createAuthToken(req.user.serialize());
-    res.json({authToken});
+    res.json({
+        authToken
+    });
 });
 
-const jwtAuth = function(req, res, next) {
-    passport.authenticate('jwt', {sessions: false}, function(err, user, info) {
-        if (err) { return next(err); };
-        if (!user) { return res.status(401).send({redirect: '/'});};
+const jwtAuth = function (req, res, next) {
+    passport.authenticate('jwt', {
+        sessions: false
+    }, function (err, user) {
+        if (err) {
+            return next(err);
+        };
+        if (!user) {
+            return res.status(401).send({
+                redirect: '/'
+            });
+        };
         req.user = user;
         next();
-      })(req, res, next);
+    })(req, res, next);
 }
 
 router.post('/refresh', jwtAuth, (req, res) => {
     const authToken = createAuthToken(req.user);
-    res.json({authToken});
+    res.json({
+        authToken
+    });
 });
 
 router.get('/logout', jwtAuth, (req, res) => {
     req.logout();
-    res.send({redirect: '/'});
+    res.send({
+        redirect: '/'
+    });
 });
 
-module.exports = {router, jwtAuth};
+module.exports = {
+    router,
+    jwtAuth
+};

@@ -2,8 +2,8 @@
 
 function addNewItem(itemName, quantity, category) {
     $.ajax('/pantry-items', {
-        beforeSend : function( xhr ) {
-            xhr.setRequestHeader( 'Authorization', `Bearer ${window.localStorage.token}`);
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', `Bearer ${window.localStorage.token}`);
         },
         method: 'POST',
         data: JSON.stringify({
@@ -17,13 +17,13 @@ function addNewItem(itemName, quantity, category) {
     });
 }
 
-function alertItemExists(err) {
+function alertItemExists() {
     $('#js-alert').append(`<h2>This item already exists!</h2>`);
 }
 
-function alertItemAdded(data) { 
-    
-     $('#js-alert').append(`<h2>${data.newItem.name} has been added!</h2>`);
+function alertItemAdded(data) {
+
+    $('#js-alert').append(`<h2>${data.newItem.name} has been added!</h2>`);
     getPantryItems();
 
 }
@@ -74,11 +74,11 @@ function displayCategories(data) {
 
 function getPantryItems() {
     $.ajax('/pantry-items', {
-        beforeSend : function( xhr ) {
-            xhr.setRequestHeader( 'Authorization', `Bearer ${window.localStorage.token}`);
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', `Bearer ${window.localStorage.token}`);
         },
         success: getAndDisplayCategoriesAndItems,
-        error: function(err) { 
+        error: function () {
             window.location.href = '/';
         }
     });
@@ -118,8 +118,7 @@ function displayPantryItems(data) {
         </section>
         <section id="js-recipe-details">
         </section>`);
-    }
-    else {
+    } else {
         $('#js-recipes').empty();
     }
 }
@@ -148,7 +147,7 @@ function updateItemInDatabase(itemId, itemQuantity) {
 
 function deleteItemInDatabase(itemId) {
     $.ajax({
-        url: `/pantry-items/${itemId}`, 
+        url: `/pantry-items/${itemId}`,
         method: 'DELETE',
         headers: {
             Authorization: `Bearer ${window.localStorage.token}`
@@ -157,25 +156,23 @@ function deleteItemInDatabase(itemId) {
 }
 
 function listenForIncrementItemClick() {
-    $('#js-pantry-items').on('click', '.increment', function(event) {
+    $('#js-pantry-items').on('click', '.increment', function (event) {
         event.preventDefault();
         const currentItemId = $(event.currentTarget).closest('li').attr('id');
-    
-        if(event.currentTarget.id === 'js-add') {
-           let itemQuantity = $(event.currentTarget).parent().children('.js-quantity').text();
+
+        if (event.currentTarget.id === 'js-add') {
+            let itemQuantity = $(event.currentTarget).parent().children('.js-quantity').text();
             itemQuantity++;
             updateItemInDatabase(currentItemId, itemQuantity);
-           getPantryItems();
-        }
-        else if (event.currentTarget.id === 'js-subtract') {
+            getPantryItems();
+        } else if (event.currentTarget.id === 'js-subtract') {
             let itemQuantity = $(event.currentTarget).parent().children('.js-quantity').text();
             itemQuantity--;
 
             if (itemQuantity === 0) {
                 deleteItemInDatabase(currentItemId);
-            }
-            else{
-               updateItemInDatabase(currentItemId, itemQuantity);
+            } else {
+                updateItemInDatabase(currentItemId, itemQuantity);
             }
             getPantryItems();
         }
@@ -186,5 +183,5 @@ $(function () {
     getPantryItems();
     listenforAddNewItem();
     listenForIncrementItemClick();
-    
-    });
+
+});

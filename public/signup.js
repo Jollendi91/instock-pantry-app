@@ -55,16 +55,16 @@ function listenForSignupSubmit() {
         const firstName = $('#js-signup-firstName').val();
         const lastName = $('#js-signup-lastName').val();
 
-        $('#js-signup-form').each(function() {
+        $('#js-signup-form').each(function () {
             this.reset();
         });
 
         sendRegisterUserData(username, password, verifyPassword, firstName, lastName);
-        });  
-    }
+    });
+}
 
 
-$(function() {
+$(function () {
     listenForSignupSubmit();
     listenForBackToLoginClick();
     listenForLoginClick();

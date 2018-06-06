@@ -1,7 +1,7 @@
 'use strict';
 
 function listenForNavToggleClick() {
-    $('.nav-toggle').click( () => {
+    $('.nav-toggle').click(() => {
         $('.nav-item').toggleClass('navbar-toggle-show');
         $('nav').toggleClass('nav-toggle-width');
 
@@ -28,10 +28,11 @@ function listenForUserLogOut() {
             headers: {
                 Authorization: `Bearer ${window.localStorage.token}`
             },
-            success: function(data) {
+            success: function (data) {
                 localStorage.clear();
-                window.location.href = data.redirect;        
-            }});
+                window.location.href = data.redirect;
+            }
+        });
     });
 }
 

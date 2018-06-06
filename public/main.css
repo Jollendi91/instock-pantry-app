@@ -1,54 +1,142 @@
 /* CSS reset */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 
 * {
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     font-family: "Raleway";
     margin: 0;
-	padding: 0;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    padding: 0;
 }
 
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
 
 /* Global Styles */
 
@@ -72,7 +160,28 @@ button {
     cursor: pointer;
     border: 0;
     border-radius: 5px;
+    background: -webkit-gradient(linear, left top, right top, from(#11998e), to(#38ef7d));
+    background: -webkit-linear-gradient(left, #11998e, #38ef7d);
+    background: -o-linear-gradient(left, #11998e, #38ef7d);
     background: linear-gradient(to right, #11998e, #38ef7d);
+}
+
+::-webkit-input-placeholder {
+    font-size: 18px;
+    color: #222121;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    font-size: 18px;
+    color: #222121;
+    opacity: 1;
+}
+
+::-ms-input-placeholder {
+    font-size: 18px;
+    color: #222121;
+    opacity: 1;
 }
 
 ::placeholder {
@@ -83,26 +192,38 @@ button {
 
 /* Login Page & Signup Page */
 
-#intro::before, #signup::before {
+#intro::before,
+#signup::before {
     position: absolute;
     content: "";
     display: block;
     width: 100%;
     height: 100%;
     z-index: -1;
-    filter: blur(3px);
-    transform: scale(1.1);
-    background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.75) 1%,rgba(0,0,0,0.1) 100%), url("https://source.unsplash.com/4R1YpmGO52I");
-        background-attachment: fixed;
+    -webkit-filter: blur(3px);
+            filter: blur(3px);
+    -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+            transform: scale(1.1);
+    background: -webkit-linear-gradient(315deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.75) 1%, rgba(0, 0, 0, 0.1) 100%), url("https://source.unsplash.com/4R1YpmGO52I");
+    background: -o-linear-gradient(315deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.75) 1%, rgba(0, 0, 0, 0.1) 100%), url("https://source.unsplash.com/4R1YpmGO52I");
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.75) 1%, rgba(0, 0, 0, 0.1) 100%), url("https://source.unsplash.com/4R1YpmGO52I");
+    background-attachment: fixed;
     background-size: cover;
 }
 
-#intro, #signup {
+#intro,
+#signup {
     line-height: 1;
     height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
 .login-intro {
@@ -114,11 +235,15 @@ button {
     display: inline-block;
 }
 
-.login-intro div h1, header h1 {
+.login-intro div h1,
+header h1 {
+    background: -webkit-gradient(linear, left top, right top, from(#11998e), to(#38ef7d));
+    background: -webkit-linear-gradient(left, #11998e, #38ef7d);
+    background: -o-linear-gradient(left, #11998e, #38ef7d);
     background: linear-gradient(to right, #11998e, #38ef7d);
     background-clip: border-box;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;  
+    -webkit-text-fill-color: transparent;
 }
 
 .login-intro div h1 {
@@ -162,7 +287,8 @@ form {
     margin: auto;
 }
 
-#js-login-form input, #js-signup-form input {
+#js-login-form input,
+#js-signup-form input {
     display: block;
     margin: 10px auto;
     width: 80%;
@@ -186,7 +312,8 @@ button[type="submit"] {
     font-size: 18px;
 }
 
-.sign-up button, #js-back-to-login {
+.sign-up button,
+#js-back-to-login {
     background: transparent;
     color: #F0CA4D;
     padding: 0;
@@ -195,7 +322,7 @@ button[type="submit"] {
 #create-account {
     font-size: 26px;
     color: #FBDD7B;
-	padding-bottom: 0;
+    padding-bottom: 0;
 }
 
 /* Header */
@@ -204,26 +331,38 @@ header {
     position: fixed;
     left: 0;
     top: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
     width: -webkit-fill-available;
     width: -moz-available;
     font-family: "Raleway";
     z-index: 2;
 }
 
-header, .pantry-items section {
+header,
+.pantry-items section {
+    background: -webkit-linear-gradient(315deg, #ece9e6, #ffffff);
+    background: -o-linear-gradient(315deg, #ece9e6, #ffffff);
     background: linear-gradient(135deg, #ece9e6, #ffffff);
 }
 
-header h1, .nav-toggle {
+header h1,
+.nav-toggle {
     padding: 12px;
     font-size: 28px;
 }
 
 .nav-toggle {
-    align-self: flex-end;
+    -ms-flex-item-align: end;
+        align-self: flex-end;
     display: initial;
     position: absolute;
     cursor: pointer;
@@ -260,13 +399,15 @@ body.hasHover .nav-item li:hover {
     border-top: 1px solid black;
 }
 
-
 /*Pantry Items */
 
-#add-item-container, #recipe-search, #js-custom-search-status {
+#add-item-container,
+#recipe-search,
+#js-custom-search-status {
     display: block;
     margin: auto;
     width: -moz-fit-content;
+    width: -webkit-fit-content;
     width: fit-content;
     padding: 10px;
     background: #0009;
@@ -288,8 +429,13 @@ body.hasHover .nav-item li:hover {
 }
 
 #js-add-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     margin-bottom: 10px;
 }
 
@@ -300,14 +446,20 @@ body.hasHover .nav-item li:hover {
 }
 
 #js-add-item label {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     margin-left: 10px;
 }
 
 #js-add-item input,
 #js-add-item select {
-    flex-grow: 2;
+    -webkit-box-flex: 2;
+        -ms-flex-positive: 2;
+            flex-grow: 2;
     margin-left: 5px;
     padding: 2px 5px;
     border: 0;
@@ -329,21 +481,22 @@ form select {
 #select::after {
     font-family: 'Font Awesome 5 Free';
     margin-right: 0.5em;
-	display: inline-block;
-	font-style: normal;
-	font-variant: normal;
-	text-rendering: auto;
-	-webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
     position: absolute;
-	top: 6px;
-	right: 0px;
-	color: black;
-	content: "\f107";
+    top: 6px;
+    right: 0px;
+    color: black;
+    content: "\f107";
     font-weight: 900;
     pointer-events: none;
 }
 
-#js-add-item button, #recipe-search button {    
+#js-add-item button,
+#recipe-search button {
     font-size: 18px;
     margin-top: 3px;
     font-weight: bold;
@@ -352,48 +505,68 @@ form select {
 .pantry-items {
     padding-top: 20px;
     text-align: center;
-    columns: auto 250px;
-    column-gap: 20px;
+    -webkit-columns: auto 250px;
+            columns: auto 250px;
+    -webkit-column-gap: 20px;
+            column-gap: 20px;
 }
 
 .pantry-items section {
-	page-break-inside: avoid;
-	margin-bottom: 15px;
-	padding-top: 10px;
-	border-radius: 0 10px 0 10px;
-    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 15px;
+    padding-top: 10px;
+    border-radius: 0 10px 0 10px;
+    -webkit-column-break-inside: avoid;
+            break-inside: avoid;
     width: 100%;
     display: inline-block;
 }
 
 .pantry-items ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     padding: 10px;
 }
 
-section > h3 {
+section>h3 {
     font-size: 22px;
     text-align: center;
     padding-bottom: 10px;
 }
 
 .pantry-items ul li {
-	display: flex;
-    justify-content: space-between;
-    align-items: center;
-	width: 95%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 95%;
     margin: auto;
     padding: 10px;
-	border-bottom: 2px solid #a3a3a34d;
+    border-bottom: 2px solid #a3a3a34d;
 }
 
 li label {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .item-counter {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 
@@ -401,18 +574,18 @@ li label {
     margin: 0px 10px;
     padding: 0;
     font-size: initial;
-	width: 25px;
-	border-radius: 50px;
-	height: 25px;
-	font-weight: bold;
+    width: 25px;
+    border-radius: 50px;
+    height: 25px;
+    font-weight: bold;
 }
 
 .pantry-items section:nth-child(5n+1) button {
-	background: #324D5C;
+    background: #324D5C;
 }
 
 .pantry-items section:nth-child(5n+2) button {
-    background: #46B29D;  
+    background: #46B29D;
 }
 
 .pantry-items section:nth-child(5n+3) button {
@@ -420,8 +593,9 @@ li label {
 }
 
 .pantry-items section:nth-child(5n+4) button {
-	background: #E37B40;
+    background: #E37B40;
 }
+
 .pantry-items section:nth-child(5n+5) button {
     background: #DE5B49;
 }
@@ -440,13 +614,17 @@ label input[type="checkbox"] {
     margin-top: 10px;
 }
 
-
 /* Recipe List */
 
-#js-recipe-list, .recipe-list {
+#js-recipe-list,
+.recipe-list {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
     margin: 10px;
 }
 
@@ -474,17 +652,19 @@ article img {
 }
 
 .ingredients-used-info {
-	position: absolute;
-	bottom: 2px;
-	background: #0009;
-	width: 100%;
-	border-radius: 0 0 5px 5px;
+    position: absolute;
+    bottom: 2px;
+    background: #0009;
+    width: 100%;
+    border-radius: 0 0 5px 5px;
 }
 
 body.hasHover .ingredients-used-info {
     visibility: hidden;
     opacity: 0;
     height: 0;
+    -webkit-transition: all .5s ease;
+    -o-transition: all .5s ease;
     transition: all .5s ease;
 }
 
@@ -499,6 +679,7 @@ body.hasHover article:hover .ingredients-used-info {
 }
 
 /* Single Recipe Info */
+
 #js-recipe-details {
     background: white;
     border-radius: 5px;
@@ -510,11 +691,11 @@ body.hasHover article:hover .ingredients-used-info {
 }
 
 #recipe-header p {
-	padding: 3px 5px;
+    padding: 3px 5px;
 }
 
 #recipe-saved {
-	text-align: center;
+    text-align: center;
     padding: 10px;
 }
 
@@ -533,20 +714,30 @@ body.hasHover article:hover .ingredients-used-info {
 }
 
 .list {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     padding: 0 15px;
 }
 
 #js-ingredient-list li {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
-    flex-basis: 33%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-preferred-size: 33%;
+        flex-basis: 33%;
 }
 
 li img {
-	max-width: 100%;
-	height: 100%;
+    max-width: 100%;
+    height: 100%;
 }
 
 li p {
@@ -573,15 +764,15 @@ li p {
 }
 
 .recipe-list article {
-	overflow: visible;
+    overflow: visible;
 }
 
 article button {
-	position: absolute;
-	top: -10px;
-	right: -11px;
+    position: absolute;
+    top: -10px;
+    right: -11px;
     border-radius: 50px;
-	width: 30px;
+    width: 30px;
     height: 30px;
     padding: 0;
     background: #e7dfdf;
@@ -603,89 +794,102 @@ section h2 {
 }
 
 #js-ingredient-list div {
-	width: 60px;
-	height: 60px;
-	text-align: center;
+    width: 60px;
+    height: 60px;
+    text-align: center;
 }
 
 /* Media Queries */
 
 @media all and (min-width: 480px) {
-
     body {
         background-attachment: fixed;
     }
-
     /* Navigation Bar */
     header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+                flex-direction: row;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
     }
-
     .nav-toggle {
         display: none;
     }
-
     .nav-item {
         display: initial;
     }
-    
     .nav-item li {
-        display: inline-block; 
+        display: inline-block;
     }
-
     /*Login Screen - Media query*/
-
     #login {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
     }
-
-    #intro, #signup {
+    #intro,
+    #signup {
         height: auto;
         max-width: 500px;
-        align-items: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
         position: relative;
         overflow: hidden;
         border-radius: 10px;
         padding: 50px 15px;
     }
-
-    #intro::before, #signup::before {
-        filter: blur(10px);
-        transform: none;
+    #intro::before,
+    #signup::before {
+        -webkit-filter: blur(10px);
+                filter: blur(10px);
+        -webkit-transform: none;
+            -ms-transform: none;
+                transform: none;
     }
-
     /* Recipe Search */
-
     #recipe-search {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        align-items: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
         margin-top: 5px;
     }
-
     #recipe-search button {
         margin-top: 3px;
         margin-bottom: 3px;
     }
-
     /* Single Recipe */
-
     #js-recipe-details {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
         margin-left: auto;
         margin-right: auto;
         max-width: 700px;
     }
-
     #recipe-header {
         max-width: 556px;
     }
-
     #add-item-container h2 {
         font-size: 24px;
         padding: 15px 5px;
