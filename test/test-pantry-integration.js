@@ -506,4 +506,26 @@ describe('Recipe API resource', function() {
         });
     });
 
+    describe('Recipe Box DELETE endpoint', function() {
+
+        it('should remove the requested recipe', function() {
+            let recipe;
+
+            return Recipe.findOne()
+            .then(function(recipeBox) {
+                recipe = recipeBox.recipes[0];
+
+                return chai.request(app)
+                    .delete(`/recipes/recipe-box/${recipe._id}`)
+                    .set('Authorization', `Bearer ${testUser.authToken}`)
+            })
+            .then(function(res) {
+                expect(res).to.have.status(204);
+                return Recipe.findOne({'recipes._id': recipe._id});
+            })
+            .then(function(_recipe) {
+                expect(_recipe).to.be.null;
+            });
+        });
+    });
 });
