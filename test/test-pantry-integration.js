@@ -463,4 +463,47 @@ describe('Recipe API resource', function() {
         });
     });
 
+    describe('Recipe Box POST endpoint', function() {
+
+        it('should add new recipe', function() {
+            const newRecipe = generateRecipeData();
+
+            return chai.request(app)
+                .post('/recipes')
+                .set('Authorization', `Bearer ${testUser.authToken}`)
+                .send(newRecipe)
+                .then(function(res) {
+                    expect(res).to.have.status(201);
+                    expect(res).to.be.json;
+                    expect(res.body).to.be.an('object');
+
+                    const index = res.body.recipeBox.recipes.length - 1;
+                    const newRecipeIndex = res.body.recipeBox.recipes[index];
+
+                    expect(newRecipeIndex).to.include.keys('_id', 'title', 'image', 'source', 'sourceName', 'timeReady', 'servings', 'ingredients', 'instructions');
+                    expect(newRecipeIndex.title).to.equal(newRecipe.title);
+                    expect(newRecipeIndex.image).to.equal(newRecipe.image);
+                    expect(newRecipeIndex.source).to.equal(newRecipe.source);
+                    expect(newRecipeIndex.sourceName).to.equal(newRecipe.sourceName);
+                    expect(newRecipeIndex.timeReady).to.equal(newRecipe.timeReady);
+                    expect(newRecipeIndex.servings).to.equal(newRecipe.servings);
+                    expect(newRecipeIndex.ingredients).to.be.an('array');
+                    expect(newRecipeIndex.instructions).to.be.an('array');
+
+                    return Recipe.findOne({user: ObjectId(res.body.recipeBox.user)});
+                })
+                .then(function(recipeBox) {
+                    const index = recipeBox.recipes.length - 1;
+                    expect(recipeBox.recipes[index].title).to.equal(newRecipe.title);
+                    expect(recipeBox.recipes[index].image).to.equal(newRecipe.image);
+                    expect(recipeBox.recipes[index].source).to.equal(newRecipe.source);
+                    expect(recipeBox.recipes[index].sourceName).to.equal(newRecipe.sourceName);
+                    expect(recipeBox.recipes[index].timeReady).to.equal(newRecipe.timeReady);
+                    expect(recipeBox.recipes[index].servings).to.equal(newRecipe.servings);
+                    expect(recipeBox.recipes[index].ingredients).to.be.an('array');
+                    expect(recipeBox.recipes[index].instructions).to.be.an('array');
+                });
+        });
+    });
+
 });
