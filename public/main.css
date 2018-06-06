@@ -20,8 +20,7 @@ time, mark, audio, video {
 }
 
 * {
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
     font-family: "Raleway";
     margin: 0;
 	padding: 0;
@@ -58,7 +57,6 @@ body {
     padding: 0 20px;
     background-image: url("https://source.unsplash.com/4R1YpmGO52I");
     background-size: cover;
-    background-attachment: fixed;
     max-width: 1200px;
     margin: auto;
 }
@@ -69,24 +67,6 @@ body {
 
 button {
     cursor: pointer;
-}
-
-::-webkit-input-placeholder {
-    font-size: 18px;
-    color: #222121;
-    opacity: 1;
-}
-
-:-ms-input-placeholder {
-    font-size: 18px;
-    color: #222121;
-    opacity: 1;
-}
-
-::-ms-input-placeholder {
-    font-size: 18px;
-    color: #222121;
-    opacity: 1;
 }
 
 ::placeholder {
@@ -104,13 +84,8 @@ button {
     width: 100%;
     height: 100%;
     z-index: -1;
-    -webkit-filter: blur(3px);
-            filter: blur(3px);
-    -webkit-transform: scale(1.1);
-        -ms-transform: scale(1.1);
-            transform: scale(1.1);
-    background: -webkit-linear-gradient(315deg, rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.75) 1%,rgba(0,0,0,0.1) 100%), url("https://source.unsplash.com/4R1YpmGO52I");
-    background: -o-linear-gradient(315deg, rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.75) 1%,rgba(0,0,0,0.1) 100%), url("https://source.unsplash.com/4R1YpmGO52I");
+    filter: blur(3px);
+    transform: scale(1.1);
     background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.75) 1%,rgba(0,0,0,0.1) 100%), url("https://source.unsplash.com/4R1YpmGO52I");
         background-attachment: fixed;
     background-size: cover;
@@ -119,14 +94,9 @@ button {
 #intro, #signup {
     line-height: 1;
     height: 100vh;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .login-intro {
@@ -134,9 +104,6 @@ button {
 }
 
 .login-intro div, header h1 {
-    background: -webkit-gradient(linear, left top, right top, from(#11998e), to(#38ef7d));
-    background: -webkit-linear-gradient(left, #11998e, #38ef7d);
-    background: -o-linear-gradient(left, #11998e, #38ef7d);
     background: linear-gradient(to right, #11998e, #38ef7d);
     background-clip: border-box;
     -webkit-background-clip: text;
@@ -187,13 +154,10 @@ form {
 }
 
 button[type="submit"] {
-    padding: 8px;
+    padding: 8px 20px;
     border: 0;
     border-radius: 3px;
-    font-size: 18px;
-    background: -webkit-gradient(linear, left top, right top, from(#11998e), to(#38ef7d));
-    background: -webkit-linear-gradient(left, #11998e, #38ef7d);
-    background: -o-linear-gradient(left, #11998e, #38ef7d);
+    font-size: 20px;
     background: linear-gradient(to right, #11998e, #38ef7d);
     margin-top: 10px;
     color: white;
@@ -228,16 +192,9 @@ header {
     position: fixed;
     left: 0;
     top: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
     width: -webkit-fill-available;
     width: -moz-available;
     font-family: "Raleway";
@@ -245,8 +202,6 @@ header {
 }
 
 header, .pantry-items section {
-    background: -webkit-linear-gradient(315deg, #ece9e6, #ffffff);
-    background: -o-linear-gradient(315deg, #ece9e6, #ffffff);
     background: linear-gradient(135deg, #ece9e6, #ffffff);
 }
 
@@ -256,8 +211,7 @@ header h1, .nav-toggle {
 }
 
 .nav-toggle {
-    -ms-flex-item-align: end;
-        align-self: flex-end;
+    align-self: flex-end;
     display: initial;
     position: absolute;
     cursor: pointer;
@@ -301,7 +255,6 @@ body.hasHover .nav-item li:hover {
     display: block;
     margin: auto;
     width: -moz-fit-content;
-    width: -webkit-fit-content;
     width: fit-content;
     padding: 10px;
     background: #0009;
@@ -311,13 +264,8 @@ body.hasHover .nav-item li:hover {
 }
 
 #js-add-item {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    flex-direction: column;
     margin-bottom: 10px;
 }
 
@@ -328,25 +276,20 @@ body.hasHover .nav-item li:hover {
 }
 
 #js-add-item label {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    align-items: center;
     margin-left: 10px;
 }
 
 #js-add-item input,
 #js-add-item select {
-    -webkit-box-flex: 2;
-        -ms-flex-positive: 2;
-            flex-grow: 2;
+    flex-grow: 2;
     margin-left: 5px;
     padding: 2px 5px;
     border: 0;
     border-radius: 2px;
     font-size: 16px;
+    background-color: white;
 }
 
 form select {
@@ -377,9 +320,6 @@ form select {
 }
 
 #js-add-item button, #recipe-search button {
-    background: -webkit-gradient(linear, left top, right top, from(#11998e), to(#38ef7d));
-    background: -webkit-linear-gradient(left, #11998e, #38ef7d);
-    background: -o-linear-gradient(left, #11998e, #38ef7d);
     background: linear-gradient(to right, #11998e, #38ef7d);
     border: 0;
     padding: 5px;
@@ -393,10 +333,8 @@ form select {
 .pantry-items {
     padding-top: 20px;
     text-align: center;
-    -webkit-columns: auto 250px;
-            columns: auto 250px;
-    -webkit-column-gap: 20px;
-            column-gap: 20px;
+    columns: auto 250px;
+    column-gap: 20px;
 }
 
 .pantry-items section {
@@ -404,18 +342,12 @@ form select {
 	margin-bottom: 15px;
 	padding-top: 10px;
 	border-radius: 0 10px 0 10px;
-	-webkit-column-break-inside: avoid;
-	        break-inside: avoid;
+	break-inside: avoid;
 }
 
 .pantry-items ul {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    flex-direction: column;
     padding: 10px;
 }
 
@@ -426,15 +358,9 @@ section > h3 {
 }
 
 .pantry-items ul li {
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    justify-content: space-between;
+    align-items: center;
 	width: 95%;
     margin: auto;
     padding: 10px;
@@ -442,17 +368,11 @@ section > h3 {
 }
 
 li label {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    align-items: center;
 }
 
 .item-counter {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
 }
 
@@ -503,13 +423,9 @@ label input[type="checkbox"] {
 /* Recipe List */
 
 #js-recipe-list, .recipe-list {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -ms-flex-pack: distribute;
-        justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: space-around;
     margin: 10px;
 }
 
@@ -548,8 +464,6 @@ body.hasHover .ingredients-used-info {
     visibility: hidden;
     opacity: 0;
     height: 0;
-    -webkit-transition: all .5s ease;
-    -o-transition: all .5s ease;
     transition: all .5s ease;
 }
 
@@ -589,9 +503,6 @@ body.hasHover article:hover .ingredients-used-info {
     border-radius: 5px;
     font-size: 16px;
     color: white;
-    background: -webkit-gradient(linear, left top, right top, from(#11998e), to(#38ef7d));
-    background: -webkit-linear-gradient(left, #11998e, #38ef7d);
-    background: -o-linear-gradient(left, #11998e, #38ef7d);
     background: linear-gradient(to right, #11998e, #38ef7d);
 }
 
@@ -610,25 +521,15 @@ body.hasHover article:hover .ingredients-used-info {
 }
 
 .list {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    flex-direction: column;
     padding: 0 15px;
 }
 
 #js-ingredient-list li {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -ms-flex-preferred-size: 33%;
-        flex-basis: 33%;
+    align-items: center;
+    flex-basis: 33%;
 }
 
 li img {
@@ -696,18 +597,15 @@ section h2 {
 
 @media all and (min-width: 480px) {
 
+    body {
+        background-attachment: fixed;
+    }
+
     /* Navigation Bar */
     header {
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-            -ms-flex-direction: row;
-                flex-direction: row;
-        -webkit-box-pack: justify;
-            -ms-flex-pack: justify;
-                justify-content: space-between;
-        -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .nav-toggle {
@@ -725,23 +623,15 @@ section h2 {
     /*Login Screen - Media query*/
 
     #login {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
-        -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+        justify-content: center;
+        align-items: center;
     }
 
     #intro, #signup {
         height: auto;
         max-width: 500px;
-        -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+        align-items: center;
         position: relative;
         overflow: hidden;
         border-radius: 10px;
@@ -749,22 +639,15 @@ section h2 {
     }
 
     #intro::before, #signup::before {
-        -webkit-filter: blur(10px);
-                filter: blur(10px);
-        -webkit-transform: none;
-            -ms-transform: none;
-                transform: none;
+        filter: blur(10px);
+        transform: none;
     }
 
     /* Recipe Search */
 
     #recipe-search {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+        align-items: center;
         margin-top: 5px;
     }
 
@@ -776,14 +659,9 @@ section h2 {
     /* Single Recipe */
 
     #js-recipe-details {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-        -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
+        flex-wrap: wrap;
+        justify-content: center;
         margin-left: auto;
         margin-right: auto;
         max-width: 700px;
