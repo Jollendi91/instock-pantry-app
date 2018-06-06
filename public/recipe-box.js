@@ -1,11 +1,10 @@
-
 function displayRecipes(recipeBox) {
 
     $('body').css('display', 'block');
 
     $('#js-recipes').empty();
 
-    for(let recipe in recipeBox.recipes) {
+    for (let recipe in recipeBox.recipes) {
         let RECIPE = recipeBox.recipes[recipe];
         $('#js-recipes').append(`
         <article>
@@ -15,7 +14,7 @@ function displayRecipes(recipeBox) {
             </div>
             <button class="js-recipe-delete" value="delete" aria-label="Delete"><i class="fas fa-times"></i></button>
         </article>
-        `);  
+        `);
     }
 }
 
@@ -26,7 +25,7 @@ function getRecipes() {
             Authorization: `Bearer ${window.localStorage.token}`
         },
         success: displayRecipes,
-        error: function(err) {
+        error: function (err) {
             window.location.href = '/';
         }
     });
@@ -34,9 +33,9 @@ function getRecipes() {
 
 function getIngredientList(recipeInfo) {
     for (let ingredient in recipeInfo.recipes[0].ingredients) {
-      let INGREDIENT = recipeInfo.recipes[0].ingredients[ingredient];
-  
-      $('#js-ingredient-list').append(`
+        let INGREDIENT = recipeInfo.recipes[0].ingredients[ingredient];
+
+        $('#js-ingredient-list').append(`
           <li id="${INGREDIENT.id}">
             <div>
               <img src="https://spoonacular.com/cdn/ingredients_100x100/${INGREDIENT.image}" alt="${INGREDIENT.name}">
@@ -45,19 +44,19 @@ function getIngredientList(recipeInfo) {
           </li>
           `);
     }
-  }
-  
-  function getInstructionList(recipeInfo) {
+}
+
+function getInstructionList(recipeInfo) {
     for (let instruction in recipeInfo.recipes[0].instructions[0].steps) {
-      let INSTRUCTION = recipeInfo.recipes[0].instructions[0].steps[instruction];
-  
-      $('#js-instruction-list').append(`
+        let INSTRUCTION = recipeInfo.recipes[0].instructions[0].steps[instruction];
+
+        $('#js-instruction-list').append(`
         <li id="step-${INSTRUCTION.number}">
           ${INSTRUCTION.step}
         </li>
       `);
     }
-  }
+}
 
 function displaySingleRecipeDetails(recipeInfo) {
     let RECIPE = recipeInfo.recipes[0];
@@ -87,24 +86,24 @@ function displaySingleRecipeDetails(recipeInfo) {
     getInstructionList(recipeInfo);
 
     $('html, body').animate({
-      scrollTop: ($('#js-recipe-details').offset().top - 60)
+        scrollTop: ($('#js-recipe-details').offset().top - 60)
     }, 700, 'swing');
-  };
+};
 
 function listenForRecipeDeleteClick() {
-    $('#js-recipes').on('click', '.js-recipe-delete', function(event) {
+    $('#js-recipes').on('click', '.js-recipe-delete', function (event) {
         $('#js-recipe-details').empty();
         $('#js-recipes').empty();
-       const recipeId = $(event.currentTarget).siblings('div').attr('id');
-        
-       $.ajax({
-           url: `recipes/recipe-box/${recipeId}`,
-           method: 'DELETE',
-           headers: {
-               Authorization: `Bearer ${window.localStorage.token}`
-           },
-           success: getRecipes
-       });
+        const recipeId = $(event.currentTarget).siblings('div').attr('id');
+
+        $.ajax({
+            url: `recipes/recipe-box/${recipeId}`,
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${window.localStorage.token}`
+            },
+            success: getRecipes
+        });
 
     });
 }
@@ -113,18 +112,18 @@ function listenForRecipeDeleteClick() {
 function listenForRecipeClick() {
     $('#js-recipes').on('click', '.js-single-recipe', function (event) {
         $('#js-recipe-details').empty();
-        
+
         const recipeID = $(event.currentTarget).attr('id');
-        
+
         $.ajax({
             url: `/recipes/recipe-box/${recipeID}`,
-          headers: {
-            Authorization: `Bearer ${window.localStorage.token}`
-          },
-          success: displaySingleRecipeDetails
+            headers: {
+                Authorization: `Bearer ${window.localStorage.token}`
+            },
+            success: displaySingleRecipeDetails
         });
-            
-      });
+
+    });
 }
 
 $(function () {

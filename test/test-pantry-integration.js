@@ -8,9 +8,19 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const expect = chai.expect;
 
-const {Pantry, User, Recipe} = require('../models');
-const {app, runServer, closeServer} = require('../server');
-const {TEST_DATABASE_URL} = require('../config');
+const {
+    Pantry,
+    User,
+    Recipe
+} = require('../models');
+const {
+    app,
+    runServer,
+    closeServer
+} = require('../server');
+const {
+    TEST_DATABASE_URL
+} = require('../config');
 
 
 chai.use(chaiHttp);
@@ -24,25 +34,25 @@ testUser.verifyPassword = testUser.password;
 
 function addUser() {
     console.info('registering test user');
-   return chai.request('http://localhost:8080')
-    .post('/instock/users/')
-    .send(testUser)
-    .then(function(res) {
-        console.info('authenticating test user');
-        testUser._id = res.body._id;
-        return chai.request('http://localhost:8080')
-            .post('/instock/auth/login')
-            .set('Content-Type', 'application/json')
-            .send({
-                username: testUser.username,
-                password: testUser.password
-            })
-    })
-    .then(function(res) {
-        testUser.authToken = res.body.authToken;
-       return seedPantryData();
-    })
-    .catch(error => console.log(error));
+    return chai.request('http://localhost:8080')
+        .post('/instock/users/')
+        .send(testUser)
+        .then(function (res) {
+            console.info('authenticating test user');
+            testUser._id = res.body._id;
+            return chai.request('http://localhost:8080')
+                .post('/instock/auth/login')
+                .set('Content-Type', 'application/json')
+                .send({
+                    username: testUser.username,
+                    password: testUser.password
+                })
+        })
+        .then(function (res) {
+            testUser.authToken = res.body.authToken;
+            return seedPantryData();
+        })
+        .catch(error => console.log(error));
 }
 
 /* Pantry Test Functions */
@@ -67,7 +77,7 @@ function seedItemData() {
     console.info('seeding item data');
     const itemData = [];
 
-    for (let i=1; i<=10; i++) {
+    for (let i = 1; i <= 10; i++) {
         itemData.push(generateItemData());
     }
 
@@ -93,25 +103,25 @@ function generatePantryData() {
 
 function addRecipeUser() {
     console.info('registering test user');
-   return chai.request('http://localhost:8080')
-    .post('/instock/users/')
-    .send(testUser)
-    .then(function(res) {
-        console.info('authenticating test user');
-        testUser._id = res.body._id;
-        return chai.request('http://localhost:8080')
-            .post('/instock/auth/login')
-            .set('Content-Type', 'application/json')
-            .send({
-                username: testUser.username,
-                password: testUser.password
-            })
-    })
-    .then(function(res) {
-        testUser.authToken = res.body.authToken;
-       return seedRecipeBoxData();
-    })
-    .catch(error => console.log(error));
+    return chai.request('http://localhost:8080')
+        .post('/instock/users/')
+        .send(testUser)
+        .then(function (res) {
+            console.info('authenticating test user');
+            testUser._id = res.body._id;
+            return chai.request('http://localhost:8080')
+                .post('/instock/auth/login')
+                .set('Content-Type', 'application/json')
+                .send({
+                    username: testUser.username,
+                    password: testUser.password
+                })
+        })
+        .then(function (res) {
+            testUser.authToken = res.body.authToken;
+            return seedRecipeBoxData();
+        })
+        .catch(error => console.log(error));
 }
 
 function seedRecipeBoxData() {
@@ -127,7 +137,7 @@ function seedRecipeData() {
     console.info('seeding recipe data');
     const recipeData = [];
 
-    for (let i=1; i<=10; i++) {
+    for (let i = 1; i <= 10; i++) {
         recipeData.push(generateRecipeData());
     }
 
@@ -150,7 +160,7 @@ function generateRecipeData() {
 function generateIngredientData() {
     const ingredientData = [];
 
-    for (let i=1; i<=10; i++) {
+    for (let i = 1; i <= 10; i++) {
         ingredientData.push(faker.random.word);
     }
 
@@ -160,7 +170,7 @@ function generateIngredientData() {
 function generateInstructionData() {
     const instructionData = [];
 
-    for (let i=1; i<=10; i++) {
+    for (let i = 1; i <= 10; i++) {
         instructionData.push(faker.random.sentence);
     }
 
@@ -179,60 +189,66 @@ function tearDownDb() {
     return mongoose.connection.dropDatabase();
 }
 
-describe('Pantry API resource', function() {
+describe('Pantry API resource', function () {
 
-    before(function() {
+    before(function () {
         return runServer(TEST_DATABASE_URL);
     });
 
-    beforeEach(function() {
+    beforeEach(function () {
         return addUser();
     });
 
-    afterEach(function() {
+    afterEach(function () {
         return tearDownDb();
     });
 
-    after(function() {
+    after(function () {
         return closeServer();
     });
-    
-    describe('GET endpoint', function() {
 
-        it('should get all pantry items', function() {
+    describe('GET endpoint', function () {
+
+        it('should get all pantry items', function () {
             let res;
             return chai.request(app)
                 .get('/pantry-items')
                 .set('Authorization', `Bearer ${testUser.authToken}`)
-                .then(function(_res) {
+                .then(function (_res) {
                     res = _res;
                     expect(res).to.have.status(200);
                     expect(res).to.be.json;
                     expect(res.body.items).to.have.length.of.at.least(1);
 
-                    return Pantry.aggregate([
+                    return Pantry.aggregate([{
+                            $match: {
+                                user: ObjectId(_res.body.user)
+                            }
+                        },
                         {
-                            $match: {user: ObjectId(_res.body.user)}
-                         }, 
-                         {
-                             $project: { numberOfItems: {$size: "$items"}}
-                         }]);
+                            $project: {
+                                numberOfItems: {
+                                    $size: "$items"
+                                }
+                            }
+                        }
+                    ]);
                 })
-                .then(function(count) {
+                .then(function (count) {
                     expect(res.body.items).to.have.lengthOf(count[0].numberOfItems);
                 });
         });
 
-        it('should return a single item if passed id', function() {
+        it('should return a single item if passed id', function () {
             let pantryItem;
-            
+
             return Pantry.findOne()
-                .then(function(_pantryItem) {
+                .then(function (_pantryItem) {
                     pantryItem = _pantryItem.items[0];
                     return chai.request(app)
                         .get(`/pantry-items/${_pantryItem.items[0]._id}`)
                 })
-                .then(function(res) {
+                .then(function (res) {
                     const resItem = res.body[0].items[0];
                     expect(res).to.have.status(200);
                     expect(res).to.be.json;
@@ -243,27 +259,29 @@ describe('Pantry API resource', function() {
                 });
         });
 
-        it('should return pantry items with right fields', function() {
+        it('should return pantry items with right fields', function () {
             let resPantryItem;
 
             return chai.request(app)
                 .get('/pantry-items')
                 .set('Authorization', `Bearer ${testUser.authToken}`)
-                .then(function(res) {
+                .then(function (res) {
                     expect(res).to.have.status(200);
                     expect(res).to.be.json;
                     expect(res.body.items).to.be.an('array');
                     expect(res.body.items).to.have.lengthOf.at.least(1);
 
-                    res.body.items.forEach(function(item) {
+                    res.body.items.forEach(function (item) {
                         expect(item).to.be.an('object');
                         expect(item).to.include.keys('_id', 'name', 'quantity', 'category');
                     });
 
                     resPantryItem = res.body.items[0];
-                    return Pantry.findOne({user: ObjectId(res.body.user)});
+                    return Pantry.findOne({
+                        user: ObjectId(res.body.user)
+                    });
                 })
-                .then(function(pantryItem) {
+                .then(function (pantryItem) {
                     const item = pantryItem.items[0];
                     expect(resPantryItem._id).to.equal(item._id.toString());
                     expect(resPantryItem.name).to.equal(item.name);
@@ -273,9 +291,9 @@ describe('Pantry API resource', function() {
         });
     });
 
-    describe('POST endpoint', function() {
+    describe('POST endpoint', function () {
 
-        it('should add a new pantry item', function() {
+        it('should add a new pantry item', function () {
 
             const newPantryItem = generateItemData();
 
@@ -283,11 +301,11 @@ describe('Pantry API resource', function() {
                 .post('/pantry-items')
                 .set('Authorization', `Bearer ${testUser.authToken}`)
                 .send(newPantryItem)
-                .then(function(res) {
+                .then(function (res) {
                     expect(res).to.have.status(201);
                     expect(res).to.be.json;
                     expect(res.body).to.be.an('object');
-                    
+
                     const index = res.body.pantry.items.length - 1;
                     const newItemIndex = res.body.pantry.items[index];
                     expect(newItemIndex).to.include.keys('_id', 'name', 'quantity', 'category');
@@ -296,9 +314,11 @@ describe('Pantry API resource', function() {
                     expect(newItemIndex.quantity).to.equal(newPantryItem.quantity);
                     expect(newItemIndex.category).to.equal(newPantryItem.category);
 
-                    return Pantry.findOne({user: ObjectId(res.body.pantry.user)});
+                    return Pantry.findOne({
+                        user: ObjectId(res.body.pantry.user)
+                    });
                 })
-                .then(function(pantryItem) {
+                .then(function (pantryItem) {
                     const index = pantryItem.items.length - 1;
                     expect(pantryItem.items[index].name).to.equal(newPantryItem.name);
                     expect(pantryItem.items[index].quantity).to.equal(newPantryItem.quantity);
@@ -307,52 +327,56 @@ describe('Pantry API resource', function() {
         });
     });
 
-    describe('PUT endpoint', function() {
+    describe('PUT endpoint', function () {
 
-        it('should update fields sent over', function() {
+        it('should update fields sent over', function () {
             const updateData = {
                 quantity: 15
             };
 
             return Pantry
                 .findOne()
-                .then(function(pantryItem) {
-                    
+                .then(function (pantryItem) {
+
                     updateData.id = pantryItem.items[0]._id;
                     return chai.request(app)
                         .put(`/pantry-items/${pantryItem.items[0]._id}`)
                         .set('Authorization', `Bearer ${testUser.authToken}`)
                         .send(updateData)
-                        .then(function(res) {
+                        .then(function (res) {
                             expect(res).to.have.status(204);
 
-                            return Pantry.findOne({'items._id': updateData.id});
+                            return Pantry.findOne({
+                                'items._id': updateData.id
+                            });
                         })
-                        .then(function(pantryItem) {
+                        .then(function (pantryItem) {
                             expect(pantryItem.items[0].quantity).to.equal(updateData.quantity);
                         });
                 });
         });
     });
 
-   describe('DELETE endpoint', function() {
+    describe('DELETE endpoint', function () {
 
-        it('should remove the requested item', function() {
+        it('should remove the requested item', function () {
             let pantryItem;
             return Pantry
                 .findOne()
-                .then(function(_pantryItem) {
+                .then(function (_pantryItem) {
                     pantryItem = _pantryItem.items[0];
 
                     return chai.request(app)
-                        .delete(`/pantry-items/${pantryItem._id}`) 
-                        .set('Authorization', `Bearer ${testUser.authToken}`)  
+                        .delete(`/pantry-items/${pantryItem._id}`)
+                        .set('Authorization', `Bearer ${testUser.authToken}`)
                 })
-                .then(function(res) {
+                .then(function (res) {
                     expect(res).to.have.status(204);
-                    return Pantry.findOne({'items._id': pantryItem._id});
+                    return Pantry.findOne({
+                        'items._id': pantryItem._id
+                    });
                 })
-                .then(function(_pantryItem) {
+                .then(function (_pantryItem) {
                     expect(_pantryItem).to.be.null;
                 });
         });
@@ -360,61 +384,67 @@ describe('Pantry API resource', function() {
 });
 
 
-describe('Recipe API resource', function() {
+describe('Recipe API resource', function () {
 
-    before(function() {
+    before(function () {
         return runServer(TEST_DATABASE_URL);
     });
 
-    beforeEach(function() {
+    beforeEach(function () {
         return addRecipeUser();
     });
 
-    afterEach(function() {
+    afterEach(function () {
         return tearDownDb();
     });
 
-    after(function() {
+    after(function () {
         return closeServer();
     });
 
-    describe('GET endpoint', function() {
+    describe('GET endpoint', function () {
 
-        it('should get all recipes', function() {
+        it('should get all recipes', function () {
             let res;
             return chai.request(app)
                 .get('/recipes/recipe-box')
                 .set('Authorization', `Bearer ${testUser.authToken}`)
-                .then(function(_res) {
+                .then(function (_res) {
                     res = _res;
                     expect(res).to.have.status(200);
                     expect(res).to.be.json;
                     expect(res.body.recipes).to.have.length.of.at.least(1);
-    
-                    return Recipe.aggregate([
-                        {
-                            $match: {user: ObjectId(_res.body.user)}
+
+                    return Recipe.aggregate([{
+                            $match: {
+                                user: ObjectId(_res.body.user)
+                            }
                         },
                         {
-                            $project: { numberOfRecipes: {$size: "$recipes"}}
-                        }]);
+                            $project: {
+                                numberOfRecipes: {
+                                    $size: "$recipes"
+                                }
+                            }
+                        }
+                    ]);
                 })
-                .then(function(count) {
+                .then(function (count) {
                     expect(res.body.recipes).to.have.lengthOf(count[0].numberOfRecipes);
                 });
         });
 
-        it('should return a single recipe if passed id', function() {
+        it('should return a single recipe if passed id', function () {
             let recipeCard;
 
             return Recipe.findOne()
-                .then(function(_recipeBox) {
+                .then(function (_recipeBox) {
                     recipeCard = _recipeBox.recipes[0];
                     return chai.request(app)
                         .get(`/recipes/recipe-box/${_recipeBox.recipes[0]._id}`)
                         .set('Authorization', `Bearer ${testUser.authToken}`)
                 })
-                .then(function(res) {
+                .then(function (res) {
                     const resRecipe = res.body.recipes[0];
                     expect(res).to.have.status(200);
                     expect(res).to.be.json;
@@ -430,27 +460,29 @@ describe('Recipe API resource', function() {
                 });
         });
 
-        it('should return recipes with right fields', function() {
+        it('should return recipes with right fields', function () {
             let resRecipe;
 
             return chai.request(app)
                 .get('/recipes/recipe-box')
                 .set('Authorization', `Bearer ${testUser.authToken}`)
-                .then(function(res) {
+                .then(function (res) {
                     expect(res).to.have.status(200);
                     expect(res).to.be.json;
                     expect(res.body.recipes).to.be.an('array');
                     expect(res.body.recipes).to.have.lengthOf.at.least(1);
 
-                    res.body.recipes.forEach(function(recipe) {
+                    res.body.recipes.forEach(function (recipe) {
                         expect(recipe).to.be.an('object');
                         expect(recipe).to.have.keys('_id', 'title', 'image', 'source', 'sourceName', 'timeReady', 'servings', 'ingredients', 'instructions');
                     });
 
                     resRecipe = res.body.recipes[0];
-                    return Recipe.findOne({user: ObjectId(res.body.user)});
+                    return Recipe.findOne({
+                        user: ObjectId(res.body.user)
+                    });
                 })
-                .then(function(recipeBox) {
+                .then(function (recipeBox) {
                     const recipe = recipeBox.recipes[0];
                     expect(resRecipe._id).to.equal(recipe._id.toString());
                     expect(resRecipe.title).to.equal(recipe.title);
@@ -463,16 +495,16 @@ describe('Recipe API resource', function() {
         });
     });
 
-    describe('Recipe Box POST endpoint', function() {
+    describe('Recipe Box POST endpoint', function () {
 
-        it('should add new recipe', function() {
+        it('should add new recipe', function () {
             const newRecipe = generateRecipeData();
 
             return chai.request(app)
                 .post('/recipes')
                 .set('Authorization', `Bearer ${testUser.authToken}`)
                 .send(newRecipe)
-                .then(function(res) {
+                .then(function (res) {
                     expect(res).to.have.status(201);
                     expect(res).to.be.json;
                     expect(res.body).to.be.an('object');
@@ -490,9 +522,11 @@ describe('Recipe API resource', function() {
                     expect(newRecipeIndex.ingredients).to.be.an('array');
                     expect(newRecipeIndex.instructions).to.be.an('array');
 
-                    return Recipe.findOne({user: ObjectId(res.body.recipeBox.user)});
+                    return Recipe.findOne({
+                        user: ObjectId(res.body.recipeBox.user)
+                    });
                 })
-                .then(function(recipeBox) {
+                .then(function (recipeBox) {
                     const index = recipeBox.recipes.length - 1;
                     expect(recipeBox.recipes[index].title).to.equal(newRecipe.title);
                     expect(recipeBox.recipes[index].image).to.equal(newRecipe.image);
@@ -506,26 +540,28 @@ describe('Recipe API resource', function() {
         });
     });
 
-    describe('Recipe Box DELETE endpoint', function() {
+    describe('Recipe Box DELETE endpoint', function () {
 
-        it('should remove the requested recipe', function() {
+        it('should remove the requested recipe', function () {
             let recipe;
 
             return Recipe.findOne()
-            .then(function(recipeBox) {
-                recipe = recipeBox.recipes[0];
+                .then(function (recipeBox) {
+                    recipe = recipeBox.recipes[0];
 
-                return chai.request(app)
-                    .delete(`/recipes/recipe-box/${recipe._id}`)
-                    .set('Authorization', `Bearer ${testUser.authToken}`)
-            })
-            .then(function(res) {
-                expect(res).to.have.status(204);
-                return Recipe.findOne({'recipes._id': recipe._id});
-            })
-            .then(function(_recipe) {
-                expect(_recipe).to.be.null;
-            });
+                    return chai.request(app)
+                        .delete(`/recipes/recipe-box/${recipe._id}`)
+                        .set('Authorization', `Bearer ${testUser.authToken}`)
+                })
+                .then(function (res) {
+                    expect(res).to.have.status(204);
+                    return Recipe.findOne({
+                        'recipes._id': recipe._id
+                    });
+                })
+                .then(function (_recipe) {
+                    expect(_recipe).to.be.null;
+                });
         });
     });
 });
