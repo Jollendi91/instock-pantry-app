@@ -1,3 +1,5 @@
+'use strict';
+
 function displayRecipes(recipeBox) {
 
     $('body').css('display', 'block');
@@ -25,7 +27,7 @@ function getRecipes() {
             Authorization: `Bearer ${window.localStorage.token}`
         },
         success: displayRecipes,
-        error: function (err) {
+        error: function () {
             window.location.href = '/';
         }
     });

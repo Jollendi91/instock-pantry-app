@@ -25,6 +25,7 @@ function displayRecipes(recipeData) {
 
 let custom = false;
 
+// User can select ingredients they would like to use in search
 function listenForCustomSearchClick() {
   $('#recipe-search').on('click', '#js-custom-recipe-search', () => {
     if (custom) {
