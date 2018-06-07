@@ -7,8 +7,7 @@ function displayError(error) {
     `);
 }
 
-function displaySuccess(data) {
-    console.log(data);
+function displaySuccess() {
     $('#js-signup').html(`
     <h2>User successfully registered!</h2>
     <p>Please proceed to Login</p>

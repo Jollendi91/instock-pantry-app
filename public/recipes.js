@@ -114,7 +114,6 @@ function getInstructionList(recipeInfo) {
 let currentRecipe;
 
 function displaySingleRecipeDetails(recipeInfo) {
-  console.log(recipeInfo);
   let RECIPE = recipeInfo.response.body;
 
   currentRecipe = {
