@@ -258,7 +258,7 @@ header h1 {
     text-align: center;
     margin-top: 20px;
     padding: 10px 20px;
-    line-height: 1.2;
+    line-height: 1.4;
 }
 
 label {
@@ -323,6 +323,13 @@ button[type="submit"] {
     font-size: 26px;
     color: #FBDD7B;
     padding-bottom: 0;
+}
+
+.demo {
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    right: 0;
 }
 
 /* Header */

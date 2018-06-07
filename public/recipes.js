@@ -166,6 +166,7 @@ function displaySingleRecipeDetails(recipeInfo) {
   $('html, body').animate({
     scrollTop: ($('#js-recipe-details').offset().top - 60)
   }, 700, 'swing');
+  
 };
 
 function alertRecipeSaved() {
