@@ -331,6 +331,7 @@ header {
     position: fixed;
     left: 0;
     top: 0;
+    width: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -404,13 +405,13 @@ body.hasHover .nav-item li:hover {
 #add-item-container,
 #recipe-search,
 #js-custom-search-status {
-    display: block;
+    display: table;
     margin: auto;
     width: -moz-fit-content;
     width: -webkit-fit-content;
     width: fit-content;
     padding: 10px;
-    background: #0009;
+    background: rgba(0, 0, 0, 0.6);
     color: white;
     text-align: center;
     border-radius: 5px;
@@ -632,7 +633,7 @@ article {
     width: 100%;
     max-width: 325px;
     margin: 5px 0;
-    background: #0009;
+    background: rgba(0, 0, 0, 0.6);
     color: white;
     font-size: 16px;
     border-radius: 5px;
@@ -654,7 +655,7 @@ article img {
 .ingredients-used-info {
     position: absolute;
     bottom: 2px;
-    background: #0009;
+    background: rgba(0, 0, 0, 0.6);
     width: 100%;
     border-radius: 0 0 5px 5px;
 }
