@@ -270,7 +270,6 @@ label {
 
 .form-section {
     text-align: center;
-    padding: 10px 0;
 }
 
 .form-section h2 {
@@ -323,10 +322,6 @@ button[type="submit"] {
     font-size: 26px;
     color: #FBDD7B;
     padding-bottom: 0;
-}
-
-.demo {
-    padding-top: 10px;
 }
 
 /* Header */
