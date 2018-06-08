@@ -326,10 +326,7 @@ button[type="submit"] {
 }
 
 .demo {
-    position: absolute;
-    bottom: 8px;
-    left: 0;
-    right: 0;
+    padding-top: 10px;
 }
 
 /* Header */
