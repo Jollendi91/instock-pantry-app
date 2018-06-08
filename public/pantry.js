@@ -57,6 +57,7 @@ function getExistingCategories(data) {
     return categories;
 }
 
+
 function displayCategories(data) {
     const displayedCategories = getExistingCategories(data);
 
