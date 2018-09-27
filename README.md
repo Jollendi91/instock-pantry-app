@@ -1,6 +1,6 @@
 # InStock
 
-An app to help the user track, maintain, and use the food items they have at home. Users can categorize and track the quantity of each item, maintaining a virtual pantry to help simplify the gorcery shopping experience. Users then have a choice to search for recipes that maximize the use of all the ingredients they have on hand, or make a custom recipe search, specifying the ingredients they would like to use. This helps simplify the decision of what to cook while saving the user money by using whats in stock. 
+An app to help the user track, maintain, and use the food items they have at home. Users can categorize and track the quantity of each item, maintaining a virtual pantry to help simplify the grocery shopping experience. Users then have a choice to search for recipes that maximize the use of all the ingredients they have on hand, or make a custom recipe search, specifying the ingredients they would like to use. This helps simplify the decision of what to cook while saving the user money by using whats in stock. 
 
 ## Demo
 
