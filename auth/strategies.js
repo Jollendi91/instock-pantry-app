@@ -1,8 +1,8 @@
 'use strict';
 
 const {Strategy: LocalStrategy} = require('passport-local');
-
-const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
+const { Strategy: JwtStrategy } = require('passport-local')
+const { ExtractJwt } = require('passport-jwt');
 
 const {User} = require('../models');
 const {JWT_SECRET} = require('../config');
